@@ -28,7 +28,17 @@
         "path": "/photos/thumb/pic-01_thumb.jpg"
       }
     },
-    "keywords": [],
+    "keywords": [
+      "- brick building",
+      "- windows with bars",
+      "- institutional architecture",
+      "- vertical lines",
+      "- neutral tones",
+      "- ground level door",
+      "- urban setting",
+      "- tall structure",
+      "- symmetrical design"
+    ],
     "createdAt": "2024-12-24T22:43:14.034Z"
   },
   {
@@ -60,7 +70,18 @@
         "path": "/photos/thumb/pic-02_thumb.jpg"
       }
     },
-    "keywords": [],
+    "keywords": [
+      "concrete structure",
+      "bridge",
+      "architecture",
+      "industrial design",
+      "support beams",
+      "rust",
+      "abandoned",
+      "underneath view",
+      "urban decay",
+      "lines and angles"
+    ],
     "createdAt": "2024-12-24T22:43:15.098Z"
   },
   {
@@ -92,7 +113,18 @@
         "path": "/photos/thumb/pic-03_thumb.jpg"
       }
     },
-    "keywords": [],
+    "keywords": [
+      "rusty metal",
+      "industrial texture",
+      "diagonal lines",
+      "shadows",
+      "green moss",
+      "weathered surface",
+      "abstract pattern",
+      "light contrast",
+      "orange tones",
+      "geometric shapes"
+    ],
     "createdAt": "2024-12-24T22:43:15.537Z"
   },
   {
@@ -316,7 +348,10 @@
         "path": "/photos/thumb/pic-10_thumb.jpg"
       }
     },
-    "keywords": ["test", "test2"],
+    "keywords": [
+      "test",
+      "test2"
+    ],
     "createdAt": "2024-12-24T22:43:17.423Z"
   }
 ]

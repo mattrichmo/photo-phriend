@@ -14,8 +14,10 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { FileData } from '@/types/file'
 import { X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export default function GalleryPage() {
+  const router = useRouter()
   const [images, setImages] = useState<FileData[]>([])
   const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set())
   const [isLoading, setIsLoading] = useState(false)
@@ -138,6 +140,26 @@ export default function GalleryPage() {
     }).length
   }
 
+  const handleGenerateKeywords = async (imageIds: string[]) => {
+    if (imageIds.length === 0) return;
+
+    const imagesToProcess = imageIds.map(id => images.find(img => img.id === id))
+      .filter(Boolean)
+      .map(image => ({
+        id: image!.id,
+        name: image!.details.full.name,
+        path: image!.details.optimized.path
+      }));
+
+    if (imagesToProcess.length === 0) return;
+
+    // Store the image information in localStorage
+    localStorage.setItem('imagesForKeywords', JSON.stringify(imagesToProcess));
+    
+    // Navigate to generate page
+    router.push('/generate');
+  };
+
   return (
     <div className="space-y-6">
       {/* Image Overlay */}
@@ -178,7 +200,8 @@ export default function GalleryPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => alert('Keyword generation not implemented yet')}
+                  onClick={() => handleGenerateKeywords(Array.from(selectedImages))}
+                  disabled={selectedImages.size === 0}
                 >
                   Generate Keywords ({countSelectedImagesNeedingKeywords()})
                 </Button>
@@ -276,7 +299,7 @@ export default function GalleryPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => alert('Keyword generation not implemented yet')}
+                      onClick={() => handleGenerateKeywords([image.id])}
                     >
                       Generate Keywords
                     </Button>

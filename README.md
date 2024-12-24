@@ -1,6 +1,6 @@
 # Photo Phriend
 
-A modern web application for optimizing and managing your photo collection. Built with Next.js, TypeScript, and Sharp.
+A modern web application for optimizing and managing your photo collection. Built with Next.js, TypeScript, and Sharp. Designed to run locally to manage your image optimization in one place. Run npm run dev to start the server.
 
 ## Features
 

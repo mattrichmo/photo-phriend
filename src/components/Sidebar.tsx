@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { ImageIcon, ImagePlusIcon } from 'lucide-react'
+import { ImageIcon, ImagePlusIcon, TagsIcon } from 'lucide-react'
 
 const navigation = [
   {
@@ -15,6 +15,11 @@ const navigation = [
     name: 'Gallery',
     href: '/gallery',
     icon: ImageIcon,
+  },
+  {
+    name: 'Generate',
+    href: '/generate',
+    icon: TagsIcon,
   },
 ]
 
