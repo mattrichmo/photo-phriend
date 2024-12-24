@@ -256,21 +256,38 @@ export default function OptimizePage() {
       
       {files.length > 0 && (
         <div className="flex justify-end gap-4">
-          {selectedFiles.size > 0 && (
+          {selectedFiles.size > 0 ? (
             <>
-              <Button 
-                onClick={handleDownloadSelected}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                Download ({selectedFiles.size})
-              </Button>
-              <Button 
-                onClick={handleDeleteSelected}
-                className="bg-red-600 hover:bg-red-700"
-              >
-                Delete ({selectedFiles.size})
-              </Button>
+              {Array.from(selectedFiles).every(id => 
+                files.find(f => f.id === id)?.optimizedPath && !files.find(f => f.id === id)?.isOptimizing
+              ) ? (
+                <Button 
+                  onClick={handleDownloadSelected}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  Download ({selectedFiles.size})
+                </Button>
+              ) : (
+                // Only show Remove button if ANY selected file is not yet optimized
+                Array.from(selectedFiles).some(id => !files.find(f => f.id === id)?.optimizedPath) && (
+                  <Button 
+                    onClick={handleDeleteSelected}
+                    className="bg-red-600 hover:bg-red-700"
+                  >
+                    Remove ({Array.from(selectedFiles).filter(id => 
+                      !files.find(f => f.id === id)?.optimizedPath
+                    ).length})
+                  </Button>
+                )
+              )}
             </>
+          ) : allFilesOptimized && (
+            <Button 
+              onClick={handleDownloadAll}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              Download All
+            </Button>
           )}
           <Button 
             onClick={handleOptimizeAll}
@@ -279,15 +296,6 @@ export default function OptimizePage() {
           >
             {isOptimizing ? 'Optimizing...' : 'Optimize All'}
           </Button>
-          
-          {allFilesOptimized && (
-            <Button 
-              onClick={handleDownloadAll}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              Download All
-            </Button>
-          )}
         </div>
       )}
       
@@ -304,11 +312,12 @@ export default function OptimizePage() {
         </TableHeader>
         <TableBody>
           {files.map((file) => (
-            <TableRow key={file.id} className="cursor-pointer hover:bg-gray-50" onClick={() => handleSelectFile(file.id)}>
+            <TableRow key={file.id} className="hover:bg-gray-50">
               <TableCell className="relative">
                 <Checkbox
                   checked={selectedFiles.has(file.id)}
                   onCheckedChange={() => handleSelectFile(file.id)}
+                  onClick={(e) => e.stopPropagation()}
                   className="data-[state=checked]:bg-blue-600"
                 />
               </TableCell>
