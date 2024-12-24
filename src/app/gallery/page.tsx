@@ -130,6 +130,14 @@ export default function GalleryPage() {
     }
   }
 
+  // Helper function to count selected images that need keywords
+  const countSelectedImagesNeedingKeywords = () => {
+    return Array.from(selectedImages).filter(id => {
+      const image = images.find(img => img.id === id)
+      return !image?.keywords || image.keywords.length === 0
+    }).length
+  }
+
   return (
     <div className="space-y-6">
       {/* Image Overlay */}
@@ -163,26 +171,37 @@ export default function GalleryPage() {
 
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Optimized Images Gallery</h1>
-        {selectedImages.size > 0 && (
-          <div className="space-x-2">
-            <Button
-              onClick={handleBulkDownload}
-              variant="outline"
-              size="sm"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Processing...' : `Download Selected (${selectedImages.size})`}
-            </Button>
-            <Button
-              onClick={() => handleDelete(Array.from(selectedImages))}
-              variant="destructive"
-              size="sm"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Processing...' : `Delete Selected (${selectedImages.size})`}
-            </Button>
-          </div>
-        )}
+        <div className="space-x-2">
+          {selectedImages.size > 0 && (
+            <>
+              {countSelectedImagesNeedingKeywords() > 0 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => alert('Keyword generation not implemented yet')}
+                >
+                  Generate Keywords ({countSelectedImagesNeedingKeywords()})
+                </Button>
+              )}
+              <Button
+                onClick={handleBulkDownload}
+                variant="outline"
+                size="sm"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Processing...' : `Download Selected (${selectedImages.size})`}
+              </Button>
+              <Button
+                onClick={() => handleDelete(Array.from(selectedImages))}
+                variant="destructive"
+                size="sm"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Processing...' : `Delete Selected (${selectedImages.size})`}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
       
       <Table>
@@ -199,6 +218,7 @@ export default function GalleryPage() {
             <TableHead>Original Size</TableHead>
             <TableHead>Optimized Size</TableHead>
             <TableHead>Savings</TableHead>
+            <TableHead>Keywords</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -243,6 +263,25 @@ export default function GalleryPage() {
                   }
                 </TableCell>
                 <TableCell>{savings}%</TableCell>
+                <TableCell>
+                  {image.keywords && image.keywords.length > 0 ? (
+                    <div className="flex flex-wrap gap-1 max-w-xs">
+                      {image.keywords.map((keyword, index) => (
+                        <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                          {keyword}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => alert('Keyword generation not implemented yet')}
+                    >
+                      Generate Keywords
+                    </Button>
+                  )}
+                </TableCell>
                 <TableCell>
                   <Button
                     onClick={() => handleDownload(image)}

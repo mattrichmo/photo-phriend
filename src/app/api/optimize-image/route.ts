@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import sharp from 'sharp'
+import * as ExifReader from 'exifreader'
 
 interface ExifData {
   latitude?: number;
@@ -12,6 +13,11 @@ interface ExifData {
   aperture?: string;
   shutterSpeed?: string;
   iso?: string;
+}
+
+interface ExifTag {
+  value: number | string;
+  description?: string;
 }
 
 interface OptimizationResult {
@@ -46,31 +52,53 @@ export async function POST(request: Request) {
     const image = sharp(buffer)
     const metadata = await image.metadata()
 
-    // Extract EXIF data
+    // Extract EXIF data using ExifReader for more reliable extraction
     let exifData: ExifData | null = null
-    if (metadata.exif) {
-      try {
-        // Extract raw EXIF data
-        const rawExif = await sharp(buffer)
-          .metadata()
-          .then(meta => meta.exif ? meta.exif : null)
-
-        if (rawExif) {
-          exifData = {
-            // For now, we'll just store basic metadata since EXIF extraction is complex
-            date: metadata.exif ? new Date().toISOString() : undefined,
-            time: metadata.exif ? new Date().toISOString() : undefined,
-            camera: metadata.format, // Using format as a placeholder
-            iso: metadata.hasAlpha ? '100' : undefined // Using hasAlpha as a placeholder
-          }
-        }
-      } catch (error) {
-        console.error('Error extracting EXIF data:', error)
+    try {
+      const tags = await ExifReader.load(buffer)
+      
+      // Helper function to safely get EXIF values
+      const getExifValue = (tag: ExifTag | undefined): string | undefined => {
+        if (!tag) return undefined
+        return tag.description || tag.value.toString()
       }
+
+      if (tags) {
+        const gpsLat = tags['GPSLatitude'] as ExifTag | undefined
+        const gpsLong = tags['GPSLongitude'] as ExifTag | undefined
+        const dateTime = (tags['DateTimeOriginal'] || tags['DateTime']) as ExifTag | undefined
+        
+        exifData = {
+          latitude: gpsLat ? parseFloat(getExifValue(gpsLat) || '') : undefined,
+          longitude: gpsLong ? parseFloat(getExifValue(gpsLong) || '') : undefined,
+          altitude: tags['GPSAltitude'] ? parseFloat(getExifValue(tags['GPSAltitude'] as ExifTag) || '') : undefined,
+          date: dateTime ? getExifValue(dateTime)?.split(' ')[0] : undefined,
+          time: dateTime ? getExifValue(dateTime)?.split(' ')[1] : undefined,
+          camera: getExifValue(tags['Make'] as ExifTag) || getExifValue(tags['Model'] as ExifTag),
+          lens: getExifValue(tags['LensModel'] as ExifTag),
+          aperture: getExifValue(tags['FNumber'] as ExifTag),
+          shutterSpeed: getExifValue(tags['ExposureTime'] as ExifTag),
+          iso: getExifValue(tags['ISOSpeedRatings'] as ExifTag)
+        }
+
+        // Clean up undefined values
+        Object.keys(exifData).forEach(key => {
+          if (exifData && exifData[key as keyof ExifData] === undefined) {
+            delete exifData[key as keyof ExifData]
+          }
+        })
+
+        // If no meaningful EXIF data was found, set to null
+        if (exifData && Object.keys(exifData).length === 0) {
+          exifData = null
+        }
+      }
+    } catch (error) {
+      console.error('Error extracting EXIF data:', error)
     }
     
     // Create optimized version (80% quality)
-    const optimizedImage = sharp(buffer).withMetadata()
+    const optimizedImage = sharp(buffer).withMetadata() // Keep metadata in optimized version
     if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
       optimizedImage.jpeg({ quality: 80 })
     } else if (metadata.format === 'png') {

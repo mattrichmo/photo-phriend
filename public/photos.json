@@ -1,11 +1,7 @@
 [
   {
-    "id": "kxvy8sjf0",
-    "exif": {
-      "date": "2024-12-24T22:38:22.108Z",
-      "time": "2024-12-24T22:38:22.108Z",
-      "camera": "jpeg"
-    },
+    "id": "971qxmtwn",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-01.jpg",
@@ -33,15 +29,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:22.920Z"
+    "createdAt": "2024-12-24T22:43:14.034Z"
   },
   {
-    "id": "4x0zpbkv0",
-    "exif": {
-      "date": "2024-12-24T22:38:23.316Z",
-      "time": "2024-12-24T22:38:23.316Z",
-      "camera": "jpeg"
-    },
+    "id": "p0dgircz4",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-02.jpg",
@@ -69,15 +61,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:24.273Z"
+    "createdAt": "2024-12-24T22:43:15.098Z"
   },
   {
-    "id": "yzwfp0795",
-    "exif": {
-      "date": "2024-12-24T22:38:24.346Z",
-      "time": "2024-12-24T22:38:24.346Z",
-      "camera": "jpeg"
-    },
+    "id": "hz2t5x3pr",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-03.jpg",
@@ -105,15 +93,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:24.754Z"
+    "createdAt": "2024-12-24T22:43:15.537Z"
   },
   {
-    "id": "3ph496uxb",
-    "exif": {
-      "date": "2024-12-24T22:38:24.804Z",
-      "time": "2024-12-24T22:38:24.804Z",
-      "camera": "jpeg"
-    },
+    "id": "bv7fdos4i",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-04.jpg",
@@ -141,15 +125,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:25.301Z"
+    "createdAt": "2024-12-24T22:43:16.067Z"
   },
   {
-    "id": "8fbzyl50a",
-    "exif": {
-      "date": "2024-12-24T22:38:25.342Z",
-      "time": "2024-12-24T22:38:25.342Z",
-      "camera": "jpeg"
-    },
+    "id": "ulqs8mk3q",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-05.jpg",
@@ -177,15 +157,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:25.614Z"
+    "createdAt": "2024-12-24T22:43:16.366Z"
   },
   {
-    "id": "5lzpv1z7s",
-    "exif": {
-      "date": "2024-12-24T22:38:25.669Z",
-      "time": "2024-12-24T22:38:25.669Z",
-      "camera": "jpeg"
-    },
+    "id": "weqr58wva",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-06.jpg",
@@ -213,15 +189,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:25.984Z"
+    "createdAt": "2024-12-24T22:43:16.688Z"
   },
   {
-    "id": "dfpvx2k0o",
-    "exif": {
-      "date": "2024-12-24T22:38:26.009Z",
-      "time": "2024-12-24T22:38:26.009Z",
-      "camera": "jpeg"
-    },
+    "id": "0f4gye0bw",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-07.jpg",
@@ -249,15 +221,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:26.282Z"
+    "createdAt": "2024-12-24T22:43:16.982Z"
   },
   {
-    "id": "fig6bgtba",
-    "exif": {
-      "date": "2024-12-24T22:38:26.299Z",
-      "time": "2024-12-24T22:38:26.299Z",
-      "camera": "jpeg"
-    },
+    "id": "ghn89flb3",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-08.jpg",
@@ -285,15 +253,11 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:26.483Z"
+    "createdAt": "2024-12-24T22:43:17.192Z"
   },
   {
-    "id": "64n0xoqub",
-    "exif": {
-      "date": "2024-12-24T22:38:26.501Z",
-      "time": "2024-12-24T22:38:26.501Z",
-      "camera": "jpeg"
-    },
+    "id": "o5e6znaqh",
+    "exif": null,
     "details": {
       "full": {
         "name": "pic-09.jpg",
@@ -321,6 +285,38 @@
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:38:26.617Z"
+    "createdAt": "2024-12-24T22:43:17.319Z"
+  },
+  {
+    "id": "zut1175qk",
+    "exif": null,
+    "details": {
+      "full": {
+        "name": "pic-10.jpg",
+        "size": 1830790,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-10.jpg"
+      },
+      "optimized": {
+        "name": "pic-10_optimized.jpg",
+        "size": 398471,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-10_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-10_minified.jpg",
+        "size": 107845,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-10_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-10_thumb.jpg",
+        "size": 64623,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-10_thumb.jpg"
+      }
+    },
+    "keywords": ["test", "test2"],
+    "createdAt": "2024-12-24T22:43:17.423Z"
   }
 ]
