@@ -2,13 +2,7 @@ import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 import JSZip from 'jszip'
-
-interface ImageData {
-  id: string
-  name: string
-  originalPath: string
-  optimizedPath: string
-}
+import { FileData } from '@/types/file'
 
 export async function GET(
   request: Request,
@@ -20,9 +14,9 @@ export async function GET(
     // Read photos.json to find the image
     const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
     const photosData = await fs.readFile(photosJsonPath, 'utf-8')
-    const photos: ImageData[] = JSON.parse(photosData)
+    const photos: FileData[] = JSON.parse(photosData)
 
-    const image = photos.find((photo: ImageData) => photo.id === id)
+    const image = photos.find((photo: FileData) => photo.id === id)
     if (!image) {
       return NextResponse.json(
         { error: 'Image not found' },
@@ -30,19 +24,38 @@ export async function GET(
       )
     }
 
-    // Create a zip file containing both original and optimized images
+    // Create a zip file containing all versions
     const zip = new JSZip()
 
     // Add original image
-    const originalPath = path.join(process.cwd(), 'public', image.originalPath)
+    const originalPath = path.join(process.cwd(), 'public', image.details.full.path)
     const originalBuffer = await fs.readFile(originalPath)
-    zip.file(image.name, originalBuffer)
+    zip.file(image.details.full.name, originalBuffer)
 
     // Add optimized image
-    const optimizedPath = path.join(process.cwd(), 'public', image.optimizedPath)
+    const optimizedPath = path.join(process.cwd(), 'public', image.details.optimized.path)
     const optimizedBuffer = await fs.readFile(optimizedPath)
-    const optimizedName = `${image.name.split('.')[0]}_optimized.jpg`
-    zip.file(optimizedName, optimizedBuffer)
+    zip.file(image.details.optimized.name, optimizedBuffer)
+
+    // Add minified image
+    const minifiedPath = path.join(process.cwd(), 'public', image.details.minified.path)
+    const minifiedBuffer = await fs.readFile(minifiedPath)
+    zip.file(image.details.minified.name, minifiedBuffer)
+
+    // Add thumbnail image
+    const thumbPath = path.join(process.cwd(), 'public', image.details.thumb.path)
+    const thumbBuffer = await fs.readFile(thumbPath)
+    zip.file(image.details.thumb.name, thumbBuffer)
+
+    // Add metadata file
+    const metadata = {
+      id: image.id,
+      exif: image.exif,
+      details: image.details,
+      keywords: image.keywords,
+      createdAt: new Date().toISOString()
+    }
+    zip.file('metadata.json', JSON.stringify(metadata, null, 2))
 
     // Generate zip file
     const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' })
@@ -52,7 +65,7 @@ export async function GET(
       headers: {
         'Content-Type': 'application/zip',
         'Content-Length': zipBuffer.length.toString(),
-        'Content-Disposition': `attachment; filename="${image.name.split('.')[0]}_package.zip"`,
+        'Content-Disposition': `attachment; filename="${image.details.full.name.split('.')[0]}_package.zip"`,
       },
     })
   } catch (error) {

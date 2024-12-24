@@ -1,13 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
-
-interface ImageData {
-  id: string
-  name: string
-  originalPath: string
-  optimizedPath: string
-}
+import { FileData } from '@/types/file'
 
 export async function DELETE(request: Request) {
   try {
@@ -19,7 +13,7 @@ export async function DELETE(request: Request) {
 
     // Read the current images data
     const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
-    let photos: ImageData[] = []
+    let photos: FileData[] = []
     
     try {
       const photosData = await fs.readFile(photosJsonPath, 'utf-8')
@@ -30,32 +24,41 @@ export async function DELETE(request: Request) {
     }
     
     // Find the images to delete
-    const imagesToDelete = photos.filter((img: ImageData) => imageIds.includes(img.id))
+    const imagesToDelete = photos.filter((img: FileData) => imageIds.includes(img.id))
     
     // Delete the actual files
     for (const image of imagesToDelete) {
       try {
         // Delete original image
-        const originalPath = path.join(process.cwd(), 'public', image.originalPath)
+        const originalPath = path.join(process.cwd(), 'public', image.details.full.path)
         await fs.unlink(originalPath)
         
         // Delete optimized image
-        if (image.optimizedPath) {
-          const optimizedPath = path.join(process.cwd(), 'public', image.optimizedPath)
-          await fs.unlink(optimizedPath)
-        }
+        const optimizedPath = path.join(process.cwd(), 'public', image.details.optimized.path)
+        await fs.unlink(optimizedPath)
+
+        // Delete minified image
+        const minifiedPath = path.join(process.cwd(), 'public', image.details.minified.path)
+        await fs.unlink(minifiedPath)
+
+        // Delete thumbnail image
+        const thumbPath = path.join(process.cwd(), 'public', image.details.thumb.path)
+        await fs.unlink(thumbPath)
       } catch (error) {
         console.error(`Failed to delete file for image ${image.id}:`, error)
       }
     }
 
     // Update the JSON file
-    const updatedPhotos = photos.filter((img: ImageData) => !imageIds.includes(img.id))
+    const updatedPhotos = photos.filter((img: FileData) => !imageIds.includes(img.id))
     await fs.writeFile(photosJsonPath, JSON.stringify(updatedPhotos, null, 2))
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error deleting images:', error)
-    return NextResponse.json({ error: 'Failed to delete images' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Failed to delete images' },
+      { status: 500 }
+    )
   }
 } 

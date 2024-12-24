@@ -20,9 +20,13 @@ export async function POST(request: Request) {
     const photosDir = path.join(process.cwd(), 'public', 'photos')
     const originalDir = path.join(photosDir, 'original')
     const optimizedDir = path.join(photosDir, 'optimized')
+    const minifiedDir = path.join(photosDir, 'minified')
+    const thumbDir = path.join(photosDir, 'thumb')
 
     await fs.mkdir(originalDir, { recursive: true })
     await fs.mkdir(optimizedDir, { recursive: true })
+    await fs.mkdir(minifiedDir, { recursive: true })
+    await fs.mkdir(thumbDir, { recursive: true })
 
     // Convert File to Buffer
     const buffer = Buffer.from(await file.arrayBuffer())
@@ -33,22 +37,38 @@ export async function POST(request: Request) {
       await fs.writeFile(originalPath, buffer)
       
       return NextResponse.json({ success: true })
-    } else if (type === 'optimized') {
-      // Save optimized file and update photos.json
+    } else if (type === 'processed') {
+      // Save all processed versions and update photos.json
       const id = formData.get('id') as string
       const originalSize = parseInt(formData.get('originalSize') as string)
       const optimizedSize = parseInt(formData.get('optimizedSize') as string)
+      const minifiedSize = parseInt(formData.get('minifiedSize') as string)
+      const thumbSize = parseInt(formData.get('thumbSize') as string)
+      const exifData = formData.get('exif') ? JSON.parse(formData.get('exif') as string) : null
       
-      if (!id || !originalSize || !optimizedSize) {
+      if (!id || !originalSize) {
         return NextResponse.json(
-          { error: 'Missing required fields for optimized image' },
+          { error: 'Missing required fields for processed image' },
           { status: 400 }
         )
       }
 
+      // Save optimized version
       const optimizedName = `${filename.split('.')[0]}_optimized.jpg`
       const optimizedPath = path.join(optimizedDir, optimizedName)
       await fs.writeFile(optimizedPath, buffer)
+
+      // Save minified version
+      const minifiedName = `${filename.split('.')[0]}_minified.jpg`
+      const minifiedPath = path.join(minifiedDir, minifiedName)
+      const minifiedBuffer = Buffer.from(await (formData.get('minifiedBuffer') as File).arrayBuffer())
+      await fs.writeFile(minifiedPath, minifiedBuffer)
+
+      // Save thumbnail version
+      const thumbName = `${filename.split('.')[0]}_thumb.jpg`
+      const thumbPath = path.join(thumbDir, thumbName)
+      const thumbBuffer = Buffer.from(await (formData.get('thumbBuffer') as File).arrayBuffer())
+      await fs.writeFile(thumbPath, thumbBuffer)
 
       // Update photos.json
       const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
@@ -58,18 +78,40 @@ export async function POST(request: Request) {
         const photosData = await fs.readFile(photosJsonPath, 'utf-8')
         photos = JSON.parse(photosData)
       } catch (error) {
-        // File doesn't exist or is invalid, start with empty array
         console.error('Error reading photos.json:', error)
       }
 
       // Add new image data
       photos.push({
         id,
-        name: filename,
-        size: originalSize,
-        optimizedSize,
-        originalPath: `/photos/original/${filename}`,
-        optimizedPath: `/photos/optimized/${optimizedName}`,
+        exif: exifData,
+        details: {
+          full: {
+            name: filename,
+            size: originalSize,
+            type: 'image/jpeg',
+            path: `/photos/original/${filename}`,
+          },
+          optimized: {
+            name: optimizedName,
+            size: optimizedSize,
+            type: 'image/jpeg',
+            path: `/photos/optimized/${optimizedName}`,
+          },
+          minified: {
+            name: minifiedName,
+            size: minifiedSize,
+            type: 'image/jpeg',
+            path: `/photos/minified/${minifiedName}`,
+          },
+          thumb: {
+            name: thumbName,
+            size: thumbSize,
+            type: 'image/jpeg',
+            path: `/photos/thumb/${thumbName}`,
+          }
+        },
+        keywords: [],
         createdAt: new Date().toISOString(),
       })
 

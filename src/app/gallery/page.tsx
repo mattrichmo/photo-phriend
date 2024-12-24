@@ -12,21 +12,14 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-
-interface GalleryImage {
-  id: string
-  name: string
-  size: number
-  optimizedSize: number
-  originalPath: string
-  optimizedPath: string
-  createdAt: string
-}
+import { FileData } from '@/types/file'
+import { X } from 'lucide-react'
 
 export default function GalleryPage() {
-  const [images, setImages] = useState<GalleryImage[]>([])
+  const [images, setImages] = useState<FileData[]>([])
   const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set())
   const [isLoading, setIsLoading] = useState(false)
+  const [viewingImage, setViewingImage] = useState<FileData | null>(null)
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -43,7 +36,7 @@ export default function GalleryPage() {
     fetchImages()
   }, [])
 
-  const handleDownload = async (image: GalleryImage) => {
+  const handleDownload = async (image: FileData) => {
     try {
       const response = await fetch(`/api/images/${image.id}/download`)
       if (!response.ok) throw new Error('Failed to download image')
@@ -52,7 +45,7 @@ export default function GalleryPage() {
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `${image.name.split('.')[0]}_optimized.jpg`
+      a.download = `${image.details.full.name.split('.')[0]}_package.zip`
       document.body.appendChild(a)
       a.click()
       window.URL.revokeObjectURL(url)
@@ -110,7 +103,6 @@ export default function GalleryPage() {
       setIsLoading(true)
       const selectedIds = Array.from(selectedImages)
       
-      // Request the server to create and send a zip file
       const response = await fetch('/api/images/download-zip', {
         method: 'POST',
         headers: {
@@ -125,7 +117,7 @@ export default function GalleryPage() {
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `optimized-images-${new Date().toISOString().split('T')[0]}.zip`
+      a.download = `images-${new Date().toISOString().split('T')[0]}.zip`
       document.body.appendChild(a)
       a.click()
       window.URL.revokeObjectURL(url)
@@ -140,6 +132,35 @@ export default function GalleryPage() {
 
   return (
     <div className="space-y-6">
+      {/* Image Overlay */}
+      {viewingImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center"
+          onClick={() => setViewingImage(null)}
+        >
+          <div className="relative max-w-7xl max-h-[90vh] w-full h-full m-4">
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20"
+              onClick={() => setViewingImage(null)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+            <div className="relative w-full h-full">
+              <Image
+                src={viewingImage.details.optimized.path}
+                alt={viewingImage.details.full.name}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Optimized Images Gallery</h1>
         {selectedImages.size > 0 && (
@@ -182,8 +203,8 @@ export default function GalleryPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {images.map((image) => {
-            const savings = ((image.size - image.optimizedSize) / image.size * 100).toFixed(1)
+          {images.filter(image => image.details?.full && image.details?.optimized).map((image) => {
+            const savings = ((image.details.full.size - image.details.optimized.size) / image.details.full.size * 100).toFixed(1)
             
             return (
               <TableRow key={image.id}>
@@ -194,21 +215,30 @@ export default function GalleryPage() {
                   />
                 </TableCell>
                 <TableCell>
-                  <div className="relative w-16 h-16">
-                    <Image 
-                      src={image.optimizedPath}
-                      alt={image.name}
-                      fill
-                      className="object-cover rounded"
-                      sizes="64px"
-                    />
+                  <div 
+                    className="relative w-16 h-16 cursor-pointer hover:opacity-80 transition-opacity"
+                    onClick={() => setViewingImage(image)}
+                  >
+                    {image.details.thumb?.path ? (
+                      <Image 
+                        src={image.details.thumb.path}
+                        alt={image.details.full.name}
+                        fill
+                        className="object-cover rounded"
+                        sizes="64px"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center text-gray-500">
+                        No preview
+                      </div>
+                    )}
                   </div>
                 </TableCell>
-                <TableCell>{image.name}</TableCell>
-                <TableCell>{(image.size / 1024).toFixed(2)} KB</TableCell>
+                <TableCell>{image.details.full.name}</TableCell>
+                <TableCell>{(image.details.full.size / 1024).toFixed(2)} KB</TableCell>
                 <TableCell>
-                  {image.optimizedSize 
-                    ? `${(image.optimizedSize / 1024).toFixed(2)} KB`
+                  {image.details.optimized.size 
+                    ? `${(image.details.optimized.size / 1024).toFixed(2)} KB`
                     : '-'
                   }
                 </TableCell>

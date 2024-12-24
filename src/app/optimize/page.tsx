@@ -11,14 +11,63 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { FileData } from "@/types/file"
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 import { Checkbox } from "@/components/ui/checkbox"
 import Image from 'next/image'
 
+interface UploadFile extends File {
+  path: string;
+}
+
+interface ProcessingFile {
+  id: string;
+  file: UploadFile;
+  isOptimizing: boolean;
+  optimizationError?: string;
+  details: {
+    full: {
+      name: string;
+      size: number;
+      type: string;
+      path: string;
+    };
+    optimized?: {
+      name: string;
+      size: number;
+      type: string;
+      path: string;
+    };
+    minified?: {
+      name: string;
+      size: number;
+      type: string;
+      path: string;
+    };
+    thumb?: {
+      name: string;
+      size: number;
+      type: string;
+      path: string;
+    };
+  };
+  exif: {
+    latitude: number;
+    longitude: number;
+    altitude: number;
+    date: string;
+    time: string;
+    camera: string;
+    lens: string;
+    aperture: string;
+    shutterSpeed: string;
+    iso: string;
+  } | null;
+  keywords: string[];
+}
+
 export default function OptimizePage() {
-  const [files, setFiles] = useState<FileData[]>([])
+  const [files, setFiles] = useState<ProcessingFile[]>([])
   const [isOptimizing, setIsOptimizing] = useState(false)
   const [selectedFiles, setSelectedFiles] = useState<Set<string>>(new Set())
 
@@ -35,26 +84,32 @@ export default function OptimizePage() {
       return true
     })
 
-    const newFiles: FileData[] = validFiles.map(file => ({
+    const newFiles: ProcessingFile[] = validFiles.map(file => ({
       id: Math.random().toString(36).substr(2, 9),
-      name: file.name,
-      path: URL.createObjectURL(file),
-      size: file.size,
-      type: file.type,
-      file: file,
-      isOptimizing: false
+      file: Object.assign(file, { path: URL.createObjectURL(file) }) as UploadFile,
+      isOptimizing: false,
+      details: {
+        full: {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          path: URL.createObjectURL(file),
+        }
+      },
+      exif: null,
+      keywords: []
     }))
 
     setFiles(prev => [...prev, ...newFiles])
   }
 
-  const optimizeImage = async (file: FileData) => {
+  const optimizeImage = async (file: ProcessingFile) => {
     try {
       // First, save the original file
       const originalFormData = new FormData()
       originalFormData.append('file', file.file)
       originalFormData.append('type', 'original')
-      originalFormData.append('filename', file.name)
+      originalFormData.append('filename', file.details.full.name)
 
       const saveOriginalResponse = await fetch('/api/save-image', {
         method: 'POST',
@@ -76,33 +131,50 @@ export default function OptimizePage() {
 
       if (!response.ok) throw new Error('Failed to optimize image')
 
-      const optimizedBlob = await response.blob()
-      const optimizedPath = URL.createObjectURL(optimizedBlob)
+      const result = await response.json()
+      const { optimized, minified, thumb, exif } = result
 
-      // Save the optimized file
-      const optimizedFormData = new FormData()
-      optimizedFormData.append('file', new File([optimizedBlob], `${file.name.split('.')[0]}_optimized.jpg`, { type: 'image/jpeg' }))
-      optimizedFormData.append('type', 'optimized')
-      optimizedFormData.append('filename', file.name)
-      optimizedFormData.append('originalSize', file.size.toString())
-      optimizedFormData.append('optimizedSize', optimizedBlob.size.toString())
-      optimizedFormData.append('id', file.id)
+      // Convert array buffers to blobs
+      const optimizedBlob = new Blob([Uint8Array.from(optimized.buffer.data)])
+      const minifiedBlob = new Blob([Uint8Array.from(minified.buffer.data)])
+      const thumbBlob = new Blob([Uint8Array.from(thumb.buffer.data)])
 
-      const saveOptimizedResponse = await fetch('/api/save-image', {
+      // Save all processed versions
+      const processedFormData = new FormData()
+      processedFormData.append('file', optimizedBlob, `${file.details.full.name.split('.')[0]}_optimized.jpg`)
+      processedFormData.append('minifiedBuffer', minifiedBlob, `${file.details.full.name.split('.')[0]}_minified.jpg`)
+      processedFormData.append('thumbBuffer', thumbBlob, `${file.details.full.name.split('.')[0]}_thumb.jpg`)
+      processedFormData.append('type', 'processed')
+      processedFormData.append('filename', file.details.full.name)
+      processedFormData.append('originalSize', file.details.full.size.toString())
+      processedFormData.append('optimizedSize', optimized.size.toString())
+      processedFormData.append('minifiedSize', minified.size.toString())
+      processedFormData.append('thumbSize', thumb.size.toString())
+      processedFormData.append('id', file.id)
+      if (exif) {
+        processedFormData.append('exif', JSON.stringify(exif))
+      }
+
+      const saveProcessedResponse = await fetch('/api/save-image', {
         method: 'POST',
-        body: optimizedFormData,
+        body: processedFormData,
       })
 
-      if (!saveOptimizedResponse.ok) {
-        throw new Error('Failed to save optimized image')
+      if (!saveProcessedResponse.ok) {
+        throw new Error('Failed to save processed images')
       }
 
       return {
-        optimizedPath,
-        optimizedSize: optimizedBlob.size,
+        optimizedPath: URL.createObjectURL(optimizedBlob),
+        optimizedSize: optimized.size,
+        minifiedPath: URL.createObjectURL(minifiedBlob),
+        minifiedSize: minified.size,
+        thumbPath: URL.createObjectURL(thumbBlob),
+        thumbSize: thumb.size,
+        exif
       }
     } catch (error) {
-      console.error(`Error optimizing ${file.name}:`, error)
+      console.error(`Error optimizing ${file.details.full.name}:`, error)
       throw error
     }
   }
@@ -115,17 +187,46 @@ export default function OptimizePage() {
       
       for (let i = 0; i < updatedFiles.length; i++) {
         const file = updatedFiles[i]
-        if (file.optimizedPath) continue // Skip if already optimized
+        if (file.details.optimized?.path) continue // Skip if already optimized
 
         file.isOptimizing = true
         setFiles([...updatedFiles])
 
         try {
-          const { optimizedPath, optimizedSize } = await optimizeImage(file)
+          const { 
+            optimizedPath, 
+            optimizedSize, 
+            minifiedPath, 
+            minifiedSize, 
+            thumbPath, 
+            thumbSize,
+            exif 
+          } = await optimizeImage(file)
+          
           updatedFiles[i] = {
             ...file,
-            optimizedPath,
-            optimizedSize,
+            exif,
+            details: {
+              ...file.details,
+              optimized: {
+                name: `${file.details.full.name.split('.')[0]}_optimized.jpg`,
+                size: optimizedSize,
+                type: 'image/jpeg',
+                path: optimizedPath,
+              },
+              minified: {
+                name: `${file.details.full.name.split('.')[0]}_minified.jpg`,
+                size: minifiedSize,
+                type: 'image/jpeg',
+                path: minifiedPath,
+              },
+              thumb: {
+                name: `${file.details.full.name.split('.')[0]}_thumb.jpg`,
+                size: thumbSize,
+                type: 'image/jpeg',
+                path: thumbPath,
+              }
+            },
             isOptimizing: false,
           }
         } catch (error) {
@@ -158,19 +259,19 @@ export default function OptimizePage() {
     for (const fileData of files) {
       try {
         // Add original file
-        const originalResponse = await fetch(fileData.path)
+        const originalResponse = await fetch(fileData.details.full.path)
         const originalBlob = await originalResponse.blob()
-        originalFolder?.file(fileData.name, originalBlob)
+        originalFolder?.file(fileData.details.full.name, originalBlob)
 
         // Add optimized file if it exists
-        if (fileData.optimizedPath) {
-          const optimizedResponse = await fetch(fileData.optimizedPath)
+        if (fileData.details.optimized?.path) {
+          const optimizedResponse = await fetch(fileData.details.optimized.path)
           const optimizedBlob = await optimizedResponse.blob()
-          const optimizedName = `${fileData.name.split('.')[0]}_optimized.jpg`
+          const optimizedName = `${fileData.details.full.name.split('.')[0]}_optimized.jpg`
           optimizedFolder?.file(optimizedName, optimizedBlob)
         }
       } catch (error) {
-        console.error(`Error adding ${fileData.name} to zip:`, error)
+        console.error(`Error adding ${fileData.details.full.name} to zip:`, error)
       }
     }
 
@@ -212,19 +313,19 @@ export default function OptimizePage() {
 
       try {
         // Add original file
-        const originalResponse = await fetch(fileData.path)
+        const originalResponse = await fetch(fileData.details.full.path)
         const originalBlob = await originalResponse.blob()
-        originalFolder?.file(fileData.name, originalBlob)
+        originalFolder?.file(fileData.details.full.name, originalBlob)
 
         // Add optimized file if it exists
-        if (fileData.optimizedPath) {
-          const optimizedResponse = await fetch(fileData.optimizedPath)
+        if (fileData.details.optimized?.path) {
+          const optimizedResponse = await fetch(fileData.details.optimized.path)
           const optimizedBlob = await optimizedResponse.blob()
-          const optimizedName = `${fileData.name.split('.')[0]}_optimized.jpg`
+          const optimizedName = `${fileData.details.full.name.split('.')[0]}_optimized.jpg`
           optimizedFolder?.file(optimizedName, optimizedBlob)
         }
       } catch (error) {
-        console.error(`Error adding ${fileData.name} to zip:`, error)
+        console.error(`Error adding ${fileData.details.full.name} to zip:`, error)
       }
     }
 
@@ -248,7 +349,7 @@ export default function OptimizePage() {
     setSelectedFiles(new Set())
   }
 
-  const allFilesOptimized = files.length > 0 && files.every(file => file.optimizedPath && !file.isOptimizing)
+  const allFilesOptimized = files.length > 0 && files.every(file => file.details.optimized?.path && !file.isOptimizing)
 
   return (
     <div className="space-y-6">
@@ -259,7 +360,7 @@ export default function OptimizePage() {
           {selectedFiles.size > 0 ? (
             <>
               {Array.from(selectedFiles).every(id => 
-                files.find(f => f.id === id)?.optimizedPath && !files.find(f => f.id === id)?.isOptimizing
+                files.find(f => f.id === id)?.details.optimized?.path && !files.find(f => f.id === id)?.isOptimizing
               ) ? (
                 <Button 
                   onClick={handleDownloadSelected}
@@ -269,13 +370,13 @@ export default function OptimizePage() {
                 </Button>
               ) : (
                 // Only show Remove button if ANY selected file is not yet optimized
-                Array.from(selectedFiles).some(id => !files.find(f => f.id === id)?.optimizedPath) && (
+                Array.from(selectedFiles).some(id => !files.find(f => f.id === id)?.details.optimized?.path) && (
                   <Button 
                     onClick={handleDeleteSelected}
                     className="bg-red-600 hover:bg-red-700"
                   >
                     Remove ({Array.from(selectedFiles).filter(id => 
-                      !files.find(f => f.id === id)?.optimizedPath
+                      !files.find(f => f.id === id)?.details.optimized?.path
                     ).length})
                   </Button>
                 )
@@ -324,19 +425,19 @@ export default function OptimizePage() {
               <TableCell>
                 <div className="relative w-16 h-16">
                   <Image
-                    src={file.path}
-                    alt={file.name}
+                    src={file.details.full.path}
+                    alt={file.details.full.name}
                     fill
                     className="object-cover rounded"
                     sizes="64px"
                   />
                 </div>
               </TableCell>
-              <TableCell>{file.name}</TableCell>
-              <TableCell>{(file.size / 1024).toFixed(2)} KB</TableCell>
+              <TableCell>{file.details.full.name}</TableCell>
+              <TableCell>{(file.details.full.size / 1024).toFixed(2)} KB</TableCell>
               <TableCell>
-                {file.optimizedSize 
-                  ? `${(file.optimizedSize / 1024).toFixed(2)} KB`
+                {file.details.optimized?.size 
+                  ? `${(file.details.optimized.size / 1024).toFixed(2)} KB`
                   : '-'
                 }
               </TableCell>
@@ -345,7 +446,7 @@ export default function OptimizePage() {
                   ? 'Optimizing...'
                   : file.optimizationError
                   ? file.optimizationError
-                  : file.optimizedPath
+                  : file.details.optimized?.path
                   ? 'Optimized'
                   : 'Pending'
                 }
@@ -357,3 +458,4 @@ export default function OptimizePage() {
     </div>
   )
 } 
+
