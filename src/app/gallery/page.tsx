@@ -23,6 +23,7 @@ export default function GalleryPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [viewingImage, setViewingImage] = useState<FileData | null>(null)
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
+  const [loadingImages, setLoadingImages] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -144,21 +145,71 @@ export default function GalleryPage() {
   const handleGenerateKeywords = async (imageIds: string[]) => {
     if (imageIds.length === 0) return;
 
-    const imagesToProcess = imageIds.map(id => images.find(img => img.id === id))
-      .filter(Boolean)
-      .map(image => ({
-        id: image!.id,
-        name: image!.details.full.name,
-        path: image!.details.optimized.path
-      }));
+    // Check if it's a single image
+    if (imageIds.length === 1) {
+      const imageId = imageIds[0];
+      const image = images.find(img => img.id === imageId);
+      if (!image) return;
 
-    if (imagesToProcess.length === 0) return;
+      try {
+        // Add image to loading state
+        setLoadingImages(prev => new Set(prev).add(imageId));
 
-    // Store the image information in localStorage
-    localStorage.setItem('imagesForKeywords', JSON.stringify(imagesToProcess));
-    
-    // Navigate to generate page
-    router.push('/generate');
+        // Use the API key from the generate page
+        const apiKey = localStorage.getItem('apiKey');
+        if (!apiKey) throw new Error('API key not found');
+
+        console.log('API Key:', apiKey);
+        console.log('Image Path:', image.details.optimized.path);
+
+        const response = await fetch('/api/generate-keywords-single', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            imagePath: image.details.optimized.path,
+            imageId: image.id,
+            apiKey,
+          })
+        });
+
+        if (!response.ok) throw new Error('Failed to generate keywords');
+
+        const data = await response.json();
+
+        // Update the image keywords in the state
+        setImages(prevImages => prevImages.map(img =>
+          img.id === imageId ? { ...img, keywords: data.keywords } : img
+        ));
+      } catch (error) {
+        console.error('Error generating keywords:', error);
+        alert('Failed to generate keywords');
+      } finally {
+        // Remove image from loading state
+        setLoadingImages(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(imageId);
+          return newSet;
+        });
+      }
+    } else {
+      // Store the image information in localStorage for multiple images
+      const imagesToProcess = imageIds
+        .map(id => images.find(img => img.id === id))
+        .filter(image => image && (!image.keywords || image.keywords.length === 0))
+        .map(image => ({
+          id: image!.id,
+          name: image!.details.full.name,
+          path: image!.details.optimized.path
+        }));
+
+      if (imagesToProcess.length === 0) return;
+
+      localStorage.setItem('imagesForKeywords', JSON.stringify(imagesToProcess));
+      router.push('/generate');
+    }
   };
 
   const toggleRowExpansion = (id: string) => {
@@ -298,7 +349,11 @@ export default function GalleryPage() {
                 </TableCell>
                 <TableCell>{savings}%</TableCell>
                 <TableCell>
-                  {image.keywords && image.keywords.length > 0 ? (
+                  {loadingImages.has(image.id) ? (
+                    <div className="flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
+                    </div>
+                  ) : image.keywords && image.keywords.length > 0 ? (
                     <div className="flex flex-wrap gap-1 max-w-xs">
                       {expandedRows.has(image.id) ? (
                         image.keywords.map((keyword, index) => (
