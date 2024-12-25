@@ -8,16 +8,12 @@ interface ExifData {
   altitude?: number;
   date?: string;
   time?: string;
-  camera?: string;
+  make?: string;
+  model?: string;
   lens?: string;
   aperture?: string;
   shutterSpeed?: string;
   iso?: string;
-}
-
-interface ExifTag {
-  value: number | string;
-  description?: string;
 }
 
 interface OptimizationResult {
@@ -56,42 +52,38 @@ export async function POST(request: Request) {
     let exifData: ExifData | null = null
     try {
       const tags = await ExifReader.load(buffer)
+      console.log('Raw EXIF tags:', JSON.stringify(tags, null, 2))
       
-      // Helper function to safely get EXIF values
-      const getExifValue = (tag: ExifTag | undefined): string | undefined => {
-        if (!tag) return undefined
-        return tag.description || tag.value.toString()
-      }
-
       if (tags) {
-        const gpsLat = tags['GPSLatitude'] as ExifTag | undefined
-        const gpsLong = tags['GPSLongitude'] as ExifTag | undefined
-        const dateTime = (tags['DateTimeOriginal'] || tags['DateTime']) as ExifTag | undefined
+        const dateTime = tags['DateTimeOriginal'] || tags['DateTime'] || tags['MetadataDate']
         
         exifData = {
-          latitude: gpsLat ? parseFloat(getExifValue(gpsLat) || '') : undefined,
-          longitude: gpsLong ? parseFloat(getExifValue(gpsLong) || '') : undefined,
-          altitude: tags['GPSAltitude'] ? parseFloat(getExifValue(tags['GPSAltitude'] as ExifTag) || '') : undefined,
-          date: dateTime ? getExifValue(dateTime)?.split(' ')[0] : undefined,
-          time: dateTime ? getExifValue(dateTime)?.split(' ')[1] : undefined,
-          camera: getExifValue(tags['Make'] as ExifTag) || getExifValue(tags['Model'] as ExifTag),
-          lens: getExifValue(tags['LensModel'] as ExifTag),
-          aperture: getExifValue(tags['FNumber'] as ExifTag),
-          shutterSpeed: getExifValue(tags['ExposureTime'] as ExifTag),
-          iso: getExifValue(tags['ISOSpeedRatings'] as ExifTag)
+          latitude: tags['GPSLatitude']?.description ? Number(tags['GPSLatitude'].description) : undefined,
+          longitude: tags['GPSLongitude']?.description ? Number(tags['GPSLongitude'].description) : undefined,
+          altitude: tags['GPSAltitude']?.description ? Number(tags['GPSAltitude'].description) : undefined,
+          
+          date: dateTime?.description ? String(dateTime.description).split('T')[0] : undefined,
+          time: dateTime?.description ? (String(dateTime.description).includes('T') ? 
+            String(dateTime.description).split('T')[1].split('-')[0] : 
+            String(dateTime.description).split(' ')[1]) : undefined,
+          
+          make: tags['Make']?.description,
+          model: tags['Model']?.description,
+          lens: tags['LensModel']?.description,
+          
+          aperture: tags['FNumber']?.description,
+          shutterSpeed: tags['ExposureTime']?.description,
+          iso: tags['ISOSpeedRatings']?.description
         }
 
-        // Clean up undefined values
+        // Only remove undefined values
         Object.keys(exifData).forEach(key => {
           if (exifData && exifData[key as keyof ExifData] === undefined) {
             delete exifData[key as keyof ExifData]
           }
         })
 
-        // If no meaningful EXIF data was found, set to null
-        if (exifData && Object.keys(exifData).length === 0) {
-          exifData = null
-        }
+        console.log('Processed EXIF data:', JSON.stringify(exifData, null, 2))
       }
     } catch (error) {
       console.error('Error extracting EXIF data:', error)

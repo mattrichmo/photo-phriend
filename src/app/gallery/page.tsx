@@ -322,14 +322,14 @@ export default function GalleryPage() {
                 <TableCell>
                   <div 
                     className="relative w-16 h-16 cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() => setViewingImage(image)}
+                    onClick={() => setViewingImage(images.find(img => img.id === image.id) || null)}
                   >
                     {image.details.thumb?.path ? (
                       <Image 
                         src={image.details.thumb.path}
                         alt={image.details.full.name}
                         fill
-                        className="object-cover rounded"
+                        className="object-contain rounded"
                         sizes="64px"
                       />
                     ) : (

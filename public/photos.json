@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": "b0edwbqk6",
+    "exif": {
+      "date": "2024:12:18 14:46:28",
+      "time": "14:46:28",
+      "camera": "IEC ",
+      "lens": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+      "aperture": "f/6.3",
+      "shutterSpeed": "1/2000",
+      "iso": 800
+    },
+    "details": {
+      "full": {
+        "name": "DSC08353.JPG",
+        "size": 2322686,
+        "type": "image/jpeg",
+        "path": "/photos/original/DSC08353.JPG"
+      },
+      "optimized": {
+        "name": "DSC08353_optimized.jpg",
+        "size": 344844,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/DSC08353_optimized.jpg"
+      },
+      "minified": {
+        "name": "DSC08353_minified.jpg",
+        "size": 56297,
+        "type": "image/jpeg",
+        "path": "/photos/minified/DSC08353_minified.jpg"
+      },
+      "thumb": {
+        "name": "DSC08353_thumb.jpg",
+        "size": 34563,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/DSC08353_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T19:21:07.983Z"
+  }
+]
