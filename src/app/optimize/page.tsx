@@ -408,6 +408,7 @@ export default function OptimizePage() {
             <TableHead>Name</TableHead>
             <TableHead>Original Size</TableHead>
             <TableHead>Optimized Size</TableHead>
+            <TableHead>Savings</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
@@ -438,6 +439,12 @@ export default function OptimizePage() {
               <TableCell>
                 {file.details.optimized?.size 
                   ? `${(file.details.optimized.size / 1024).toFixed(2)} KB`
+                  : '-'
+                }
+              </TableCell>
+              <TableCell>
+                {file.details.optimized?.size 
+                  ? `${(((file.details.full.size - file.details.optimized.size) / file.details.full.size) * 100).toFixed(1)}%`
                   : '-'
                 }
               </TableCell>

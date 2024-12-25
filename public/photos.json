@@ -38,5 +38,215 @@
     },
     "keywords": [],
     "createdAt": "2024-12-25T19:21:07.983Z"
+  },
+  {
+    "id": "cfrv2m6lj",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:44:02"
+    },
+    "details": {
+      "full": {
+        "name": "pic-01.jpg",
+        "size": 16956223,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-01.jpg"
+      },
+      "optimized": {
+        "name": "pic-01_optimized.jpg",
+        "size": 3641057,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-01_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-01_minified.jpg",
+        "size": 921894,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-01_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-01_thumb.jpg",
+        "size": 402323,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-01_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:41.737Z"
+  },
+  {
+    "id": "ayuk5vcjc",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:44:21"
+    },
+    "details": {
+      "full": {
+        "name": "pic-02.jpg",
+        "size": 25636700,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-02.jpg"
+      },
+      "optimized": {
+        "name": "pic-02_optimized.jpg",
+        "size": 5425111,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-02_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-02_minified.jpg",
+        "size": 959233,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-02_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-02_thumb.jpg",
+        "size": 353481,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-02_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:43.060Z"
+  },
+  {
+    "id": "zl47mk97z",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:44:37"
+    },
+    "details": {
+      "full": {
+        "name": "pic-03.jpg",
+        "size": 10702271,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-03.jpg"
+      },
+      "optimized": {
+        "name": "pic-03_optimized.jpg",
+        "size": 1781932,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-03_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-03_minified.jpg",
+        "size": 341042,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-03_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-03_thumb.jpg",
+        "size": 139199,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-03_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:43.549Z"
+  },
+  {
+    "id": "x4x8786kq",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:45:07"
+    },
+    "details": {
+      "full": {
+        "name": "pic-04.jpg",
+        "size": 10141006,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-04.jpg"
+      },
+      "optimized": {
+        "name": "pic-04_optimized.jpg",
+        "size": 3631170,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-04_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-04_minified.jpg",
+        "size": 449412,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-04_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-04_thumb.jpg",
+        "size": 147481,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-04_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:44.085Z"
+  },
+  {
+    "id": "2leojgpt3",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:45:19"
+    },
+    "details": {
+      "full": {
+        "name": "pic-05.jpg",
+        "size": 4898284,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-05.jpg"
+      },
+      "optimized": {
+        "name": "pic-05_optimized.jpg",
+        "size": 802665,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-05_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-05_minified.jpg",
+        "size": 206067,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-05_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-05_thumb.jpg",
+        "size": 108199,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-05_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:44.552Z"
+  },
+  {
+    "id": "83ish53j8",
+    "exif": {
+      "date": "2024-10-25",
+      "time": "15:45:32"
+    },
+    "details": {
+      "full": {
+        "name": "pic-06.jpg",
+        "size": 6605061,
+        "type": "image/jpeg",
+        "path": "/photos/original/pic-06.jpg"
+      },
+      "optimized": {
+        "name": "pic-06_optimized.jpg",
+        "size": 1057938,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/pic-06_optimized.jpg"
+      },
+      "minified": {
+        "name": "pic-06_minified.jpg",
+        "size": 117910,
+        "type": "image/jpeg",
+        "path": "/photos/minified/pic-06_minified.jpg"
+      },
+      "thumb": {
+        "name": "pic-06_thumb.jpg",
+        "size": 63988,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/pic-06_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-25T20:50:44.998Z"
   }
 ]
