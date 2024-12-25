@@ -300,106 +300,114 @@ export default function GalleryPage() {
             </TableHead>
             <TableHead>Preview</TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Original Size</TableHead>
-            <TableHead>Optimized Size</TableHead>
-            <TableHead>Savings</TableHead>
+            <TableHead>Camera Info</TableHead>
+            <TableHead>Exposure</TableHead>
             <TableHead>Keywords</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {images.filter(image => image.details?.full && image.details?.optimized).map((image) => {
-            const savings = ((image.details.full.size - image.details.optimized.size) / image.details.full.size * 100).toFixed(1)
-            
-            return (
-              <TableRow key={image.id}>
-                <TableCell>
-                  <Checkbox
-                    checked={selectedImages.has(image.id)}
-                    onCheckedChange={() => toggleSelect(image.id)}
-                  />
-                </TableCell>
-                <TableCell>
-                  <div 
-                    className="relative w-16 h-16 cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() => setViewingImage(images.find(img => img.id === image.id) || null)}
-                  >
-                    {image.details.thumb?.path ? (
-                      <Image 
-                        src={image.details.thumb.path}
-                        alt={image.details.full.name}
-                        fill
-                        className="object-contain rounded"
-                        sizes="64px"
-                      />
+          {images.filter(image => image.details?.full && image.details?.optimized).map((image) => (
+            <TableRow key={image.id}>
+              <TableCell>
+                <Checkbox
+                  checked={selectedImages.has(image.id)}
+                  onCheckedChange={() => toggleSelect(image.id)}
+                />
+              </TableCell>
+              <TableCell>
+                <div 
+                  className="relative w-16 h-16 cursor-pointer hover:opacity-80 transition-opacity"
+                  onClick={() => setViewingImage(images.find(img => img.id === image.id) || null)}
+                >
+                  {image.details.thumb?.path ? (
+                    <Image 
+                      src={image.details.thumb.path}
+                      alt={image.details.full.name}
+                      fill
+                      className="object-contain rounded"
+                      sizes="64px"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center text-gray-500">
+                      No preview
+                    </div>
+                  )}
+                </div>
+              </TableCell>
+              <TableCell>{image.details.full.name}</TableCell>
+              <TableCell>
+                {image.exif ? (
+                  <div className="space-y-1 text-sm">
+                    <div>{image.exif.make} {image.exif.model}</div>
+                    <div className="text-gray-500">{image.exif.lens}</div>
+                  </div>
+                ) : (
+                  <div className="text-gray-500">No camera info</div>
+                )}
+              </TableCell>
+              <TableCell>
+                {image.exif ? (
+                  <div className="space-y-1 text-sm">
+                    <div>ƒ/{image.exif.aperture}</div>
+                    <div>{image.exif.shutterSpeed}s</div>
+                    <div>ISO {image.exif.iso}</div>
+                  </div>
+                ) : (
+                  <div className="text-gray-500">No exposure info</div>
+                )}
+              </TableCell>
+              <TableCell>
+                {loadingImages.has(image.id) ? (
+                  <div className="flex justify-center items-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
+                  </div>
+                ) : image.keywords && image.keywords.length > 0 ? (
+                  <div className="flex flex-wrap gap-1 max-w-xs">
+                    {expandedRows.has(image.id) ? (
+                      image.keywords.map((keyword, index) => (
+                        <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                          {keyword}
+                        </div>
+                      ))
                     ) : (
-                      <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center text-gray-500">
-                        No preview
-                      </div>
+                      image.keywords.slice(0, 4).map((keyword, index) => (
+                        <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                          {keyword}
+                        </div>
+                      ))
+                    )}
+                    {image.keywords.length > 4 && (
+                      <Button
+                        variant="link"
+                        size="sm"
+                        onClick={() => toggleRowExpansion(image.id)}
+                      >
+                        {expandedRows.has(image.id) ? 'See Less' : 'See More'}
+                      </Button>
                     )}
                   </div>
-                </TableCell>
-                <TableCell>{image.details.full.name}</TableCell>
-                <TableCell>{(image.details.full.size / 1024).toFixed(2)} KB</TableCell>
-                <TableCell>
-                  {image.details.optimized.size 
-                    ? `${(image.details.optimized.size / 1024).toFixed(2)} KB`
-                    : '-'
-                  }
-                </TableCell>
-                <TableCell>{savings}%</TableCell>
-                <TableCell>
-                  {loadingImages.has(image.id) ? (
-                    <div className="flex justify-center items-center">
-                      <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
-                    </div>
-                  ) : image.keywords && image.keywords.length > 0 ? (
-                    <div className="flex flex-wrap gap-1 max-w-xs">
-                      {expandedRows.has(image.id) ? (
-                        image.keywords.map((keyword, index) => (
-                          <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
-                            {keyword}
-                          </div>
-                        ))
-                      ) : (
-                        image.keywords.slice(0, 4).map((keyword, index) => (
-                          <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
-                            {keyword}
-                          </div>
-                        ))
-                      )}
-                      {image.keywords.length > 4 && (
-                        <Button
-                          variant="link"
-                          size="sm"
-                          onClick={() => toggleRowExpansion(image.id)}
-                        >
-                          {expandedRows.has(image.id) ? 'See Less' : 'See More'}
-                        </Button>
-                      )}
-                    </div>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleGenerateKeywords([image.id])}
-                    >
-                      Generate Keywords
-                    </Button>
-                  )}
-                </TableCell>
-                <TableCell>
+                ) : (
                   <Button
-                    onClick={() => handleDownload(image)}
                     variant="outline"
                     size="sm"
+                    onClick={() => handleGenerateKeywords([image.id])}
                   >
-                    Download
+                    Generate Keywords
                   </Button>
-                </TableCell>
-              </TableRow>
-            )
-          })}
+                )}
+              </TableCell>
+              <TableCell>
+                <Button
+                  onClick={() => handleDownload(image)}
+                  variant="outline"
+                  size="sm"
+                >
+                  Download
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

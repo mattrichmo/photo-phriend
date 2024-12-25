@@ -9,6 +9,8 @@ export interface FileData {
     date: string,
     time: string,
     camera: string,
+    make: string,
+    model: string,
     lens: string,
     aperture: string,
     shutterSpeed: string,
