@@ -34,7 +34,19 @@ export default function GeneratePage() {
       // Clear localStorage after getting the images
       localStorage.removeItem('imagesForKeywords');
     }
+
+    // Get API key from localStorage
+    const storedApiKey = localStorage.getItem('apiKey');
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+    }
   }, []);
+
+  const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newApiKey = e.target.value;
+    setApiKey(newApiKey);
+    localStorage.setItem('apiKey', newApiKey);
+  };
 
   const handleGenerateKeywords = async (imageIndex: number) => {
     if (!apiKey) {
@@ -108,7 +120,7 @@ export default function GeneratePage() {
           type="input"
           id="apiKey"
           value={apiKey}
-          onChange={(e) => setApiKey(e.target.value)}
+          onChange={handleApiKeyChange}
           className="w-full p-2 border rounded-md"
           placeholder="Enter your OpenAI API key"
         />

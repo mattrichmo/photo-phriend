@@ -22,6 +22,7 @@ export default function GalleryPage() {
   const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set())
   const [isLoading, setIsLoading] = useState(false)
   const [viewingImage, setViewingImage] = useState<FileData | null>(null)
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -160,6 +161,16 @@ export default function GalleryPage() {
     router.push('/generate');
   };
 
+  const toggleRowExpansion = (id: string) => {
+    const newExpandedRows = new Set(expandedRows)
+    if (newExpandedRows.has(id)) {
+      newExpandedRows.delete(id)
+    } else {
+      newExpandedRows.add(id)
+    }
+    setExpandedRows(newExpandedRows)
+  }
+
   return (
     <div className="space-y-6">
       {/* Image Overlay */}
@@ -289,11 +300,28 @@ export default function GalleryPage() {
                 <TableCell>
                   {image.keywords && image.keywords.length > 0 ? (
                     <div className="flex flex-wrap gap-1 max-w-xs">
-                      {image.keywords.map((keyword, index) => (
-                        <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
-                          {keyword}
-                        </div>
-                      ))}
+                      {expandedRows.has(image.id) ? (
+                        image.keywords.map((keyword, index) => (
+                          <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                            {keyword}
+                          </div>
+                        ))
+                      ) : (
+                        image.keywords.slice(0, 4).map((keyword, index) => (
+                          <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
+                            {keyword}
+                          </div>
+                        ))
+                      )}
+                      {image.keywords.length > 4 && (
+                        <Button
+                          variant="link"
+                          size="sm"
+                          onClick={() => toggleRowExpansion(image.id)}
+                        >
+                          {expandedRows.has(image.id) ? 'See Less' : 'See More'}
+                        </Button>
+                      )}
                     </div>
                   ) : (
                     <Button

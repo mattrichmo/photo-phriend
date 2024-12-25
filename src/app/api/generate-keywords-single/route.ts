@@ -4,6 +4,7 @@ import sharp from 'sharp';
 import fs from 'fs/promises';
 import path from 'path';
 
+
 interface PhotoData {
     id: string;
     exif: Record<string, unknown> | null;
@@ -44,15 +45,29 @@ Please provide specific, accurate, and relevant keywords that describe the main 
 and notable elements in the image. Return between 5-10 keywords per image.`;
 
 const userPrompt = `Please analyze this image and provide relevant keywords that describe its contents. 
-Focus on the main subjects, actions, and notable elements.`;
+Focus on the main subjects, actions, and notable elements. I would like 10 keywords for wide, narrow, and specific.`;
 
-// Define the response schema as an object with a keywords array
+// Define the response schema as an object with a keywords object containing wide, narrow, and specific arrays
 const responseSchema = {
     type: 'object',
     properties: {
         keywords: {
-            type: 'array',
-            items: { type: 'string' }
+            type: 'object',
+            properties: {
+                wide: {
+                    type: 'array',
+                    items: { type: 'string' }
+                },
+                narrow: {
+                    type: 'array',
+                    items: { type: 'string' }
+                },
+                specific: {
+                    type: 'array',
+                    items: { type: 'string' }
+                }
+            },
+            required: ['wide', 'narrow', 'specific']
         }
     },
     required: ['keywords']
@@ -145,7 +160,10 @@ export async function POST(req: Request) {
 
         // Parse the JSON response
         const parsedResponse = JSON.parse(content);
-        const keywords = parsedResponse.keywords;
+        const { wide, narrow, specific } = parsedResponse.keywords;
+
+        // Combine all keywords into a single array
+        const keywords = [...wide, ...narrow, ...specific];
 
         if (!Array.isArray(keywords)) {
             throw new Error('Invalid keywords format');

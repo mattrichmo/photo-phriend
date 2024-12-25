@@ -1,357 +1,379 @@
 [
   {
-    "id": "971qxmtwn",
+    "id": "3p6zonjrc",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-01.jpg",
-        "size": 16956223,
+        "size": 890358,
         "type": "image/jpeg",
         "path": "/photos/original/pic-01.jpg"
       },
       "optimized": {
         "name": "pic-01_optimized.jpg",
-        "size": 3641057,
+        "size": 153670,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-01_optimized.jpg"
       },
       "minified": {
         "name": "pic-01_minified.jpg",
-        "size": 921894,
+        "size": 37670,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-01_minified.jpg"
       },
       "thumb": {
         "name": "pic-01_thumb.jpg",
-        "size": 402323,
+        "size": 22869,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-01_thumb.jpg"
       }
     },
     "keywords": [
-      "- brick building",
-      "- windows with bars",
-      "- institutional architecture",
-      "- vertical lines",
-      "- neutral tones",
-      "- ground level door",
-      "- urban setting",
-      "- tall structure",
-      "- symmetrical design"
+      "mushroom",
+      "fungus",
+      "dark background",
+      "cap",
+      "stem",
+      "nature",
+      "macro photography",
+      "moisture",
+      "detail"
     ],
-    "createdAt": "2024-12-24T22:43:14.034Z"
+    "createdAt": "2024-12-24T23:57:31.723Z"
   },
   {
-    "id": "p0dgircz4",
+    "id": "zb0qnxlcf",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-02.jpg",
-        "size": 25636700,
+        "size": 7845251,
         "type": "image/jpeg",
         "path": "/photos/original/pic-02.jpg"
       },
       "optimized": {
         "name": "pic-02_optimized.jpg",
-        "size": 5425111,
+        "size": 1156070,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-02_optimized.jpg"
       },
       "minified": {
         "name": "pic-02_minified.jpg",
-        "size": 959233,
+        "size": 130491,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-02_minified.jpg"
       },
       "thumb": {
         "name": "pic-02_thumb.jpg",
-        "size": 353481,
+        "size": 51149,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-02_thumb.jpg"
       }
     },
-    "keywords": [
-      "concrete structure",
-      "bridge",
-      "architecture",
-      "industrial design",
-      "support beams",
-      "rust",
-      "abandoned",
-      "underneath view",
-      "urban decay",
-      "lines and angles"
-    ],
-    "createdAt": "2024-12-24T22:43:15.098Z"
+    "keywords": [],
+    "createdAt": "2024-12-24T23:57:32.127Z"
   },
   {
-    "id": "hz2t5x3pr",
+    "id": "z2ogww5z1",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-03.jpg",
-        "size": 10702271,
+        "size": 3565985,
         "type": "image/jpeg",
         "path": "/photos/original/pic-03.jpg"
       },
       "optimized": {
         "name": "pic-03_optimized.jpg",
-        "size": 1781932,
+        "size": 365993,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-03_optimized.jpg"
       },
       "minified": {
         "name": "pic-03_minified.jpg",
-        "size": 341042,
+        "size": 79177,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-03_minified.jpg"
       },
       "thumb": {
         "name": "pic-03_thumb.jpg",
-        "size": 139199,
+        "size": 43270,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-03_thumb.jpg"
       }
     },
-    "keywords": [
-      "rusty metal",
-      "industrial texture",
-      "diagonal lines",
-      "shadows",
-      "green moss",
-      "weathered surface",
-      "abstract pattern",
-      "light contrast",
-      "orange tones",
-      "geometric shapes"
-    ],
-    "createdAt": "2024-12-24T22:43:15.537Z"
+    "keywords": [],
+    "createdAt": "2024-12-24T23:57:32.383Z"
   },
   {
-    "id": "bv7fdos4i",
+    "id": "fjfr13zgq",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-04.jpg",
-        "size": 10141006,
+        "size": 552430,
         "type": "image/jpeg",
         "path": "/photos/original/pic-04.jpg"
       },
       "optimized": {
         "name": "pic-04_optimized.jpg",
-        "size": 3631170,
+        "size": 154393,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-04_optimized.jpg"
       },
       "minified": {
         "name": "pic-04_minified.jpg",
-        "size": 449412,
+        "size": 46828,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-04_minified.jpg"
       },
       "thumb": {
         "name": "pic-04_thumb.jpg",
-        "size": 147481,
+        "size": 34953,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-04_thumb.jpg"
       }
     },
-    "keywords": [],
-    "createdAt": "2024-12-24T22:43:16.067Z"
+    "keywords": [
+      "flower",
+      "nature",
+      "black and white",
+      "botanical",
+      "petals",
+      "close-up",
+      "texture",
+      "details",
+      "floral",
+      "organic",
+      "folded petals",
+      "layered structure",
+      "contrast",
+      "light and shadow",
+      "delicate appearance"
+    ],
+    "createdAt": "2024-12-24T23:57:32.432Z"
   },
   {
-    "id": "ulqs8mk3q",
+    "id": "w0ipk7vju",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-05.jpg",
-        "size": 4898284,
+        "size": 2840887,
         "type": "image/jpeg",
         "path": "/photos/original/pic-05.jpg"
       },
       "optimized": {
         "name": "pic-05_optimized.jpg",
-        "size": 802665,
+        "size": 514545,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-05_optimized.jpg"
       },
       "minified": {
         "name": "pic-05_minified.jpg",
-        "size": 206067,
+        "size": 100986,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-05_minified.jpg"
       },
       "thumb": {
         "name": "pic-05_thumb.jpg",
-        "size": 108199,
+        "size": 52804,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-05_thumb.jpg"
       }
     },
-    "keywords": [],
-    "createdAt": "2024-12-24T22:43:16.366Z"
+    "keywords": [
+      "mushroom",
+      "fungus",
+      "nature",
+      "flora",
+      "organism",
+      "vegetation",
+      "wildlife",
+      "outdoors",
+      "ecosystem",
+      "biodiversity",
+      "mushroom cap",
+      "fungal structure",
+      "gills",
+      "stipe",
+      "white mushroom",
+      "macro photography",
+      "forest floor",
+      "mycology",
+      "natural habitat",
+      "spore-bearing",
+      "Pleurotus ostreatus",
+      "oyster mushroom",
+      "textured gills",
+      "white color",
+      "stalk",
+      "detailed close-up",
+      "dark background",
+      "edible fungus",
+      "mushroom anatomy",
+      "fleshy cap"
+    ],
+    "createdAt": "2024-12-24T23:57:32.613Z"
   },
   {
-    "id": "weqr58wva",
+    "id": "jgr6pwdgv",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-06.jpg",
-        "size": 6605061,
+        "size": 3729307,
         "type": "image/jpeg",
         "path": "/photos/original/pic-06.jpg"
       },
       "optimized": {
         "name": "pic-06_optimized.jpg",
-        "size": 1057938,
+        "size": 977578,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-06_optimized.jpg"
       },
       "minified": {
         "name": "pic-06_minified.jpg",
-        "size": 117910,
+        "size": 167412,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-06_minified.jpg"
       },
       "thumb": {
         "name": "pic-06_thumb.jpg",
-        "size": 63988,
+        "size": 76553,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-06_thumb.jpg"
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:43:16.688Z"
+    "createdAt": "2024-12-24T23:57:32.846Z"
   },
   {
-    "id": "0f4gye0bw",
+    "id": "wd5bubpll",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-07.jpg",
-        "size": 5129460,
+        "size": 2801777,
         "type": "image/jpeg",
         "path": "/photos/original/pic-07.jpg"
       },
       "optimized": {
         "name": "pic-07_optimized.jpg",
-        "size": 717158,
+        "size": 271305,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-07_optimized.jpg"
       },
       "minified": {
         "name": "pic-07_minified.jpg",
-        "size": 171604,
+        "size": 78525,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-07_minified.jpg"
       },
       "thumb": {
         "name": "pic-07_thumb.jpg",
-        "size": 93164,
+        "size": 40285,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-07_thumb.jpg"
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:43:16.982Z"
+    "createdAt": "2024-12-24T23:57:33.072Z"
   },
   {
-    "id": "ghn89flb3",
+    "id": "mejz5jrev",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-08.jpg",
-        "size": 4297295,
+        "size": 1429920,
         "type": "image/jpeg",
         "path": "/photos/original/pic-08.jpg"
       },
       "optimized": {
         "name": "pic-08_optimized.jpg",
-        "size": 710726,
+        "size": 382497,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-08_optimized.jpg"
       },
       "minified": {
         "name": "pic-08_minified.jpg",
-        "size": 179493,
+        "size": 78799,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-08_minified.jpg"
       },
       "thumb": {
         "name": "pic-08_thumb.jpg",
-        "size": 99933,
+        "size": 48040,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-08_thumb.jpg"
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:43:17.192Z"
+    "createdAt": "2024-12-24T23:57:33.178Z"
   },
   {
-    "id": "o5e6znaqh",
+    "id": "l5qln47eq",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-09.jpg",
-        "size": 2247008,
+        "size": 2776110,
         "type": "image/jpeg",
         "path": "/photos/original/pic-09.jpg"
       },
       "optimized": {
         "name": "pic-09_optimized.jpg",
-        "size": 469159,
+        "size": 236983,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-09_optimized.jpg"
       },
       "minified": {
         "name": "pic-09_minified.jpg",
-        "size": 131645,
+        "size": 64428,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-09_minified.jpg"
       },
       "thumb": {
         "name": "pic-09_thumb.jpg",
-        "size": 70938,
+        "size": 36141,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-09_thumb.jpg"
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-24T22:43:17.319Z"
+    "createdAt": "2024-12-24T23:57:33.398Z"
   },
   {
-    "id": "zut1175qk",
+    "id": "nzegzj92q",
     "exif": null,
     "details": {
       "full": {
         "name": "pic-10.jpg",
-        "size": 1830790,
+        "size": 2911186,
         "type": "image/jpeg",
         "path": "/photos/original/pic-10.jpg"
       },
       "optimized": {
         "name": "pic-10_optimized.jpg",
-        "size": 398471,
+        "size": 806458,
         "type": "image/jpeg",
         "path": "/photos/optimized/pic-10_optimized.jpg"
       },
       "minified": {
         "name": "pic-10_minified.jpg",
-        "size": 107845,
+        "size": 146531,
         "type": "image/jpeg",
         "path": "/photos/minified/pic-10_minified.jpg"
       },
       "thumb": {
         "name": "pic-10_thumb.jpg",
-        "size": 64623,
+        "size": 69469,
         "type": "image/jpeg",
         "path": "/photos/thumb/pic-10_thumb.jpg"
       }
     },
-    "keywords": [
-      "test",
-      "test2"
-    ],
-    "createdAt": "2024-12-24T22:43:17.423Z"
+    "keywords": [],
+    "createdAt": "2024-12-24T23:57:33.584Z"
   }
 ]
