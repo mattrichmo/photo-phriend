@@ -3,48 +3,19 @@ import fs from 'fs/promises'
 import path from 'path'
 import { FileData } from '@/types/file'
 
-export async function DELETE(request: Request) {
+export async function GET() {
   try {
-    const { imageIds } = await request.json()
-
-    if (!Array.isArray(imageIds)) {
-      return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
-    }
-
-    // Read the current images data
-    const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
     const trashJsonPath = path.join(process.cwd(), 'public', 'trash.json')
-    let photos: FileData[] = []
     let trashItems: (FileData & { deleteDate: string })[] = []
     
     try {
-      const photosData = await fs.readFile(photosJsonPath, 'utf-8')
-      photos = JSON.parse(photosData)
-      
-      try {
-        const trashData = await fs.readFile(trashJsonPath, 'utf-8')
-        trashItems = JSON.parse(trashData)
-      } catch {
-        // If trash.json doesn't exist, we'll create it
-        trashItems = []
-      }
-    } catch (error) {
-      console.error('Error reading photos.json:', error)
-      return NextResponse.json({ error: 'Failed to read photos data' }, { status: 500 })
+      const trashData = await fs.readFile(trashJsonPath, 'utf-8')
+      trashItems = JSON.parse(trashData)
+    } catch {
+      // If trash.json doesn't exist, return empty array
+      trashItems = []
     }
-    
-    // Find the images to move to trash
-    const imagesToDelete = photos.filter((img: FileData) => imageIds.includes(img.id))
-    
-    // Move files to trash array with delete date
-    const itemsToTrash = imagesToDelete.map(image => ({
-      ...image,
-      deleteDate: new Date().toISOString()
-    }))
-    
-    // Add to trash array
-    trashItems.push(...itemsToTrash)
-    
+
     // Remove items older than 30 days
     const thirtyDaysAgo = new Date()
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
@@ -82,15 +53,11 @@ export async function DELETE(request: Request) {
     )
     await fs.writeFile(trashJsonPath, JSON.stringify(trashItems, null, 2))
 
-    // Update photos.json
-    const updatedPhotos = photos.filter((img: FileData) => !imageIds.includes(img.id))
-    await fs.writeFile(photosJsonPath, JSON.stringify(updatedPhotos, null, 2))
-
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ images: trashItems })
   } catch (error) {
-    console.error('Error deleting images:', error)
+    console.error('Error fetching trash:', error)
     return NextResponse.json(
-      { error: 'Failed to delete images' },
+      { error: 'Failed to fetch trash' },
       { status: 500 }
     )
   }

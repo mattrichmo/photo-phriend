@@ -254,7 +254,7 @@ export default function GalleryPage() {
       )}
 
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Optimized Images Gallery</h1>
+        <h1 className="text-2xl font-bold">All Photos</h1>
         <div className="space-x-2">
           {selectedImages.size > 0 && (
             <>

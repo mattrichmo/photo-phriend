@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { ImageIcon, ImagePlusIcon, TagsIcon } from 'lucide-react'
+import { ImageIcon, ImagePlusIcon, TagsIcon, TrashIcon } from 'lucide-react'
 
 const navigation = [
   {
@@ -20,6 +20,11 @@ const navigation = [
     name: 'Generate',
     href: '/generate',
     icon: TagsIcon,
+  },
+  {
+    name: 'Trash',
+    href: '/trash',
+    icon: TrashIcon,
   },
 ]
 

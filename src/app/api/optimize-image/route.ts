@@ -175,8 +175,8 @@ async function processImage(buffer: Buffer, metadata: sharp.Metadata, version: '
       }
       break;
     case 'minified':
-      const minWidth = Math.round((metadata.width || 0) / 2);
-      const minHeight = Math.round((metadata.height || 0) / 2);
+      const minWidth = Math.round((metadata.width || 0) / 4);
+      const minHeight = Math.round((metadata.height || 0) / 4);
       image.resize(minWidth, minHeight);
       if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
         image.jpeg({ quality: 70 });
@@ -189,8 +189,8 @@ async function processImage(buffer: Buffer, metadata: sharp.Metadata, version: '
       }
       break;
     case 'thumb':
-      const thumbWidth = Math.round((metadata.width || 0) / 3);
-      const thumbHeight = Math.round((metadata.height || 0) / 3);
+      const thumbWidth = Math.round((metadata.width || 0) / 8);
+      const thumbHeight = Math.round((metadata.height || 0) / 8);
       image.resize(thumbWidth, thumbHeight);
       if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
         image.jpeg({ quality: 60 });
