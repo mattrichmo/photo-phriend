@@ -124,17 +124,6 @@ async function createQuadrantImage(items: ImageToProcess[], aspect: number): Pro
         }
     });
 
-    // Create a white background rectangle for the number
-    const numberBgSize = 30;
-    const numberBg = await sharp({
-        create: {
-            width: numberBgSize,
-            height: numberBgSize,
-            channels: 4,
-            background: { r: 255, g: 255, b: 255, alpha: 1 }
-        }
-    }).png().toBuffer();
-
     // Prepare overlays with proper aspect ratio preservation
     const overlays = await Promise.all(items.map(async (item, index) => {
         const row = Math.floor(index / 2);
@@ -146,47 +135,28 @@ async function createQuadrantImage(items: ImageToProcess[], aspect: number): Pro
         const itemAspect = item.dimensions?.aspect || 1;
         let resizeWidth = cellWidth;
         let resizeHeight = cellHeight;
-        let verticalOffset = 0;
-        let horizontalOffset = 0;
         
         if (itemAspect > 1) {
             resizeHeight = Math.round(cellWidth / itemAspect);
-            verticalOffset = Math.round((cellHeight - resizeHeight) / 2);
+            const verticalOffset = Math.round((cellHeight - resizeHeight) / 2);
+            return {
+                input: await sharp(buffer)
+                    .resize(resizeWidth, resizeHeight, { fit: 'fill' })
+                    .toBuffer(),
+                top: row * cellHeight + verticalOffset,
+                left: col * cellWidth
+            };
         } else {
             resizeWidth = Math.round(cellHeight * itemAspect);
-            horizontalOffset = Math.round((cellWidth - resizeWidth) / 2);
+            const horizontalOffset = Math.round((cellWidth - resizeWidth) / 2);
+            return {
+                input: await sharp(buffer)
+                    .resize(resizeWidth, resizeHeight, { fit: 'fill' })
+                    .toBuffer(),
+                top: row * cellHeight,
+                left: col * cellWidth + horizontalOffset
+            };
         }
-
-        // Create the image with number overlay
-        const imageWithNumber = await sharp(buffer)
-            .resize(resizeWidth, resizeHeight, { fit: 'fill' })
-            .composite([
-                {
-                    input: numberBg,
-                    top: 10,
-                    left: 10,
-                },
-                {
-                    input: {
-                        text: {
-                            text: item.quadrantNum.toString(),
-                            font: 'sans',
-                            width: 20,
-                            height: 20,
-                            rgba: true,
-                        }
-                    },
-                    top: 15,
-                    left: 15,
-                }
-            ])
-            .toBuffer();
-
-        return {
-            input: imageWithNumber,
-            top: row * cellHeight + verticalOffset,
-            left: col * cellWidth + horizontalOffset
-        };
     }));
 
     // Create composite and convert to JPEG
@@ -223,50 +193,6 @@ async function saveCompositeImage(buffer: Buffer, aspect: number): Promise<strin
     }
 }
 
-// Add this function to group images by aspect ratio
-function groupImagesByAspect(items: ImageToProcess[]): ImageToProcess[][] {
-    // First sort by aspect ratio
-    const sortedItems = [...items].sort((a, b) => {
-        const aspectA = a.dimensions?.aspect || 1;
-        const aspectB = b.dimensions?.aspect || 1;
-        return aspectA - aspectB;
-    });
-
-    const groups: ImageToProcess[][] = [];
-    let currentGroup: ImageToProcess[] = [];
-
-    for (const item of sortedItems) {
-        const itemAspect = item.dimensions?.aspect || 1;
-        
-        // If this is the first item in a group, add it
-        if (currentGroup.length === 0) {
-            currentGroup.push(item);
-            continue;
-        }
-
-        // Get the average aspect ratio of the current group
-        const groupAspect = currentGroup.reduce((sum, groupItem) => 
-            sum + (groupItem.dimensions?.aspect || 1), 0) / currentGroup.length;
-
-        // If the aspect ratios are similar (within 20% of each other)
-        // and the group isn't full, add to current group
-        if (Math.abs(itemAspect - groupAspect) / groupAspect < 0.2 && currentGroup.length < 4) {
-            currentGroup.push(item);
-        } else {
-            // Start a new group
-            groups.push(currentGroup);
-            currentGroup = [item];
-        }
-    }
-
-    // Add the last group if it has items
-    if (currentGroup.length > 0) {
-        groups.push(currentGroup);
-    }
-
-    return groups;
-}
-
 export async function POST(req: Request) {
     try {
         const { images, apiKey } = await req.json();
@@ -284,20 +210,18 @@ export async function POST(req: Request) {
         const photos: FileData[] = JSON.parse(photosContent);
         const results: { id: string; keywords: string[] }[] = [];
 
-        // First process all items to get their dimensions
-        const processedItems = await processBatchItems(images);
-        
-        // Group images by similar aspect ratios
-        const aspectGroups = groupImagesByAspect(processedItems);
-
-        // Process each aspect group
-        for (const groupItems of aspectGroups) {
-            // Calculate average aspect ratio for this group
-            const avgAspect = groupItems.reduce((sum, item) => 
-                sum + (item.dimensions?.aspect || 1), 0) / groupItems.length;
+        // Process images in batches of 4
+        for (let i = 0; i < images.length; i += 4) {
+            const batchImages = images.slice(i, i + 4);
             
-            // Create quadrant image for this group
-            const compositeBuffer = await createQuadrantImage(groupItems, avgAspect);
+            // Process items to get their dimensions
+            const processedItems = await processBatchItems(batchImages);
+            
+            // Calculate average aspect ratio for the batch
+            const avgAspect = processedItems.reduce((sum, item) => sum + (item.dimensions?.aspect || 1), 0) / processedItems.length;
+            
+            // Create quadrant image for this batch
+            const compositeBuffer = await createQuadrantImage(processedItems, avgAspect);
             const savedImagePath = await saveCompositeImage(compositeBuffer, avgAspect);
             
             // Convert buffer to base64 with proper JPEG header
@@ -306,11 +230,11 @@ export async function POST(req: Request) {
             console.log(`Saved composite image to: ${savedImagePath}`);
 
             // Generate dynamic response schema based on number of items
-            const responseSchema = createResponseSchema(groupItems.length);
+            const responseSchema = createResponseSchema(processedItems.length);
 
             // Get keywords from OpenAI with dynamic schema
             const response = await openai.chat.completions.create({
-                model: "gpt-4-vision-preview",
+                model: "gpt-4o-mini",
                 messages: [
                     { role: "system", content: systemPrompt },
                     {
@@ -318,10 +242,10 @@ export async function POST(req: Request) {
                         content: [
                             { 
                                 type: "text", 
-                                text: `Please analyze this composite image containing ${groupItems.length} photos arranged in a quadrant. 
+                                text: `Please analyze this composite image containing ${processedItems.length} photos arranged in a quadrant. 
 Each photo is numbered clockwise starting from top-left (1) to ${
-                                    groupItems.length === 2 ? 'top-right (2)' :
-                                    groupItems.length === 3 ? 'bottom-right (3)' :
+                                    processedItems.length === 2 ? 'top-right (2)' :
+                                    processedItems.length === 3 ? 'bottom-right (3)' :
                                     'bottom-left (4)'
                                 }. 
 For each numbered photo, provide 10 keywords in three categories:
@@ -355,7 +279,7 @@ Please maintain the numbering in your response to match each photo's position.`
             const keywordResponse: BatchKeywordResponse = JSON.parse(content);
 
             // Update keywords for each image in the batch
-            for (const item of groupItems) {
+            for (const item of processedItems) {
                 const quadrantKeywords = keywordResponse[item.quadrantNum];
                 if (quadrantKeywords) {
                     const allKeywords = [
