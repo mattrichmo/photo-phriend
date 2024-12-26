@@ -98,69 +98,152 @@ async function processBatchItems(items: ImageToProcess[]): Promise<ImageToProces
 async function createQuadrantImage(items: ImageToProcess[], aspect: number): Promise<Buffer> {
     const MAX_SIZE = 500;
     const numItems = items.length;
-    const cols = 2;
-    const rows = Math.ceil(numItems / 2);
     
-    // Calculate dimensions based on aspect ratio
-    let cellWidth: number, cellHeight: number;
-    if (aspect >= 1) {
+    // Determine if we should use horizontal or vertical layout based on average aspect ratio
+    const isVerticalLayout = aspect < 1;
+    
+    // Calculate dimensions to maintain max size of 500px on longest side
+    let compositeWidth: number, compositeHeight: number, cellWidth: number, cellHeight: number;
+    
+    if (isVerticalLayout) {
+        // Portrait images - arrange horizontally
+        cellWidth = Math.round(MAX_SIZE / aspect);
+        cellHeight = MAX_SIZE;
+        compositeWidth = cellWidth * Math.min(numItems, 2);
+        compositeHeight = cellHeight * Math.ceil(numItems / 2);
+    } else {
+        // Landscape images - arrange vertically
         cellWidth = MAX_SIZE;
         cellHeight = Math.round(MAX_SIZE / aspect);
-    } else {
-        cellHeight = MAX_SIZE;
-        cellWidth = Math.round(MAX_SIZE * aspect);
+        compositeWidth = cellWidth * Math.ceil(numItems / 2);
+        compositeHeight = cellHeight * Math.min(numItems, 2);
     }
 
     // Create composite canvas
-    const compositeWidth = cellWidth * cols;
-    const compositeHeight = cellHeight * rows;
-    
     const composite = sharp({
         create: {
             width: compositeWidth,
             height: compositeHeight,
             channels: 3,
-            background: { r: 0, g: 0, b: 0 }
+            background: { r: 255, g: 255, b: 255 }
         }
     });
 
+    // Calculate positions for clockwise arrangement
+    function getPosition(index: number): { row: number; col: number } {
+        if (isVerticalLayout) {
+            // For portrait images (horizontal layout)
+            if (numItems <= 2) {
+                return { row: 0, col: index };
+            } else {
+                const clockwisePositions = [
+                    { row: 0, col: 0 }, // top-left
+                    { row: 0, col: 1 }, // top-right
+                    { row: 1, col: 1 }, // bottom-right
+                    { row: 1, col: 0 }  // bottom-left
+                ];
+                return clockwisePositions[index];
+            }
+        } else {
+            // For landscape images (vertical layout)
+            if (numItems <= 2) {
+                return { row: index, col: 0 };
+            } else {
+                const clockwisePositions = [
+                    { row: 0, col: 0 }, // top-left
+                    { row: 0, col: 1 }, // top-right
+                    { row: 1, col: 1 }, // bottom-right
+                    { row: 1, col: 0 }  // bottom-left
+                ];
+                return clockwisePositions[index];
+            }
+        }
+    }
+
     // Prepare overlays with proper aspect ratio preservation
     const overlays = await Promise.all(items.map(async (item, index) => {
-        const row = Math.floor(index / 2);
-        const col = index % 2;
+        const { row, col } = getPosition(index);
+        
+        // Update the item's quadrant number to match its position
+        item.quadrantNum = index + 1;
         
         const buffer = await fs.readFile(path.join(process.cwd(), 'public', item.path));
         
-        // Use the item's dimensions to maintain aspect ratio
-        const itemAspect = item.dimensions?.aspect || 1;
-        let resizeWidth = cellWidth;
-        let resizeHeight = cellHeight;
-        
-        if (itemAspect > 1) {
-            resizeHeight = Math.round(cellWidth / itemAspect);
-            const verticalOffset = Math.round((cellHeight - resizeHeight) / 2);
-            return {
-                input: await sharp(buffer)
-                    .resize(resizeWidth, resizeHeight, { fit: 'fill' })
-                    .toBuffer(),
-                top: row * cellHeight + verticalOffset,
-                left: col * cellWidth
-            };
-        } else {
-            resizeWidth = Math.round(cellHeight * itemAspect);
-            const horizontalOffset = Math.round((cellWidth - resizeWidth) / 2);
-            return {
-                input: await sharp(buffer)
-                    .resize(resizeWidth, resizeHeight, { fit: 'fill' })
-                    .toBuffer(),
+        // Resize image to fit cell while maintaining aspect ratio
+        const resizedBuffer = await sharp(buffer)
+            .resize(cellWidth, cellHeight, { 
+                fit: 'contain',
+                background: { r: 255, g: 255, b: 255 }
+            })
+            .toBuffer();
+
+        // Create text overlay with quadrant number using SVG
+        const svgText = Buffer.from(`
+            <svg width="60" height="60">
+                <rect x="0" y="0" width="60" height="60" fill="rgba(0,0,0,0.7)"/>
+                <text x="30" y="40" font-family="Arial" font-size="32" fill="white" text-anchor="middle">${item.quadrantNum}</text>
+            </svg>
+        `);
+
+        return [
+            {
+                input: resizedBuffer,
                 top: row * cellHeight,
-                left: col * cellWidth + horizontalOffset
-            };
-        }
+                left: col * cellWidth
+            },
+            {
+                input: svgText,
+                top: row * cellHeight + 10,
+                left: col * cellWidth + 10
+            }
+        ];
     }));
 
+    // Flatten overlays array
+    const flatOverlays = overlays.flat();
+
     // Create composite and convert to JPEG
-    return composite.composite(overlays).jpeg().toBuffer();
+    return composite.composite(flatOverlays).jpeg().toBuffer();
+}
+
+// Add a function to group images by aspect ratio
+function groupImagesByAspectRatio(images: ImageToProcess[]): ImageToProcess[][] {
+    // Sort images by aspect ratio
+    const sortedImages = [...images].sort((a, b) => {
+        const aspectA = a.dimensions?.aspect || 1;
+        const aspectB = b.dimensions?.aspect || 1;
+        return aspectA - aspectB;
+    });
+
+    const groups: ImageToProcess[][] = [];
+    let currentGroup: ImageToProcess[] = [];
+
+    for (const image of sortedImages) {
+        const currentAspect = image.dimensions?.aspect || 1;
+
+        if (currentGroup.length === 0) {
+            currentGroup.push(image);
+        } else {
+            const groupAspect = currentGroup[0].dimensions?.aspect || 1;
+            // If aspects are within 20% of each other, add to current group
+            if (Math.abs(currentAspect - groupAspect) / groupAspect <= 0.2) {
+                currentGroup.push(image);
+            } else {
+                groups.push(currentGroup);
+                currentGroup = [image];
+            }
+        }
+
+        // If current group has 4 images or this is the last image, push group
+        if (currentGroup.length === 4 || image === sortedImages[sortedImages.length - 1]) {
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+                currentGroup = [];
+            }
+        }
+    }
+
+    return groups;
 }
 
 async function ensureDirectoryExists(dirPath: string) {
@@ -210,29 +293,33 @@ export async function POST(req: Request) {
         const photos: FileData[] = JSON.parse(photosContent);
         const results: { id: string; keywords: string[] }[] = [];
 
-        // Process images in batches of 4
-        for (let i = 0; i < images.length; i += 4) {
-            const batchImages = images.slice(i, i + 4);
-            
-            // Process items to get their dimensions
-            const processedItems = await processBatchItems(batchImages);
+        // First process all images to get their dimensions
+        const processedImages = await processBatchItems(images);
+        
+        // Group images by aspect ratio
+        const imageGroups = groupImagesByAspectRatio(processedImages);
+        console.log(`Processing ${imageGroups.length} groups of images`);
+
+        // Process each group sequentially
+        for (const batchImages of imageGroups) {
+            console.log(`Processing batch of ${batchImages.length} images`);
             
             // Calculate average aspect ratio for the batch
-            const avgAspect = processedItems.reduce((sum, item) => sum + (item.dimensions?.aspect || 1), 0) / processedItems.length;
+            const avgAspect = batchImages.reduce((sum, item) => sum + (item.dimensions?.aspect || 1), 0) / batchImages.length;
             
             // Create quadrant image for this batch
-            const compositeBuffer = await createQuadrantImage(processedItems, avgAspect);
+            const compositeBuffer = await createQuadrantImage(batchImages, avgAspect);
             const savedImagePath = await saveCompositeImage(compositeBuffer, avgAspect);
             
             // Convert buffer to base64 with proper JPEG header
             const base64Image = `data:image/jpeg;base64,${compositeBuffer.toString('base64')}`;
 
-            console.log(`Saved composite image to: ${savedImagePath}`);
+            console.log(`Created composite image at: ${savedImagePath}`);
 
-            // Generate dynamic response schema based on number of items
-            const responseSchema = createResponseSchema(processedItems.length);
+            // Generate dynamic response schema based on number of items in this batch
+            const responseSchema = createResponseSchema(batchImages.length);
 
-            // Get keywords from OpenAI with dynamic schema
+            // Get keywords from OpenAI for this batch
             const response = await openai.chat.completions.create({
                 model: "gpt-4o-mini",
                 messages: [
@@ -242,10 +329,10 @@ export async function POST(req: Request) {
                         content: [
                             { 
                                 type: "text", 
-                                text: `Please analyze this composite image containing ${processedItems.length} photos arranged in a quadrant. 
+                                text: `Please analyze this composite image containing ${batchImages.length} photos arranged in a quadrant. 
 Each photo is numbered clockwise starting from top-left (1) to ${
-                                    processedItems.length === 2 ? 'top-right (2)' :
-                                    processedItems.length === 3 ? 'bottom-right (3)' :
+                                    batchImages.length === 2 ? 'top-right (2)' :
+                                    batchImages.length === 3 ? 'bottom-right (3)' :
                                     'bottom-left (4)'
                                 }. 
 For each numbered photo, provide 10 keywords in three categories:
@@ -278,8 +365,8 @@ Please maintain the numbering in your response to match each photo's position.`
 
             const keywordResponse: BatchKeywordResponse = JSON.parse(content);
 
-            // Update keywords for each image in the batch
-            for (const item of processedItems) {
+            // Update keywords for each image in this batch
+            for (const item of batchImages) {
                 const quadrantKeywords = keywordResponse[item.quadrantNum];
                 if (quadrantKeywords) {
                     const allKeywords = [
@@ -298,7 +385,7 @@ Please maintain the numbering in your response to match each photo's position.`
             }
         }
 
-        // Save updated photos.json
+        // Save updated photos.json after all batches are processed
         await fs.writeFile(photosPath, JSON.stringify(photos, null, 2));
 
         return NextResponse.json({ results });
