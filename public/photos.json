@@ -1,43 +1,238 @@
 [
   {
-    "id": "10hqrzwmr",
+    "id": "oh0y0o3k6",
     "exif": {
-      "date": "2024:12:18 14:46:28",
-      "time": "14:46:28",
+      "date": "2023:06:23 19:38:54",
+      "time": "19:38:54",
+      "make": "SONY",
+      "model": "ILCE-7M4",
+      "lens": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+      "aperture": "f/5.6",
+      "shutterSpeed": "1/200",
+      "iso": 50,
+      "width": 3072,
+      "height": 3840,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "As Shot",
+      "focalLength": "141 mm",
+      "focalLengthIn35mm": 211,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "+16",
+      "sharpness": "40"
+    },
+    "details": {
+      "full": {
+        "name": "oh0y0o3k6.jpg",
+        "size": 4722529,
+        "type": "image/jpeg",
+        "path": "/photos/original/oh0y0o3k6.jpg"
+      },
+      "optimized": {
+        "name": "oh0y0o3k6_optimized.jpg",
+        "size": 576178,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/oh0y0o3k6_optimized.jpg"
+      },
+      "minified": {
+        "name": "oh0y0o3k6_minified.jpg",
+        "size": 133519,
+        "type": "image/jpeg",
+        "path": "/photos/minified/oh0y0o3k6_minified.jpg"
+      },
+      "thumb": {
+        "name": "oh0y0o3k6_thumb.jpg",
+        "size": 70250,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/oh0y0o3k6_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-26T18:46:18.156Z"
+  },
+  {
+    "id": "38we8r7in",
+    "exif": {
+      "date": "2023:07:30 20:54:13",
+      "time": "20:54:13",
+      "make": "SONY",
+      "model": "ILCE-7M4",
+      "lens": "FE 50mm F1.8",
+      "aperture": "f/3.5",
+      "shutterSpeed": "1/125",
+      "iso": 125,
+      "width": 5359,
+      "height": 3015,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "As Shot",
+      "focalLength": "50 mm",
+      "focalLengthIn35mm": 50,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "0",
+      "sharpness": "61"
+    },
+    "details": {
+      "full": {
+        "name": "38we8r7in.jpg",
+        "size": 6226749,
+        "type": "image/jpeg",
+        "path": "/photos/original/38we8r7in.jpg"
+      },
+      "optimized": {
+        "name": "38we8r7in_optimized.jpg",
+        "size": 794622,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/38we8r7in_optimized.jpg"
+      },
+      "minified": {
+        "name": "38we8r7in_minified.jpg",
+        "size": 206780,
+        "type": "image/jpeg",
+        "path": "/photos/minified/38we8r7in_minified.jpg"
+      },
+      "thumb": {
+        "name": "38we8r7in_thumb.jpg",
+        "size": 120040,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/38we8r7in_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-26T18:46:18.505Z"
+  },
+  {
+    "id": "1ll3wxuy9",
+    "exif": {
+      "date": "2023:07:30 20:59:10",
+      "time": "20:59:10",
+      "make": "SONY",
+      "model": "ILCE-7M4",
+      "lens": "FE 50mm F1.8",
+      "aperture": "f/3.5",
+      "shutterSpeed": "1/125",
+      "iso": 100,
+      "width": 7008,
+      "height": 3942,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "Custom",
+      "focalLength": "50 mm",
+      "focalLengthIn35mm": 50,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "0",
+      "sharpness": "77"
+    },
+    "details": {
+      "full": {
+        "name": "1ll3wxuy9.jpg",
+        "size": 11150665,
+        "type": "image/jpeg",
+        "path": "/photos/original/1ll3wxuy9.jpg"
+      },
+      "optimized": {
+        "name": "1ll3wxuy9_optimized.jpg",
+        "size": 1194755,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/1ll3wxuy9_optimized.jpg"
+      },
+      "minified": {
+        "name": "1ll3wxuy9_minified.jpg",
+        "size": 230407,
+        "type": "image/jpeg",
+        "path": "/photos/minified/1ll3wxuy9_minified.jpg"
+      },
+      "thumb": {
+        "name": "1ll3wxuy9_thumb.jpg",
+        "size": 118610,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/1ll3wxuy9_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-26T18:46:19.080Z"
+  },
+  {
+    "id": "tpumzrlro",
+    "exif": {
+      "date": "2023:07:30 21:01:06",
+      "time": "21:01:06",
       "make": "SONY",
       "model": "ILCE-7M4",
       "lens": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
       "aperture": "f/6.3",
-      "shutterSpeed": "1/2000",
-      "iso": 800
+      "shutterSpeed": "1/125",
+      "iso": 800,
+      "width": 4672,
+      "height": 7008,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "As Shot",
+      "focalLength": "238.2 mm",
+      "focalLengthIn35mm": 238,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "0",
+      "sharpness": "66"
     },
     "details": {
       "full": {
-        "name": "DSC08353.JPG",
-        "size": 2322686,
+        "name": "tpumzrlro.jpg",
+        "size": 37578784,
         "type": "image/jpeg",
-        "path": "/photos/original/DSC08353.JPG"
+        "path": "/photos/original/tpumzrlro.jpg"
       },
       "optimized": {
-        "name": "DSC08353_optimized.jpg",
-        "size": 344844,
+        "name": "tpumzrlro_optimized.jpg",
+        "size": 9049437,
         "type": "image/jpeg",
-        "path": "/photos/optimized/DSC08353_optimized.jpg"
+        "path": "/photos/optimized/tpumzrlro_optimized.jpg"
       },
       "minified": {
-        "name": "DSC08353_minified.jpg",
-        "size": 56297,
+        "name": "tpumzrlro_minified.jpg",
+        "size": 886342,
         "type": "image/jpeg",
-        "path": "/photos/minified/DSC08353_minified.jpg"
+        "path": "/photos/minified/tpumzrlro_minified.jpg"
       },
       "thumb": {
-        "name": "DSC08353_thumb.jpg",
-        "size": 34563,
+        "name": "tpumzrlro_thumb.jpg",
+        "size": 231171,
         "type": "image/jpeg",
-        "path": "/photos/thumb/DSC08353_thumb.jpg"
+        "path": "/photos/thumb/tpumzrlro_thumb.jpg"
       }
     },
     "keywords": [],
-    "createdAt": "2024-12-25T20:56:13.917Z"
+    "createdAt": "2024-12-26T18:46:20.329Z"
   }
 ]

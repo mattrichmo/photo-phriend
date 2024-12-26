@@ -59,15 +59,18 @@ export default function GeneratePage() {
     ));
 
     try {
-      // Generate keywords
-      const response = await fetch('/api/generate-keywords-single', {
+      // Generate keywords using the multiple endpoint with a single image
+      const response = await fetch('/api/generate-keywords-multiple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          imagePath: images[imageIndex].path,
-          imageId: images[imageIndex].id,
+          images: [{
+            id: images[imageIndex].id,
+            path: images[imageIndex].path.replace('/photos/', 'photos/'),
+            quadrantNum: 1
+          }],
           apiKey,
         }),
       });
@@ -80,7 +83,7 @@ export default function GeneratePage() {
 
       // Update local state
       setImages(prev => prev.map((img, idx) => 
-        idx === imageIndex ? { ...img, keywords: data.keywords, isProcessing: false } : img
+        idx === imageIndex ? { ...img, keywords: data.results[0].keywords, isProcessing: false } : img
       ));
     } catch (err) {
       const error = err instanceof Error ? err.message : 'An error occurred';
@@ -99,12 +102,65 @@ export default function GeneratePage() {
     setIsGeneratingAll(true);
 
     try {
-      // Process images sequentially to avoid rate limits
-      for (let i = 0; i < images.length; i++) {
-        if (!images[i].keywords) {
-          await handleGenerateKeywords(i);
-        }
+      // Mark all unprocessed images as processing
+      setImages(prev => prev.map(img => 
+        !img.keywords ? { ...img, isProcessing: true, error: undefined } : img
+      ));
+
+      // Get all unprocessed images
+      const unprocessedImages = images
+        .filter(img => !img.keywords)
+        .map((img, index) => ({
+          id: img.id,
+          path: img.path.replace('/photos/', 'photos/'),
+          quadrantNum: (index % 4) + 1
+        }));
+
+      if (unprocessedImages.length === 0) {
+        console.log('No images to process');
+        return;
       }
+
+      // Send all images to be processed in batches by the API
+      const response = await fetch('/api/generate-keywords-multiple', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          images: unprocessedImages,
+          apiKey,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate keywords');
+      }
+
+      // Update images with new keywords
+      setImages(prev => prev.map(img => {
+        const result = data.results.find((r: { id: string; keywords: string[] }) => r.id === img.id);
+        if (result) {
+          return {
+            ...img,
+            keywords: result.keywords,
+            isProcessing: false,
+            error: undefined
+          };
+        }
+        return img;
+      }));
+
+    } catch (err) {
+      const error = err instanceof Error ? err.message : 'An error occurred';
+      console.error('Error generating keywords:', error);
+      
+      // Update all processing images with error
+      setImages(prev => prev.map(img => 
+        img.isProcessing ? { ...img, error, isProcessing: false } : img
+      ));
     } finally {
       setIsGeneratingAll(false);
     }

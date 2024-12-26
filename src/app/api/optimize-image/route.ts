@@ -14,22 +14,44 @@ interface ExifData {
   aperture?: string;
   shutterSpeed?: string;
   iso?: string;
+  
+  width?: number;
+  height?: number;
+  resolution?: {
+    x: number;
+    y: number;
+    unit: string;
+  };
+  software?: string;
+  exposureMode?: string;
+  whiteBalance?: string;
+  focalLength?: string;
+  focalLengthIn35mm?: number;
+  colorSpace?: string;
+  meteringMode?: string;
+  flash?: string;
+  contrast?: string;
+  saturation?: string;
+  sharpness?: string;
+}
+
+interface ImageVersion {
+  buffer: Buffer;
+  size: number;
+  width: number;
+  height: number;
 }
 
 interface OptimizationResult {
-  optimized: {
-    buffer: Buffer,
-    size: number
-  },
-  minified: {
-    buffer: Buffer,
-    size: number
-  },
-  thumb: {
-    buffer: Buffer,
-    size: number
-  },
-  exif: ExifData | null
+  optimized: ImageVersion;
+  minified: ImageVersion;
+  thumb: ImageVersion;
+  exif: ExifData | null;
+}
+
+interface ResolutionValue {
+  value: [number, number];
+  description: string;
 }
 
 export async function POST(request: Request) {
@@ -48,14 +70,15 @@ export async function POST(request: Request) {
     const image = sharp(buffer)
     const metadata = await image.metadata()
 
-    // Extract EXIF data using ExifReader for more reliable extraction
-    let exifData: ExifData | null = null
+    // Extract EXIF data
+    let exifData: ExifData | null = null;
     try {
-      const tags = await ExifReader.load(buffer)
-      console.log('Raw EXIF tags:', JSON.stringify(tags, null, 2))
+      const tags = await ExifReader.load(buffer);
       
       if (tags) {
-        const dateTime = tags['DateTimeOriginal'] || tags['DateTime'] || tags['MetadataDate']
+        const dateTime = tags['DateTimeOriginal'] || tags['DateTime'] || tags['MetadataDate'];
+        const xResolution = tags['XResolution'] as ResolutionValue;
+        const yResolution = tags['YResolution'] as ResolutionValue;
         
         exifData = {
           latitude: tags['GPSLatitude']?.description ? Number(tags['GPSLatitude'].description) : undefined,
@@ -73,88 +96,59 @@ export async function POST(request: Request) {
           
           aperture: tags['FNumber']?.description,
           shutterSpeed: tags['ExposureTime']?.description,
-          iso: tags['ISOSpeedRatings']?.description
+          iso: tags['ISOSpeedRatings']?.description,
+
+          width: Number(tags['Image Width']?.value),
+          height: Number(tags['Image Height']?.value),
+          resolution: xResolution && yResolution ? {
+            x: xResolution.value[0],
+            y: yResolution.value[0],
+            unit: tags['ResolutionUnit']?.description || 'inches'
+          } : undefined,
+          software: tags['Software']?.description,
+          exposureMode: tags['ExposureMode']?.description,
+          whiteBalance: tags['WhiteBalance']?.description,
+          focalLength: tags['FocalLength']?.description,
+          focalLengthIn35mm: typeof tags['FocalLengthIn35mmFilm']?.value === 'number' ? 
+            tags['FocalLengthIn35mmFilm'].value : undefined,
+          colorSpace: tags['ColorSpace']?.description,
+          meteringMode: tags['MeteringMode']?.description,
+          flash: tags['Flash']?.description,
+          contrast: tags['Contrast']?.description,
+          saturation: tags['Saturation']?.description,
+          sharpness: tags['Sharpness']?.description
+        };
+
+        // Remove undefined values
+        if (exifData) {
+          Object.keys(exifData).forEach((key) => {
+            if (exifData && exifData[key as keyof ExifData] === undefined) {
+              delete exifData[key as keyof ExifData];
+            }
+          });
         }
 
-        // Only remove undefined values
-        Object.keys(exifData).forEach(key => {
-          if (exifData && exifData[key as keyof ExifData] === undefined) {
-            delete exifData[key as keyof ExifData]
-          }
-        })
-
-        console.log('Processed EXIF data:', JSON.stringify(exifData, null, 2))
+        console.log('Processed EXIF data:', JSON.stringify(exifData, null, 2));
       }
     } catch (error) {
-      console.error('Error extracting EXIF data:', error)
+      console.error('Error extracting EXIF data:', error);
     }
     
-    // Create optimized version (80% quality)
-    const optimizedImage = sharp(buffer).withMetadata() // Keep metadata in optimized version
-    if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
-      optimizedImage.jpeg({ quality: 80 })
-    } else if (metadata.format === 'png') {
-      optimizedImage.png({ quality: 80 })
-    } else if (metadata.format === 'webp') {
-      optimizedImage.webp({ quality: 80 })
-    } else {
-      optimizedImage.jpeg({ quality: 80 })
-    }
-    
-    // Create minified version (reduced by 4x)
-    const minifiedImage = sharp(buffer).withMetadata()
-    const minWidth = Math.round((metadata.width || 0) / 2)
-    const minHeight = Math.round((metadata.height || 0) / 2)
-    minifiedImage.resize(minWidth, minHeight)
-    if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
-      minifiedImage.jpeg({ quality: 70 })
-    } else if (metadata.format === 'png') {
-      minifiedImage.png({ quality: 70 })
-    } else if (metadata.format === 'webp') {
-      minifiedImage.webp({ quality: 70 })
-    } else {
-      minifiedImage.jpeg({ quality: 70 })
-    }
-    
-    // Create thumbnail version (reduced by 8x)
-    const thumbImage = sharp(buffer).withMetadata()
-    const thumbWidth = Math.round((metadata.width || 0) / 3)
-    const thumbHeight = Math.round((metadata.height || 0) / 3)
-    thumbImage.resize(thumbWidth, thumbHeight)
-    if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
-      thumbImage.jpeg({ quality: 60 })
-    } else if (metadata.format === 'png') {
-      thumbImage.png({ quality: 60 })
-    } else if (metadata.format === 'webp') {
-      thumbImage.webp({ quality: 60 })
-    } else {
-      thumbImage.jpeg({ quality: 60 })
-    }
-
-    // Process all versions in parallel
-    const [optimizedBuffer, minifiedBuffer, thumbBuffer] = await Promise.all([
-      optimizedImage.toBuffer(),
-      minifiedImage.toBuffer(),
-      thumbImage.toBuffer()
-    ])
+    // Process images and get metadata for each version
+    const [optimizedData, minifiedData, thumbData] = await Promise.all([
+      processImage(buffer, metadata, 'optimized'),
+      processImage(buffer, metadata, 'minified'),
+      processImage(buffer, metadata, 'thumb')
+    ]);
 
     const result: OptimizationResult = {
-      optimized: {
-        buffer: optimizedBuffer,
-        size: optimizedBuffer.length
-      },
-      minified: {
-        buffer: minifiedBuffer,
-        size: minifiedBuffer.length
-      },
-      thumb: {
-        buffer: thumbBuffer,
-        size: thumbBuffer.length
-      },
+      optimized: optimizedData,
+      minified: minifiedData,
+      thumb: thumbData,
       exif: exifData
-    }
+    };
 
-    return NextResponse.json(result)
+    return NextResponse.json(result);
   } catch (error) {
     console.error('Error optimizing image:', error)
     return NextResponse.json(
@@ -162,4 +156,60 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
+}
+
+async function processImage(buffer: Buffer, metadata: sharp.Metadata, version: 'optimized' | 'minified' | 'thumb'): Promise<ImageVersion> {
+  const image = sharp(buffer).withMetadata();
+  
+  // Apply version-specific processing
+  switch(version) {
+    case 'optimized':
+      if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
+        image.jpeg({ quality: 80 });
+      } else if (metadata.format === 'png') {
+        image.png({ quality: 80 });
+      } else if (metadata.format === 'webp') {
+        image.webp({ quality: 80 });
+      } else {
+        image.jpeg({ quality: 80 });
+      }
+      break;
+    case 'minified':
+      const minWidth = Math.round((metadata.width || 0) / 2);
+      const minHeight = Math.round((metadata.height || 0) / 2);
+      image.resize(minWidth, minHeight);
+      if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
+        image.jpeg({ quality: 70 });
+      } else if (metadata.format === 'png') {
+        image.png({ quality: 70 });
+      } else if (metadata.format === 'webp') {
+        image.webp({ quality: 70 });
+      } else {
+        image.jpeg({ quality: 70 });
+      }
+      break;
+    case 'thumb':
+      const thumbWidth = Math.round((metadata.width || 0) / 3);
+      const thumbHeight = Math.round((metadata.height || 0) / 3);
+      image.resize(thumbWidth, thumbHeight);
+      if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
+        image.jpeg({ quality: 60 });
+      } else if (metadata.format === 'png') {
+        image.png({ quality: 60 });
+      } else if (metadata.format === 'webp') {
+        image.webp({ quality: 60 });
+      } else {
+        image.jpeg({ quality: 60 });
+      }
+      break;
+  }
+
+  const processedBuffer = await image.toBuffer({ resolveWithObject: true });
+  
+  return {
+    buffer: processedBuffer.data,
+    size: processedBuffer.info.size,
+    width: processedBuffer.info.width,
+    height: processedBuffer.info.height
+  };
 } 

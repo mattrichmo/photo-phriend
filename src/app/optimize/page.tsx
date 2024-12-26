@@ -109,7 +109,7 @@ export default function OptimizePage() {
       const originalFormData = new FormData()
       originalFormData.append('file', file.file)
       originalFormData.append('type', 'original')
-      originalFormData.append('filename', file.details.full.name)
+      originalFormData.append('filename', `${file.id}.${file.details.full.name.split('.').pop()}`)
 
       const saveOriginalResponse = await fetch('/api/save-image', {
         method: 'POST',
@@ -141,11 +141,11 @@ export default function OptimizePage() {
 
       // Save all processed versions
       const processedFormData = new FormData()
-      processedFormData.append('file', optimizedBlob, `${file.details.full.name.split('.')[0]}_optimized.jpg`)
-      processedFormData.append('minifiedBuffer', minifiedBlob, `${file.details.full.name.split('.')[0]}_minified.jpg`)
-      processedFormData.append('thumbBuffer', thumbBlob, `${file.details.full.name.split('.')[0]}_thumb.jpg`)
+      processedFormData.append('file', optimizedBlob, `${file.id}_optimized.jpg`)
+      processedFormData.append('minifiedBuffer', minifiedBlob, `${file.id}_minified.jpg`)
+      processedFormData.append('thumbBuffer', thumbBlob, `${file.id}_thumb.jpg`)
       processedFormData.append('type', 'processed')
-      processedFormData.append('filename', file.details.full.name)
+      processedFormData.append('filename', `${file.id}.${file.details.full.name.split('.').pop()}`)
       processedFormData.append('originalSize', file.details.full.size.toString())
       processedFormData.append('optimizedSize', optimized.size.toString())
       processedFormData.append('minifiedSize', minified.size.toString())
@@ -209,19 +209,19 @@ export default function OptimizePage() {
             details: {
               ...file.details,
               optimized: {
-                name: `${file.details.full.name.split('.')[0]}_optimized.jpg`,
+                name: `${file.id}_optimized.jpg`,
                 size: optimizedSize,
                 type: 'image/jpeg',
                 path: optimizedPath,
               },
               minified: {
-                name: `${file.details.full.name.split('.')[0]}_minified.jpg`,
+                name: `${file.id}_minified.jpg`,
                 size: minifiedSize,
                 type: 'image/jpeg',
                 path: minifiedPath,
               },
               thumb: {
-                name: `${file.details.full.name.split('.')[0]}_thumb.jpg`,
+                name: `${file.id}_thumb.jpg`,
                 size: thumbSize,
                 type: 'image/jpeg',
                 path: thumbPath,
@@ -267,8 +267,7 @@ export default function OptimizePage() {
         if (fileData.details.optimized?.path) {
           const optimizedResponse = await fetch(fileData.details.optimized.path)
           const optimizedBlob = await optimizedResponse.blob()
-          const optimizedName = `${fileData.details.full.name.split('.')[0]}_optimized.jpg`
-          optimizedFolder?.file(optimizedName, optimizedBlob)
+          optimizedFolder?.file(`${fileData.id}_optimized.jpg`, optimizedBlob)
         }
       } catch (error) {
         console.error(`Error adding ${fileData.details.full.name} to zip:`, error)
@@ -321,8 +320,7 @@ export default function OptimizePage() {
         if (fileData.details.optimized?.path) {
           const optimizedResponse = await fetch(fileData.details.optimized.path)
           const optimizedBlob = await optimizedResponse.blob()
-          const optimizedName = `${fileData.details.full.name.split('.')[0]}_optimized.jpg`
-          optimizedFolder?.file(optimizedName, optimizedBlob)
+          optimizedFolder?.file(`${fileData.id}_optimized.jpg`, optimizedBlob)
         }
       } catch (error) {
         console.error(`Error adding ${fileData.details.full.name} to zip:`, error)

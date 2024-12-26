@@ -54,18 +54,18 @@ export async function POST(request: Request) {
       }
 
       // Save optimized version
-      const optimizedName = `${filename.split('.')[0]}_optimized.jpg`
+      const optimizedName = `${id}_optimized.jpg`
       const optimizedPath = path.join(optimizedDir, optimizedName)
       await fs.writeFile(optimizedPath, buffer)
 
       // Save minified version
-      const minifiedName = `${filename.split('.')[0]}_minified.jpg`
+      const minifiedName = `${id}_minified.jpg`
       const minifiedPath = path.join(minifiedDir, minifiedName)
       const minifiedBuffer = Buffer.from(await (formData.get('minifiedBuffer') as File).arrayBuffer())
       await fs.writeFile(minifiedPath, minifiedBuffer)
 
       // Save thumbnail version
-      const thumbName = `${filename.split('.')[0]}_thumb.jpg`
+      const thumbName = `${id}_thumb.jpg`
       const thumbPath = path.join(thumbDir, thumbName)
       const thumbBuffer = Buffer.from(await (formData.get('thumbBuffer') as File).arrayBuffer())
       await fs.writeFile(thumbPath, thumbBuffer)
