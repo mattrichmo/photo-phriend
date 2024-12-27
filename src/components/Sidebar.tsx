@@ -12,13 +12,13 @@ const navigation = [
     icon: ImagePlusIcon,
   },
   {
-    name: 'Gallery',
+    name: 'Photos',
     href: '/gallery',
     icon: ImageIcon,
   },
   {
-    name: 'Generate',
-    href: '/generate',
+    name: 'Keywords',
+    href: '/keywords',
     icon: TagsIcon,
   },
   {

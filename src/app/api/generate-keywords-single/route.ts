@@ -42,10 +42,10 @@ interface PhotoData {
 
 const systemPrompt = `You are a helpful AI that analyzes images and provides relevant keywords. 
 Please provide specific, accurate, and relevant keywords that describe the main subjects, actions, 
-and notable elements in the image. Return between 5-10 keywords per image.`;
+and notable elements in the image. Return between 5-10 keywords for wide, narrow, and specific. Wide keywords are broad, general descriptors. Narrow keywords are more specific. Specific keywords are very detailed or unique elements. The goal here is to produce good keywords for when we share this image. Some of them will be used on etsy, pinterest, instagram etc.`;
 
 const userPrompt = `Please analyze this image and provide relevant keywords that describe its contents. 
-Focus on the main subjects, actions, and notable elements. I would like 10 keywords for wide, narrow, and specific.`;
+Focus on the main subjects, actions, and notable elements. Think of good SEO`;
 
 // Define the response schema as an object with a keywords object containing wide, narrow, and specific arrays
 const responseSchema = {

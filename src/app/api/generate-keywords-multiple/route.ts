@@ -63,7 +63,8 @@ function createResponseSchema(numItems: number) {
 
 const systemPrompt = `You are a helpful AI that analyzes images and provides relevant keywords. 
 Please provide specific, accurate, and relevant keywords that describe the main subjects, actions, 
-and notable elements in the image. Return between 5-10 keywords per image. The images are in a quadrant and go clockwise.`;
+and notable elements in the image. Return between 5-10 keywords per category. We want wide, narrow, and specific keywords. Wide keywords are broad, general descriptors. Narrow keywords are more specific. Specific keywords are very detailed or unique elements. The goal here is to produce good keywords for when we share this image. Some of them will be used on etsy, pinterest, instagram etc.
+ The images are in a quadrant and go clockwise.`;
 
 async function getImageMetadata(filepath: string): Promise<ImageMetadata> {
     try {
