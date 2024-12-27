@@ -49,6 +49,8 @@ export async function POST(req: Request) {
     } catch (error) {
       await db.run('ROLLBACK');
       throw error;
+
+      
     }
   } catch (error) {
     console.error('Error updating keywords:', error);

@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation'
 
 interface EditData {
   keywords: string[]
+  keywordsInput?: string
   copyright: string
   description: string
   make: string
@@ -262,6 +263,7 @@ export default function GalleryPage() {
           ...prev,
           [id]: {
             keywords: [...(image.keywords || [])],
+            keywordsInput: image.keywords?.join(', ') || '',
             copyright: image.exif?.copyright || '',
             description: image.exif?.description || '',
             make: image.exif?.make || '',
@@ -287,12 +289,12 @@ export default function GalleryPage() {
   }
 
   const handleKeywordsChange = (id: string, value: string) => {
-    const keywords = value.split(',').map(k => k.trim()).filter(Boolean)
     setEditData(prev => ({
       ...prev,
       [id]: {
         ...prev[id],
-        keywords
+        keywordsInput: value,
+        keywords: value.split(',').map(k => k.trim()).filter(Boolean)
       }
     }))
   }
@@ -300,6 +302,22 @@ export default function GalleryPage() {
   const handleSaveExif = async (id: string) => {
     try {
       setIsLoading(true)
+
+      // First update the keywords
+      const keywordsResponse = await fetch('/api/images/update-keywords', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          keywords: editData[id].keywords
+        })
+      })
+
+      if (!keywordsResponse.ok) throw new Error('Failed to update keywords')
+
+      // Then update the EXIF data
       const response = await fetch(`/api/images/${id}/edit-exif`, {
         method: 'PUT',
         headers: {
@@ -312,7 +330,7 @@ export default function GalleryPage() {
 
       const updatedImage = await response.json()
       setImages(prev => prev.map(img => 
-        img.id === id ? { ...img, ...updatedImage } : img
+        img.id === id ? { ...img, ...updatedImage, keywords: editData[id].keywords } : img
       ))
       toggleEditRow(id)
     } catch (error) {
@@ -598,8 +616,9 @@ export default function GalleryPage() {
                                 <input
                                   type="text"
                                   className="w-full p-2 border rounded"
-                                  value={editData[image.id]?.keywords?.join(', ') || ''}
+                                  value={editData[image.id]?.keywordsInput || ''}
                                   onChange={(e) => handleKeywordsChange(image.id, e.target.value)}
+                                  placeholder="Enter keywords separated by commas"
                                 />
                               </div>
                               <div>
