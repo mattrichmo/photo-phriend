@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 import JSZip from 'jszip'
-import { FileData } from '@/types/file'
+import sqlite3 from 'sqlite3'
+import { open } from 'sqlite'
 
 export async function POST(request: Request) {
+  let db;
   try {
     const { imageIds } = await request.json()
 
@@ -12,14 +14,51 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
     }
 
-    // Read the current images data
-    const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
-    const photosData = await fs.readFile(photosJsonPath, 'utf-8')
-    const photos = JSON.parse(photosData)
-    
-    // Find the images to include in the zip
-    const imagesToDownload = photos.filter((img: FileData) => imageIds.includes(img.id))
+    // Open database connection
+    db = await open({
+      filename: './photo-phriend.db',
+      driver: sqlite3.Database
+    })
 
+    // Get all photo information including details and EXIF data
+    const photos = await db.all(`
+      SELECT 
+        p.*,
+        pd.name as full_name,
+        pd.path as full_path,
+        pd_opt.name as optimized_name,
+        pd_opt.path as optimized_path,
+        pd_min.name as minified_name,
+        pd_min.path as minified_path,
+        pd_thumb.name as thumb_name,
+        pd_thumb.path as thumb_path,
+        re.exif_data as raw_exif,
+        ce.*
+      FROM photos p
+      LEFT JOIN photo_details pd 
+        ON p.id = pd.photo_id AND pd.version_type = 'full'
+      LEFT JOIN photo_details pd_opt 
+        ON p.id = pd_opt.photo_id AND pd_opt.version_type = 'optimized'
+      LEFT JOIN photo_details pd_min 
+        ON p.id = pd_min.photo_id AND pd_min.version_type = 'minified'
+      LEFT JOIN photo_details pd_thumb 
+        ON p.id = pd_thumb.photo_id AND pd_thumb.version_type = 'thumb'
+      LEFT JOIN raw_exif re ON p.id = re.photo_id
+      LEFT JOIN common_exif ce ON p.id = ce.photo_id
+      WHERE p.id IN (${imageIds.map(() => '?').join(',')})
+    `, imageIds)
+
+    // Get keywords for each photo
+    for (const photo of photos) {
+      const keywords = await db.all(`
+        SELECT k.keyword
+        FROM photo_keywords pk
+        JOIN keywords k ON pk.keyword_id = k.id
+        WHERE pk.photo_id = ?
+      `, [photo.id])
+      photo.keywords = keywords.map(k => k.keyword)
+    }
+    
     // Create a new JSZip instance
     const zip = new JSZip()
 
@@ -35,39 +74,79 @@ export async function POST(request: Request) {
     }
 
     // Add files to the archive
-    for (const image of imagesToDownload) {
+    for (const photo of photos) {
       try {
         // Add original image
-        const originalPath = path.join(process.cwd(), 'public', image.details.full.path)
+        const originalPath = path.join(process.cwd(), 'public', 'photos', photo.id, photo.filename)
         const originalContent = await fs.readFile(originalPath)
-        originalFolder.file(image.details.full.name, originalContent)
+        originalFolder.file(photo.filename, originalContent)
 
         // Add optimized image
-        const optimizedPath = path.join(process.cwd(), 'public', image.details.optimized.path)
+        const optimizedPath = path.join(process.cwd(), 'public', 'photos', 'optimized', photo.optimized_name)
         const optimizedContent = await fs.readFile(optimizedPath)
-        optimizedFolder.file(image.details.optimized.name, optimizedContent)
+        optimizedFolder.file(photo.optimized_name, optimizedContent)
 
         // Add minified image
-        const minifiedPath = path.join(process.cwd(), 'public', image.details.minified.path)
+        const minifiedPath = path.join(process.cwd(), 'public', 'photos', 'minified', photo.minified_name)
         const minifiedContent = await fs.readFile(minifiedPath)
-        minifiedFolder.file(image.details.minified.name, minifiedContent)
+        minifiedFolder.file(photo.minified_name, minifiedContent)
 
         // Add thumbnail image
-        const thumbPath = path.join(process.cwd(), 'public', image.details.thumb.path)
+        const thumbPath = path.join(process.cwd(), 'public', 'photos', 'thumb', photo.thumb_name)
         const thumbContent = await fs.readFile(thumbPath)
-        thumbFolder.file(image.details.thumb.name, thumbContent)
+        thumbFolder.file(photo.thumb_name, thumbContent)
 
         // Add metadata file
         const metadata = {
-          id: image.id,
-          exif: image.exif,
-          details: image.details,
-          keywords: image.keywords,
-          createdAt: new Date().toISOString()
+          id: photo.id,
+          exif: {
+            raw: photo.raw_exif ? JSON.parse(photo.raw_exif) : null,
+            common: {
+              dateTime: photo.date_time,
+              cameraMake: photo.camera_make,
+              cameraModel: photo.camera_model,
+              lensInfo: photo.lens_info,
+              focalLength: photo.focal_length,
+              focalLength35mm: photo.focal_length_35mm,
+              aperture: photo.aperture,
+              shutterSpeed: photo.shutter_speed,
+              iso: photo.iso,
+              exposureProgram: photo.exposure_program,
+              exposureMode: photo.exposure_mode,
+              meteringMode: photo.metering_mode,
+              whiteBalance: photo.white_balance,
+              flash: photo.flash,
+              software: photo.software,
+              rating: photo.rating,
+              copyright: photo.copyright,
+              artist: photo.artist
+            }
+          },
+          details: {
+            full: {
+              name: photo.filename,
+              path: `/photos/${photo.id}/${photo.filename}`
+            },
+            optimized: {
+              name: photo.optimized_name,
+              path: `/photos/optimized/${photo.optimized_name}`
+            },
+            minified: {
+              name: photo.minified_name,
+              path: `/photos/minified/${photo.minified_name}`
+            },
+            thumb: {
+              name: photo.thumb_name,
+              path: `/photos/thumb/${photo.thumb_name}`
+            }
+          },
+          keywords: photo.keywords,
+          createdAt: photo.createdAt,
+          updatedAt: photo.updatedAt
         }
-        metadataFolder.file(`${image.details.full.name.split('.')[0]}_metadata.json`, JSON.stringify(metadata, null, 2))
+        metadataFolder.file(`${photo.filename.split('.')[0]}_metadata.json`, JSON.stringify(metadata, null, 2))
       } catch (error) {
-        console.error(`Error adding file ${image.details.full.name} to zip:`, error)
+        console.error(`Error adding file ${photo.filename} to zip:`, error)
       }
     }
 
@@ -84,5 +163,9 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error creating zip file:', error)
     return NextResponse.json({ error: 'Failed to create zip file' }, { status: 500 })
+  } finally {
+    if (db) {
+      await db.close()
+    }
   }
 } 

@@ -105,65 +105,28 @@ export default function OptimizePage() {
 
   const optimizeImage = async (file: ProcessingFile) => {
     try {
-      // First, save the original file
-      const originalFormData = new FormData()
-      originalFormData.append('file', file.file)
-      originalFormData.append('type', 'original')
-      originalFormData.append('filename', `${file.id}.${file.details.full.name.split('.').pop()}`)
-
-      const saveOriginalResponse = await fetch('/api/save-image', {
-        method: 'POST',
-        body: originalFormData,
-      })
-
-      if (!saveOriginalResponse.ok) {
-        throw new Error('Failed to save original image')
-      }
-
-      // Then optimize the image
+      // Optimize the image using the new endpoint
       const optimizeFormData = new FormData()
       optimizeFormData.append('file', file.file)
       optimizeFormData.append('fileId', file.id)
 
-      const response = await fetch('/api/optimize-image', {
+      const response = await fetch('/api/db/optimize', {
         method: 'POST',
         body: optimizeFormData,
       })
 
-      if (!response.ok) throw new Error('Failed to optimize image')
-
       const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to optimize image')
+      }
+
       const { optimized, minified, thumb, exif } = result
 
-      // Convert array buffers to blobs
+      // Create object URLs for the processed images
       const optimizedBlob = new Blob([Uint8Array.from(optimized.buffer.data)])
       const minifiedBlob = new Blob([Uint8Array.from(minified.buffer.data)])
       const thumbBlob = new Blob([Uint8Array.from(thumb.buffer.data)])
-
-      // Save all processed versions
-      const processedFormData = new FormData()
-      processedFormData.append('file', optimizedBlob, `${file.id}_optimized.jpg`)
-      processedFormData.append('minifiedBuffer', minifiedBlob, `${file.id}_minified.jpg`)
-      processedFormData.append('thumbBuffer', thumbBlob, `${file.id}_thumb.jpg`)
-      processedFormData.append('type', 'processed')
-      processedFormData.append('filename', `${file.id}.${file.details.full.name.split('.').pop()}`)
-      processedFormData.append('originalSize', file.details.full.size.toString())
-      processedFormData.append('optimizedSize', optimized.size.toString())
-      processedFormData.append('minifiedSize', minified.size.toString())
-      processedFormData.append('thumbSize', thumb.size.toString())
-      processedFormData.append('id', file.id)
-      if (exif) {
-        processedFormData.append('exif', JSON.stringify(exif))
-      }
-
-      const saveProcessedResponse = await fetch('/api/save-image', {
-        method: 'POST',
-        body: processedFormData,
-      })
-
-      if (!saveProcessedResponse.ok) {
-        throw new Error('Failed to save processed images')
-      }
 
       return {
         optimizedPath: URL.createObjectURL(optimizedBlob),

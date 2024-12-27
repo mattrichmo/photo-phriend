@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { loadPhotos, savePhotos } from '../../../../../lib/photos'
-import { FileData } from '@/types/file'
+import sqlite3 from 'sqlite3'
+import { open } from 'sqlite'
 
 interface EditExifData {
   keywords: string[]
@@ -17,55 +17,122 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  let db;
   try {
     const data = await request.json() as EditExifData
     const { id } = params
 
     console.log('Received data:', data)
 
-    // Load current photos data
-    const photos = await loadPhotos()
-    const photoIndex = photos.findIndex((p: FileData) => p.id === id)
-    
-    if (photoIndex === -1) {
-      console.error('Photo not found:', id)
-      return NextResponse.json({ error: 'Photo not found' }, { status: 404 })
-    }
+    // Open database connection
+    db = await open({
+      filename: './photo-phriend.db',
+      driver: sqlite3.Database
+    })
 
-    const currentPhoto = photos[photoIndex]
-    console.log('Current photo:', currentPhoto)
-    
-    // Update the photo metadata
-    const updatedPhoto: FileData = {
-      ...currentPhoto,
-      keywords: data.keywords || [],
-      exif: currentPhoto.exif ? {
-        ...currentPhoto.exif,
-        make: data.make,
-        model: data.model,
-        lens: data.lens,
-        aperture: data.aperture,
-        shutterSpeed: data.shutterSpeed,
-        copyright: data.copyright,
-        description: data.description
-      } : null
-    }
+    // Start transaction
+    await db.run('BEGIN TRANSACTION')
 
-    // Update photos.json first since we can't reliably update EXIF data with Sharp
     try {
-      photos[photoIndex] = updatedPhoto
-      await savePhotos(photos)
-      console.log('Successfully updated photos.json')
+      // Update common EXIF data
+      await db.run(`
+        UPDATE common_exif SET
+          camera_make = ?,
+          camera_model = ?,
+          lens_info = ?,
+          aperture = ?,
+          shutter_speed = ?,
+          copyright = ?
+        WHERE photo_id = ?
+      `, [
+        data.make,
+        data.model,
+        data.lens,
+        data.aperture,
+        data.shutterSpeed,
+        data.copyright,
+        id
+      ])
+
+      // Update description in photos table
+      await db.run(`
+        UPDATE photos SET
+          description = ?
+        WHERE id = ?
+      `, [data.description, id])
+
+      // Handle keywords update
+      // First, remove all existing keywords for this photo
+      await db.run('DELETE FROM photo_keywords WHERE photo_id = ?', [id])
+
+      // Then insert new keywords
+      for (const keyword of data.keywords) {
+        // First ensure the keyword exists in keywords table
+        let keywordId = await db.get('SELECT id FROM keywords WHERE keyword = ?', keyword)
+        
+        if (!keywordId) {
+          // Insert new keyword
+          const result = await db.run('INSERT INTO keywords (keyword) VALUES (?)', keyword)
+          keywordId = { id: result.lastID }
+        }
+
+        // Link keyword to photo
+        await db.run(
+          'INSERT INTO photo_keywords (photo_id, keyword_id) VALUES (?, ?)',
+          [id, keywordId.id]
+        )
+      }
+
+      await db.run('COMMIT')
+
+      // Get updated photo data to return
+      const photo = await db.get(`
+        SELECT 
+          p.*,
+          ce.camera_make,
+          ce.camera_model,
+          ce.lens_info as lens,
+          ce.aperture,
+          ce.shutter_speed as shutterSpeed,
+          ce.copyright
+        FROM photos p
+        LEFT JOIN common_exif ce ON p.id = ce.photo_id
+        WHERE p.id = ?
+      `, id)
+
+      if (!photo) {
+        throw new Error('Photo not found after update')
+      }
+
+      // Get updated keywords
+      const keywords = await db.all(`
+        SELECT k.keyword
+        FROM photo_keywords pk
+        JOIN keywords k ON pk.keyword_id = k.id
+        WHERE pk.photo_id = ?
+      `, [id])
+
+      const updatedPhoto = {
+        ...photo,
+        keywords: keywords.map(k => k.keyword),
+        exif: {
+          make: photo.camera_make,
+          model: photo.camera_model,
+          lens: photo.lens,
+          aperture: photo.aperture,
+          shutterSpeed: photo.shutterSpeed,
+          copyright: photo.copyright,
+          description: photo.description
+        }
+      }
+
+      return NextResponse.json(updatedPhoto)
+
     } catch (error) {
-      const err = error as Error
-      console.error('Error saving photos.json:', err)
-      return NextResponse.json(
-        { error: `Failed to save metadata: ${err.message}` },
-        { status: 500 }
-      )
+      await db.run('ROLLBACK')
+      throw error
     }
 
-    return NextResponse.json(updatedPhoto)
   } catch (error) {
     const err = error as Error
     console.error('Error in PUT handler:', err)
@@ -73,5 +140,9 @@ export async function PUT(
       { error: `Failed to update EXIF data: ${err.message}` },
       { status: 500 }
     )
+  } finally {
+    if (db) {
+      await db.close()
+    }
   }
 } 

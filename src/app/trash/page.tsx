@@ -168,7 +168,7 @@ export default function TrashPage() {
             <div className="relative w-full h-full">
               <Image
                 src={viewingImage.details.optimized.path}
-                alt={`Full size view of ${viewingImage.details.full.name}`}
+                alt={viewingImage.details.full.name || 'Full size image view'}
                 fill
                 className="object-contain"
                 sizes="(max-width: 1280px) 100vw, 1280px"
@@ -242,7 +242,7 @@ export default function TrashPage() {
                     {image.details.thumb?.path ? (
                       <Image 
                         src={image.details.thumb.path}
-                        alt={image.details.full.name}
+                        alt={image.details.full.name || 'Image thumbnail'}
                         fill
                         className="object-contain rounded"
                         sizes="64px"

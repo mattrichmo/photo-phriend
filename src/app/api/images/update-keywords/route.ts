@@ -1,75 +1,64 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 
 interface UpdateKeywordsRequest {
   id: string;
   keywords: string[];
 }
 
-interface PhotoData {
-  id: string;
-  exif: Record<string, unknown> | null;
-  details: {
-    full: {
-      name: string;
-      size: number;
-      type: string;
-      path: string;
-    };
-    optimized: {
-      name: string;
-      size: number;
-      type: string;
-      path: string;
-    };
-    minified?: {
-      name: string;
-      size: number;
-      type: string;
-      path: string;
-    };
-    thumb?: {
-      name: string;
-      size: number;
-      type: string;
-      path: string;
-    };
-  };
-  keywords: string[];
-  createdAt: string;
-}
-
 export async function POST(req: Request) {
+  let db;
   try {
     const updates: UpdateKeywordsRequest = await req.json();
 
-    // Read the current photos.json
-    const photosPath = path.join(process.cwd(), 'public', 'photos.json');
-    const photosContent = await fs.readFile(photosPath, 'utf-8');
-    const photos = JSON.parse(photosContent);
+    // Open database connection
+    db = await open({
+      filename: './photo-phriend.db',
+      driver: sqlite3.Database
+    });
 
-    // Find and update the image
-    const imageIndex = photos.images.findIndex((img: PhotoData) => img.id === updates.id);
-    if (imageIndex === -1) {
-      return NextResponse.json(
-        { error: 'Image not found' },
-        { status: 404 }
-      );
+    // Start transaction
+    await db.run('BEGIN TRANSACTION');
+
+    try {
+      // First, remove all existing keywords for this photo
+      await db.run('DELETE FROM photo_keywords WHERE photo_id = ?', [updates.id]);
+
+      // Then insert new keywords
+      for (const keyword of updates.keywords) {
+        // First ensure the keyword exists in keywords table
+        let keywordId = await db.get('SELECT id FROM keywords WHERE keyword = ?', keyword);
+        
+        if (!keywordId) {
+          // Insert new keyword
+          const result = await db.run('INSERT INTO keywords (keyword) VALUES (?)', keyword);
+          keywordId = { id: result.lastID };
+        }
+
+        // Link keyword to photo
+        await db.run(
+          'INSERT INTO photo_keywords (photo_id, keyword_id) VALUES (?, ?)',
+          [updates.id, keywordId.id]
+        );
+      }
+
+      await db.run('COMMIT');
+
+      return NextResponse.json({ success: true });
+    } catch (error) {
+      await db.run('ROLLBACK');
+      throw error;
     }
-
-    // Update keywords
-    photos.images[imageIndex].keywords = updates.keywords;
-
-    // Write back to photos.json
-    await fs.writeFile(photosPath, JSON.stringify(photos, null, 2));
-
-    return NextResponse.json({ success: true });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error('Error updating keywords:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to update keywords' },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      await db.close();
+    }
   }
 } 

@@ -188,7 +188,7 @@ export default function GalleryPage() {
         console.log('API Key:', apiKey);
         console.log('Image Path:', image.details.optimized.path);
 
-        const response = await fetch('/api/generate-keywords-single', {
+        const response = await fetch('/api/db/keywords/get-keywords-single', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ export default function GalleryPage() {
       if (imagesToProcess.length === 0) return;
 
       localStorage.setItem('imagesForKeywords', JSON.stringify(imagesToProcess));
-      router.push('/generate');
+      router.push('/keywords');
     }
   };
 

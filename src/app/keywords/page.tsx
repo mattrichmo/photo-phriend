@@ -60,7 +60,7 @@ export default function GeneratePage() {
 
     try {
       // Generate keywords using the multiple endpoint with a single image
-      const response = await fetch('/api/generate-keywords-multiple', {
+      const response = await fetch('/api/db/keywords/get-keywords-multiple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default function GeneratePage() {
       }
 
       // Send all images to be processed in batches by the API
-      const response = await fetch('/api/generate-keywords-multiple', {
+      const response = await fetch('/api/db/keywords/get-keywords-multiple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

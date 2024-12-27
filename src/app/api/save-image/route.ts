@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
+import { insertOptimizedPhoto } from '@/components/db/insert-optimize'
 
 export async function POST(request: Request) {
   try {
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
       
       return NextResponse.json({ success: true })
     } else if (type === 'processed') {
-      // Save all processed versions and update photos.json
+      // Save all processed versions
       const id = formData.get('id') as string
       const originalSize = parseInt(formData.get('originalSize') as string)
       const optimizedSize = parseInt(formData.get('optimizedSize') as string)
@@ -70,55 +71,41 @@ export async function POST(request: Request) {
       const thumbBuffer = Buffer.from(await (formData.get('thumbBuffer') as File).arrayBuffer())
       await fs.writeFile(thumbPath, thumbBuffer)
 
-      // Update photos.json
-      const photosJsonPath = path.join(process.cwd(), 'public', 'photos.json')
-      let photos = []
-
+      // Insert into database
       try {
-        const photosData = await fs.readFile(photosJsonPath, 'utf-8')
-        photos = JSON.parse(photosData)
-      } catch (error) {
-        console.error('Error reading photos.json:', error)
-      }
-
-      // Add new image data
-      photos.push({
-        id,
-        exif: exifData,
-        details: {
-          full: {
-            name: filename,
-            size: originalSize,
-            type: 'image/jpeg',
-            path: `/photos/original/${filename}`,
-          },
+        const dbResult = await insertOptimizedPhoto({
+          id,
+          filename,
+          type: 'image/jpeg',
           optimized: {
-            name: optimizedName,
+            buffer,
             size: optimizedSize,
-            type: 'image/jpeg',
-            path: `/photos/optimized/${optimizedName}`,
+            width: 0, // These will be set by the optimize-image endpoint
+            height: 0
           },
           minified: {
-            name: minifiedName,
+            buffer: minifiedBuffer,
             size: minifiedSize,
-            type: 'image/jpeg',
-            path: `/photos/minified/${minifiedName}`,
+            width: 0,
+            height: 0
           },
           thumb: {
-            name: thumbName,
+            buffer: thumbBuffer,
             size: thumbSize,
-            type: 'image/jpeg',
-            path: `/photos/thumb/${thumbName}`,
-          }
-        },
-        keywords: [],
-        createdAt: new Date().toISOString(),
-      })
+            width: 0,
+            height: 0
+          },
+          exif: exifData
+        })
 
-      // Save updated photos.json
-      await fs.writeFile(photosJsonPath, JSON.stringify(photos, null, 2))
-
-      return NextResponse.json({ success: true })
+        return NextResponse.json(dbResult)
+      } catch (error) {
+        console.error('Failed to insert data into database:', error)
+        return NextResponse.json(
+          { error: 'Failed to save image data to database' },
+          { status: 500 }
+        )
+      }
     }
 
     return NextResponse.json(
