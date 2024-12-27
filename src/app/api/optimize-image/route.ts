@@ -33,6 +33,7 @@ interface ExifData {
   contrast?: string;
   saturation?: string;
   sharpness?: string;
+  rawExif?: Record<string, unknown>;
 }
 
 interface ImageVersion {
@@ -74,6 +75,8 @@ export async function POST(request: Request) {
     let exifData: ExifData | null = null;
     try {
       const tags = await ExifReader.load(buffer);
+      console.log('Raw EXIF tags:', JSON.stringify(tags, null, 2));
+
       
       if (tags) {
         const dateTime = tags['DateTimeOriginal'] || tags['DateTime'] || tags['MetadataDate'];
@@ -116,7 +119,8 @@ export async function POST(request: Request) {
           flash: tags['Flash']?.description,
           contrast: tags['Contrast']?.description,
           saturation: tags['Saturation']?.description,
-          sharpness: tags['Sharpness']?.description
+          sharpness: tags['Sharpness']?.description,
+          rawExif: tags
         };
 
         // Remove undefined values
