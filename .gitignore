@@ -44,3 +44,5 @@ next-env.d.ts
 .env.*
 
 /public/photos/
+/public/photos.json
+photo-phriend.db
