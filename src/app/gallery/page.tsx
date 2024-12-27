@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { FileData } from '@/types/file'
+import { FileData, FileVersion } from '@/types/file'
 import { X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -465,13 +465,13 @@ export default function GalleryPage() {
                   ) : image.keywords && image.keywords.length > 0 ? (
                     <div className="flex flex-wrap gap-1 max-w-xs">
                       {expandedRows.has(image.id) ? (
-                        image.keywords.map((keyword, index) => (
+                        image.keywords.map((keyword: string, index: number) => (
                           <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
                             {keyword}
                           </div>
                         ))
                       ) : (
-                        image.keywords.slice(0, 4).map((keyword, index) => (
+                        image.keywords.slice(0, 4).map((keyword: string, index: number) => (
                           <div key={index} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-secondary text-secondary-foreground">
                             {keyword}
                           </div>
@@ -524,7 +524,7 @@ export default function GalleryPage() {
                         <div>
                           <h3 className="font-semibold mb-2">Image Files</h3>
                           <div className="space-y-2">
-                            {Object.entries(image.details).map(([key, file]) => (
+                            {Object.entries(image.details).map(([key, file]: [string, FileVersion]) => (
                               <div 
                                 key={key} 
                                 className="flex items-center justify-between p-2 rounded hover:bg-secondary/50 transition-colors cursor-pointer group"

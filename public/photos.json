@@ -1,6 +1,6 @@
 [
   {
-    "id": "z8yzfbtqk",
+    "id": "ehxehvml7",
     "exif": {
       "date": "2023:06:23 19:38:54",
       "time": "19:38:54",
@@ -1749,53 +1749,3469 @@
           "value": "jpeg",
           "description": "JPEG"
         }
-      },
-      "copyright": "Matt Richmond Photo 2024",
-      "description": ""
+      }
     },
     "details": {
       "full": {
-        "name": "z8yzfbtqk.jpg",
+        "name": "ehxehvml7.jpg",
         "size": 4722529,
         "type": "image/jpeg",
-        "path": "/photos/original/z8yzfbtqk.jpg"
+        "path": "/photos/original/ehxehvml7.jpg"
       },
       "optimized": {
-        "name": "z8yzfbtqk_optimized.jpg",
+        "name": "ehxehvml7_optimized.jpg",
         "size": 576178,
         "type": "image/jpeg",
-        "path": "/photos/optimized/z8yzfbtqk_optimized.jpg"
+        "path": "/photos/optimized/ehxehvml7_optimized.jpg"
       },
       "minified": {
-        "name": "z8yzfbtqk_minified.jpg",
+        "name": "ehxehvml7_minified.jpg",
         "size": 60143,
         "type": "image/jpeg",
-        "path": "/photos/minified/z8yzfbtqk_minified.jpg"
+        "path": "/photos/minified/ehxehvml7_minified.jpg"
       },
       "thumb": {
-        "name": "z8yzfbtqk_thumb.jpg",
+        "name": "ehxehvml7_thumb.jpg",
         "size": 39086,
         "type": "image/jpeg",
-        "path": "/photos/thumb/z8yzfbtqk_thumb.jpg"
+        "path": "/photos/thumb/ehxehvml7_thumb.jpg"
       }
     },
-    "keywords": [
-      "bird",
-      "nature",
-      "sky",
-      "outdoors",
-      "wildlife",
-      "crow",
-      "perched",
-      "roof",
-      "black feathers",
-      "avian",
-      "bird on roof peak",
-      "clear blue background",
-      "morning light",
-      "sharp beak",
-      "alert posture"
-    ],
-    "createdAt": "2024-12-27T03:15:38.118Z"
+    "keywords": [],
+    "createdAt": "2024-12-27T04:45:33.317Z"
+  },
+  {
+    "id": "eu1ofxnri",
+    "exif": {
+      "date": "2024:05:20 09:46:44",
+      "time": "09:46:44",
+      "make": "SONY",
+      "model": "ILCE-7M4",
+      "lens": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+      "aperture": "f/7.1",
+      "shutterSpeed": "1/200",
+      "iso": 50,
+      "width": 3072,
+      "height": 4608,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "Custom",
+      "focalLength": "327.7 mm",
+      "focalLengthIn35mm": 491,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "0",
+      "sharpness": "65",
+      "rawExif": {
+        "Bits Per Sample": {
+          "value": 8,
+          "description": "8"
+        },
+        "Image Height": {
+          "value": 4608,
+          "description": "4608px"
+        },
+        "Image Width": {
+          "value": 3072,
+          "description": "3072px"
+        },
+        "Color Components": {
+          "value": 3,
+          "description": "3"
+        },
+        "Subsampling": {
+          "value": [
+            [
+              0,
+              17,
+              0
+            ],
+            [
+              1,
+              17,
+              1
+            ],
+            [
+              2,
+              17,
+              1
+            ]
+          ],
+          "description": "YCb4:4:4 (1 1)"
+        },
+        "Thumbnail": {
+          "Compression": {
+            "id": 259,
+            "value": 6,
+            "description": 6
+          },
+          "XResolution": {
+            "id": 282,
+            "value": [
+              72,
+              1
+            ],
+            "description": "72"
+          },
+          "YResolution": {
+            "id": 283,
+            "value": [
+              72,
+              1
+            ],
+            "description": "72"
+          },
+          "ResolutionUnit": {
+            "id": 296,
+            "value": 2,
+            "description": "inches"
+          },
+          "JPEGInterchangeFormat": {
+            "id": 513,
+            "value": 1000,
+            "description": 1000
+          },
+          "JPEGInterchangeFormatLength": {
+            "id": 514,
+            "value": 4719,
+            "description": 4719
+          },
+          "type": "image/jpeg",
+          "image": {},
+          "base64": "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"
+        },
+        "Make": {
+          "id": 271,
+          "value": [
+            "SONY"
+          ],
+          "description": "SONY"
+        },
+        "Model": {
+          "id": 272,
+          "value": [
+            "ILCE-7M4"
+          ],
+          "description": "ILCE-7M4"
+        },
+        "XResolution": {
+          "id": 282,
+          "value": [
+            300,
+            1
+          ],
+          "description": "300"
+        },
+        "YResolution": {
+          "id": 283,
+          "value": [
+            300,
+            1
+          ],
+          "description": "300"
+        },
+        "ResolutionUnit": {
+          "id": 296,
+          "value": 2,
+          "description": "inches"
+        },
+        "Software": {
+          "id": 305,
+          "value": [
+            "Adobe Lightroom 9.5.1 (iOS)"
+          ],
+          "description": "Adobe Lightroom 9.5.1 (iOS)"
+        },
+        "DateTime": {
+          "id": 306,
+          "value": [
+            "2024:09:30 11:41:56"
+          ],
+          "description": "2024:09:30 11:41:56"
+        },
+        "Exif IFD Pointer": {
+          "id": 34665,
+          "value": 190,
+          "description": 190
+        },
+        "ExposureTime": {
+          "id": 33434,
+          "value": [
+            1,
+            200
+          ],
+          "description": "1/200"
+        },
+        "FNumber": {
+          "id": 33437,
+          "value": [
+            71,
+            10
+          ],
+          "description": "f/7.1"
+        },
+        "ExposureProgram": {
+          "id": 34850,
+          "value": 1,
+          "description": "Manual"
+        },
+        "ISOSpeedRatings": {
+          "id": 34855,
+          "value": 50,
+          "description": 50
+        },
+        "SensitivityType": {
+          "id": 34864,
+          "value": 2,
+          "description": "Recommended Exposure Index"
+        },
+        "RecommendedExposureIndex": {
+          "id": 34866,
+          "value": 50,
+          "description": 50
+        },
+        "ExifVersion": {
+          "id": 36864,
+          "value": [
+            48,
+            50,
+            51,
+            50
+          ],
+          "description": "0232"
+        },
+        "DateTimeOriginal": {
+          "id": 36867,
+          "value": [
+            "2024:05:20 09:46:44"
+          ],
+          "description": "2024:05:20 09:46:44"
+        },
+        "DateTimeDigitized": {
+          "id": 36868,
+          "value": [
+            "2024:05:20 09:46:44"
+          ],
+          "description": "2024:05:20 09:46:44"
+        },
+        "OffsetTime": {
+          "id": 36880,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "OffsetTimeOriginal": {
+          "id": 36881,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "OffsetTimeDigitized": {
+          "id": 36882,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "ShutterSpeedValue": {
+          "id": 37377,
+          "value": [
+            7643856,
+            1000000
+          ],
+          "description": "1/200"
+        },
+        "ApertureValue": {
+          "id": 37378,
+          "value": [
+            5655638,
+            1000000
+          ],
+          "description": "7.10"
+        },
+        "BrightnessValue": {
+          "id": 37379,
+          "value": [
+            25084,
+            2560
+          ],
+          "description": "9.7984375"
+        },
+        "ExposureBiasValue": {
+          "id": 37380,
+          "value": [
+            0,
+            10
+          ],
+          "description": "0"
+        },
+        "MaxApertureValue": {
+          "id": 37381,
+          "value": [
+            1360,
+            256
+          ],
+          "description": "6.30"
+        },
+        "MeteringMode": {
+          "id": 37383,
+          "value": 1,
+          "description": "Average"
+        },
+        "LightSource": {
+          "id": 37384,
+          "value": 10,
+          "description": "Cloudy weather"
+        },
+        "Flash": {
+          "id": 37385,
+          "value": 16,
+          "description": "Flash did not fire, compulsory flash mode"
+        },
+        "FocalLength": {
+          "id": 37386,
+          "value": [
+            3277,
+            10
+          ],
+          "description": "327.7 mm"
+        },
+        "SubSecTimeOriginal": {
+          "id": 37521,
+          "value": [
+            "225"
+          ],
+          "description": "225"
+        },
+        "SubSecTimeDigitized": {
+          "id": 37522,
+          "value": [
+            "225"
+          ],
+          "description": "225"
+        },
+        "ColorSpace": {
+          "id": 40961,
+          "value": 1,
+          "description": "sRGB"
+        },
+        "FocalPlaneXResolution": {
+          "id": 41486,
+          "value": [
+            64449339,
+            32768
+          ],
+          "description": "1966.8377380371094"
+        },
+        "FocalPlaneYResolution": {
+          "id": 41487,
+          "value": [
+            64449339,
+            32768
+          ],
+          "description": "1966.8377380371094"
+        },
+        "FocalPlaneResolutionUnit": {
+          "id": 41488,
+          "value": 3,
+          "description": "centimeters"
+        },
+        "FileSource": {
+          "id": 41728,
+          "value": 3,
+          "description": "DSC"
+        },
+        "SceneType": {
+          "id": 41729,
+          "value": 1,
+          "description": "A directly photographed image"
+        },
+        "CustomRendered": {
+          "id": 41985,
+          "value": 0,
+          "description": "Normal process"
+        },
+        "ExposureMode": {
+          "id": 41986,
+          "value": 1,
+          "description": "Manual exposure"
+        },
+        "WhiteBalance": {
+          "value": "Custom",
+          "attributes": {},
+          "description": "Custom"
+        },
+        "DigitalZoomRatio": {
+          "id": 41988,
+          "value": [
+            16,
+            16
+          ],
+          "description": "1"
+        },
+        "FocalLengthIn35mmFilm": {
+          "id": 41989,
+          "value": 491,
+          "description": 491
+        },
+        "SceneCaptureType": {
+          "id": 41990,
+          "value": 0,
+          "description": "Standard"
+        },
+        "Contrast": {
+          "id": 41992,
+          "value": 0,
+          "description": "Normal"
+        },
+        "Saturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Sharpness": {
+          "value": "65",
+          "attributes": {},
+          "description": "65"
+        },
+        "LensSpecification": {
+          "id": 42034,
+          "value": [
+            [
+              1000,
+              10
+            ],
+            [
+              4000,
+              10
+            ],
+            [
+              50,
+              10
+            ],
+            [
+              63,
+              10
+            ]
+          ],
+          "description": "100-400 mm f/6.3"
+        },
+        "LensModel": {
+          "value": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+          "attributes": {},
+          "description": "100-400mm F5-6.3 DG DN OS | Contemporary 020"
+        },
+        "Coded Character Set": {
+          "id": 346,
+          "value": [
+            27,
+            37,
+            71
+          ],
+          "description": "UTF-8"
+        },
+        "Record Version": {
+          "id": 512,
+          "value": [
+            0,
+            4
+          ],
+          "description": "4"
+        },
+        "Date Created": {
+          "id": 567,
+          "value": [
+            50,
+            48,
+            50,
+            52,
+            48,
+            53,
+            50,
+            48
+          ],
+          "description": "2024-05-20"
+        },
+        "Time Created": {
+          "id": 572,
+          "value": [
+            48,
+            57,
+            52,
+            54,
+            52,
+            52,
+            45,
+            48,
+            55,
+            48,
+            48
+          ],
+          "description": "09:46:44-07:00"
+        },
+        "Digital Creation Date": {
+          "id": 574,
+          "value": [
+            50,
+            48,
+            50,
+            52,
+            48,
+            53,
+            50,
+            48
+          ],
+          "description": "2024-05-20"
+        },
+        "Digital Creation Time": {
+          "id": 575,
+          "value": [
+            48,
+            57,
+            52,
+            54,
+            52,
+            52,
+            45,
+            48,
+            55,
+            48,
+            48
+          ],
+          "description": "09:46:44-07:00"
+        },
+        "about": {
+          "value": "",
+          "attributes": {},
+          "description": ""
+        },
+        "CreatorTool": {
+          "value": "Adobe Lightroom 9.5.1 (iOS)",
+          "attributes": {},
+          "description": "Adobe Lightroom 9.5.1 (iOS)"
+        },
+        "ModifyDate": {
+          "value": "2024-09-30T11:41:56-07:00",
+          "attributes": {},
+          "description": "2024-09-30T11:41:56-07:00"
+        },
+        "CreateDate": {
+          "value": "2024-05-20T09:46:44.225-07:00",
+          "attributes": {},
+          "description": "2024-05-20T09:46:44.225-07:00"
+        },
+        "MetadataDate": {
+          "value": "2024-09-30T11:41:56-07:00",
+          "attributes": {},
+          "description": "2024-09-30T11:41:56-07:00"
+        },
+        "LensInfo": {
+          "value": "1000/10 4000/10 50/10 63/10",
+          "attributes": {},
+          "description": "1000/10 4000/10 50/10 63/10"
+        },
+        "Lens": {
+          "value": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+          "attributes": {},
+          "description": "100-400mm F5-6.3 DG DN OS | Contemporary 020"
+        },
+        "LensDistortInfo": {
+          "value": "1058984579/1073741824 13540429/1073741824 2309699/1073741824 -1120432/1073741824",
+          "attributes": {},
+          "description": "1058984579/1073741824 13540429/1073741824 2309699/1073741824 -1120432/1073741824"
+        },
+        "LateralChromaticAberrationCorrectionAlreadyApplied": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "DateCreated": {
+          "value": "2024-05-20T09:46:44.225-07:00",
+          "attributes": {},
+          "description": "2024-05-20T09:46:44.225-07:00"
+        },
+        "format": {
+          "value": "image/jpeg",
+          "attributes": {},
+          "description": "image/jpeg"
+        },
+        "RawFileName": {
+          "value": "",
+          "attributes": {},
+          "description": ""
+        },
+        "Version": {
+          "value": "16.5",
+          "attributes": {},
+          "description": "16.5"
+        },
+        "CompatibleVersion": {
+          "value": "251854848",
+          "attributes": {},
+          "description": "251854848"
+        },
+        "ProcessVersion": {
+          "value": "15.4",
+          "attributes": {},
+          "description": "15.4"
+        },
+        "Temperature": {
+          "value": "6445",
+          "attributes": {},
+          "description": "6445"
+        },
+        "Tint": {
+          "value": "+13",
+          "attributes": {},
+          "description": "+13"
+        },
+        "Exposure2012": {
+          "value": "+0.65",
+          "attributes": {},
+          "description": "+0.65"
+        },
+        "Contrast2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Highlights2012": {
+          "value": "-51",
+          "attributes": {},
+          "description": "-51"
+        },
+        "Shadows2012": {
+          "value": "-18",
+          "attributes": {},
+          "description": "-18"
+        },
+        "Whites2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Blacks2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Texture": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Clarity2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Dehaze": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Vibrance": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricShadows": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricDarks": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricLights": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricHighlights": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricShadowSplit": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "ParametricMidtoneSplit": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ParametricHighlightSplit": {
+          "value": "75",
+          "attributes": {},
+          "description": "75"
+        },
+        "SharpenRadius": {
+          "value": "+1.0",
+          "attributes": {},
+          "description": "+1.0"
+        },
+        "SharpenDetail": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "SharpenEdgeMasking": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceSmoothing": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorNoiseReduction": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "ColorNoiseReductionDetail": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ColorNoiseReductionSmoothness": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "GrayMixerRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GrayMixerMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningShadowHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningShadowSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningHighlightHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningHighlightSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningBalance": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneSat": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeShadowLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeHighlightLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeBlending": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ColorGradeGlobalHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeGlobalSat": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeGlobalLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "AutoLateralCA": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LensProfileEnable": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LensManualDistortionAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "VignetteAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringePurpleAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringePurpleHueLo": {
+          "value": "30",
+          "attributes": {},
+          "description": "30"
+        },
+        "DefringePurpleHueHi": {
+          "value": "70",
+          "attributes": {},
+          "description": "70"
+        },
+        "DefringeGreenAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringeGreenHueLo": {
+          "value": "40",
+          "attributes": {},
+          "description": "40"
+        },
+        "DefringeGreenHueHi": {
+          "value": "60",
+          "attributes": {},
+          "description": "60"
+        },
+        "PerspectiveUpright": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveVertical": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveHorizontal": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveRotate": {
+          "value": "0.0",
+          "attributes": {},
+          "description": "0.0"
+        },
+        "PerspectiveAspect": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveScale": {
+          "value": "100",
+          "attributes": {},
+          "description": "100"
+        },
+        "PerspectiveX": {
+          "value": "0.00",
+          "attributes": {},
+          "description": "0.00"
+        },
+        "PerspectiveY": {
+          "value": "0.00",
+          "attributes": {},
+          "description": "0.00"
+        },
+        "GrainAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PostCropVignetteAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ShadowTint": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "RedHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "RedSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GreenHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GreenSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "BlueHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "BlueSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HDREditMode": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "OverrideLookVignette": {
+          "value": "False",
+          "attributes": {},
+          "description": "False"
+        },
+        "ToneCurveName2012": {
+          "value": "Linear",
+          "attributes": {},
+          "description": "Linear"
+        },
+        "CameraProfile": {
+          "value": "Adobe Standard",
+          "attributes": {},
+          "description": "Adobe Standard"
+        },
+        "CameraProfileDigest": {
+          "value": "A4DC20C59DE4E2DF67946B80BFDA0801",
+          "attributes": {},
+          "description": "A4DC20C59DE4E2DF67946B80BFDA0801"
+        },
+        "ToggleStyleDigest": {
+          "value": "B5217C8386FEFBEB46D41DB1B1AFF8EC",
+          "attributes": {},
+          "description": "B5217C8386FEFBEB46D41DB1B1AFF8EC"
+        },
+        "ToggleStyleAmount": {
+          "value": "1",
+          "attributes": {},
+          "description": "1"
+        },
+        "HasSettings": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "CropTop": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "CropLeft": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "CropBottom": {
+          "value": "1",
+          "attributes": {},
+          "description": "1"
+        },
+        "CropRight": {
+          "value": "1",
+          "attributes": {},
+          "description": "1"
+        },
+        "CropAngle": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "CropConstrainToWarp": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HasCrop": {
+          "value": "False",
+          "attributes": {},
+          "description": "False"
+        },
+        "AlreadyApplied": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "DocumentID": {
+          "value": "xmp.did:0711ca1d-3743-4e13-a824-935156b4cb34",
+          "attributes": {},
+          "description": "xmp.did:0711ca1d-3743-4e13-a824-935156b4cb34"
+        },
+        "InstanceID": {
+          "value": "xmp.iid:0711ca1d-3743-4e13-a824-935156b4cb34",
+          "attributes": {},
+          "description": "xmp.iid:0711ca1d-3743-4e13-a824-935156b4cb34"
+        },
+        "OriginalDocumentID": {
+          "value": "xmp.did:0711ca1d-3743-4e13-a824-935156b4cb34",
+          "attributes": {},
+          "description": "xmp.did:0711ca1d-3743-4e13-a824-935156b4cb34"
+        },
+        "ToneCurvePV2012": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Red": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Green": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Blue": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "PointColors": {
+          "value": [
+            {
+              "value": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000",
+              "attributes": {},
+              "description": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000"
+            }
+          ],
+          "attributes": {},
+          "description": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000"
+        },
+        "MaskGroupBasedCorrections": {
+          "value": [
+            {
+              "What": {
+                "value": "Correction",
+                "attributes": {},
+                "description": "Correction"
+              },
+              "CorrectionAmount": {
+                "value": "1",
+                "attributes": {},
+                "description": "1"
+              },
+              "CorrectionActive": {
+                "value": "true",
+                "attributes": {},
+                "description": "true"
+              },
+              "CorrectionName": {
+                "value": "Mask 1",
+                "attributes": {},
+                "description": "Mask 1"
+              },
+              "CorrectionSyncID": {
+                "value": "9252110DEC3846AAB0177154A33D0939",
+                "attributes": {},
+                "description": "9252110DEC3846AAB0177154A33D0939"
+              },
+              "LocalExposure": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalHue": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalSaturation": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalContrast": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalClarity": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalSharpness": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalBrightness": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalToningHue": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalToningSaturation": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalExposure2012": {
+                "value": "0.500259",
+                "attributes": {},
+                "description": "0.500259"
+              },
+              "LocalContrast2012": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalHighlights2012": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalShadows2012": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalWhites2012": {
+                "value": "0.2849",
+                "attributes": {},
+                "description": "0.2849"
+              },
+              "LocalBlacks2012": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalClarity2012": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalDehaze": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalLuminanceNoise": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalMoire": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalDefringe": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalTemperature": {
+                "value": "0.556174",
+                "attributes": {},
+                "description": "0.556174"
+              },
+              "LocalTint": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalTexture": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalGrain": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalCorrectedDepth": {
+                "value": "0",
+                "attributes": {},
+                "description": "0"
+              },
+              "LocalCurveRefineSaturation": {
+                "value": "100",
+                "attributes": {},
+                "description": "100"
+              },
+              "CorrectionMasks": {
+                "value": [
+                  {
+                    "What": {
+                      "value": "Mask/Image",
+                      "attributes": {},
+                      "description": "Mask/Image"
+                    },
+                    "MaskActive": {
+                      "value": "true",
+                      "attributes": {},
+                      "description": "true"
+                    },
+                    "MaskName": {
+                      "value": "Sky 1",
+                      "attributes": {},
+                      "description": "Sky 1"
+                    },
+                    "MaskBlendMode": {
+                      "value": "0",
+                      "attributes": {},
+                      "description": "0"
+                    },
+                    "MaskInverted": {
+                      "value": "false",
+                      "attributes": {},
+                      "description": "false"
+                    },
+                    "MaskSyncID": {
+                      "value": "62EBBBA2454D4D9BAE46D2FD19FB3E7E",
+                      "attributes": {},
+                      "description": "62EBBBA2454D4D9BAE46D2FD19FB3E7E"
+                    },
+                    "MaskValue": {
+                      "value": "1",
+                      "attributes": {},
+                      "description": "1"
+                    },
+                    "MaskVersion": {
+                      "value": "1",
+                      "attributes": {},
+                      "description": "1"
+                    },
+                    "MaskSubType": {
+                      "value": "2",
+                      "attributes": {},
+                      "description": "2"
+                    },
+                    "MaskSubCategoryID": {
+                      "value": "0",
+                      "attributes": {},
+                      "description": "0"
+                    },
+                    "ReferencePoint": {
+                      "value": "0.800781 0.697947",
+                      "attributes": {},
+                      "description": "0.800781 0.697947"
+                    },
+                    "InputDigest": {
+                      "value": "2C64DEBD90C90A49E63D44330035F83E",
+                      "attributes": {},
+                      "description": "2C64DEBD90C90A49E63D44330035F83E"
+                    },
+                    "InputDigestVersion": {
+                      "value": "2",
+                      "attributes": {},
+                      "description": "2"
+                    },
+                    "MaskDigest": {
+                      "value": "B9FC3101B12990506FF43D35A946A18E",
+                      "attributes": {},
+                      "description": "B9FC3101B12990506FF43D35A946A18E"
+                    },
+                    "WholeImageArea": {
+                      "value": "0/1,0/1,1920/1,2880/1",
+                      "attributes": {},
+                      "description": "0/1,0/1,1920/1,2880/1"
+                    },
+                    "Origin": {
+                      "value": "0,0",
+                      "attributes": {},
+                      "description": "0,0"
+                    },
+                    "ModelVersion": {
+                      "value": "234881976",
+                      "attributes": {},
+                      "description": "234881976"
+                    }
+                  }
+                ],
+                "attributes": {},
+                "description": "What: Mask/Image; MaskActive: true; MaskName: Sky 1; MaskBlendMode: 0; MaskInverted: false; MaskSyncID: 62EBBBA2454D4D9BAE46D2FD19FB3E7E; MaskValue: 1; MaskVersion: 1; MaskSubType: 2; MaskSubCategoryID: 0; ReferencePoint: 0.800781 0.697947; InputDigest: 2C64DEBD90C90A49E63D44330035F83E; InputDigestVersion: 2; MaskDigest: B9FC3101B12990506FF43D35A946A18E; WholeImageArea: 0/1,0/1,1920/1,2880/1; Origin: 0,0; ModelVersion: 234881976"
+              }
+            }
+          ],
+          "attributes": {},
+          "description": "What: Correction; CorrectionAmount: 1; CorrectionActive: true; CorrectionName: Mask 1; CorrectionSyncID: 9252110DEC3846AAB0177154A33D0939; LocalExposure: 0; LocalHue: 0; LocalSaturation: 0; LocalContrast: 0; LocalClarity: 0; LocalSharpness: 0; LocalBrightness: 0; LocalToningHue: 0; LocalToningSaturation: 0; LocalExposure2012: 0.500259; LocalContrast2012: 0; LocalHighlights2012: 0; LocalShadows2012: 0; LocalWhites2012: 0.2849; LocalBlacks2012: 0; LocalClarity2012: 0; LocalDehaze: 0; LocalLuminanceNoise: 0; LocalMoire: 0; LocalDefringe: 0; LocalTemperature: 0.556174; LocalTint: 0; LocalTexture: 0; LocalGrain: 0; LocalCorrectedDepth: 0; LocalCurveRefineSaturation: 100; CorrectionMasks: What: Mask/Image; MaskActive: true; MaskName: Sky 1; MaskBlendMode: 0; MaskInverted: false; MaskSyncID: 62EBBBA2454D4D9BAE46D2FD19FB3E7E; MaskValue: 1; MaskVersion: 1; MaskSubType: 2; MaskSubCategoryID: 0; ReferencePoint: 0.800781 0.697947; InputDigest: 2C64DEBD90C90A49E63D44330035F83E; InputDigestVersion: 2; MaskDigest: B9FC3101B12990506FF43D35A946A18E; WholeImageArea: 0/1,0/1,1920/1,2880/1; Origin: 0,0; ModelVersion: 234881976"
+        },
+        "Look": {
+          "value": {
+            "Name": {
+              "value": "B&W 01",
+              "attributes": {},
+              "description": "B&W 01"
+            },
+            "Amount": {
+              "value": "1",
+              "attributes": {},
+              "description": "1"
+            },
+            "Cluster": {
+              "value": "Adobe",
+              "attributes": {},
+              "description": "Adobe"
+            },
+            "UUID": {
+              "value": "484F0802EF53449FBAC5858BC9D17B5E",
+              "attributes": {},
+              "description": "484F0802EF53449FBAC5858BC9D17B5E"
+            },
+            "SupportsMonochrome": {
+              "value": "false",
+              "attributes": {},
+              "description": "false"
+            },
+            "Copyright": {
+              "value": "© 2018 Adobe Systems, Inc.",
+              "attributes": {},
+              "description": "© 2018 Adobe Systems, Inc."
+            },
+            "SortName": {
+              "value": [
+                {
+                  "value": "B&W 01",
+                  "attributes": {
+                    "lang": "x-default"
+                  },
+                  "description": "B&W 01"
+                }
+              ],
+              "attributes": {},
+              "description": "B&W 01"
+            },
+            "Group": {
+              "value": [
+                {
+                  "value": "B&W",
+                  "attributes": {
+                    "lang": "x-default"
+                  },
+                  "description": "B&W"
+                }
+              ],
+              "attributes": {},
+              "description": "B&W"
+            },
+            "Parameters": {
+              "value": {
+                "Version": {
+                  "value": "16.5",
+                  "attributes": {},
+                  "description": "16.5"
+                },
+                "ProcessVersion": {
+                  "value": "15.4",
+                  "attributes": {},
+                  "description": "15.4"
+                },
+                "Contrast2012": {
+                  "value": "+33",
+                  "attributes": {},
+                  "description": "+33"
+                },
+                "Highlights2012": {
+                  "value": "-40",
+                  "attributes": {},
+                  "description": "-40"
+                },
+                "Shadows2012": {
+                  "value": "+45",
+                  "attributes": {},
+                  "description": "+45"
+                },
+                "Blacks2012": {
+                  "value": "-10",
+                  "attributes": {},
+                  "description": "-10"
+                },
+                "Clarity2012": {
+                  "value": "+8",
+                  "attributes": {},
+                  "description": "+8"
+                },
+                "ConvertToGrayscale": {
+                  "value": "True",
+                  "attributes": {},
+                  "description": "True"
+                },
+                "LookTable": {
+                  "value": "62CE423BDCA099FE0B786CA01EB606B0",
+                  "attributes": {},
+                  "description": "62CE423BDCA099FE0B786CA01EB606B0"
+                },
+                "ToneCurvePV2012": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "17, 17",
+                      "attributes": {},
+                      "description": "17, 17"
+                    },
+                    {
+                      "value": "34, 36",
+                      "attributes": {},
+                      "description": "34, 36"
+                    },
+                    {
+                      "value": "51, 55",
+                      "attributes": {},
+                      "description": "51, 55"
+                    },
+                    {
+                      "value": "68, 75",
+                      "attributes": {},
+                      "description": "68, 75"
+                    },
+                    {
+                      "value": "85, 96",
+                      "attributes": {},
+                      "description": "85, 96"
+                    },
+                    {
+                      "value": "102, 116",
+                      "attributes": {},
+                      "description": "102, 116"
+                    },
+                    {
+                      "value": "119, 136",
+                      "attributes": {},
+                      "description": "119, 136"
+                    },
+                    {
+                      "value": "136, 154",
+                      "attributes": {},
+                      "description": "136, 154"
+                    },
+                    {
+                      "value": "153, 171",
+                      "attributes": {},
+                      "description": "153, 171"
+                    },
+                    {
+                      "value": "170, 187",
+                      "attributes": {},
+                      "description": "170, 187"
+                    },
+                    {
+                      "value": "187, 202",
+                      "attributes": {},
+                      "description": "187, 202"
+                    },
+                    {
+                      "value": "204, 216",
+                      "attributes": {},
+                      "description": "204, 216"
+                    },
+                    {
+                      "value": "221, 230",
+                      "attributes": {},
+                      "description": "221, 230"
+                    },
+                    {
+                      "value": "238, 242",
+                      "attributes": {},
+                      "description": "238, 242"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 17, 17, 34, 36, 51, 55, 68, 75, 85, 96, 102, 116, 119, 136, 136, 154, 153, 171, 170, 187, 187, 202, 204, 216, 221, 230, 238, 242, 255, 255"
+                },
+                "ToneCurvePV2012Red": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                },
+                "ToneCurvePV2012Green": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                },
+                "ToneCurvePV2012Blue": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                }
+              },
+              "attributes": {},
+              "description": "Version: 16.5; ProcessVersion: 15.4; Contrast2012: +33; Highlights2012: -40; Shadows2012: +45; Blacks2012: -10; Clarity2012: +8; ConvertToGrayscale: True; LookTable: 62CE423BDCA099FE0B786CA01EB606B0; ToneCurvePV2012: 0, 0, 17, 17, 34, 36, 51, 55, 68, 75, 85, 96, 102, 116, 119, 136, 136, 154, 153, 171, 170, 187, 187, 202, 204, 216, 221, 230, 238, 242, 255, 255; ToneCurvePV2012Red: 0, 0, 255, 255; ToneCurvePV2012Green: 0, 0, 255, 255; ToneCurvePV2012Blue: 0, 0, 255, 255"
+            }
+          },
+          "attributes": {},
+          "description": "Name: B&W 01; Amount: 1; Cluster: Adobe; UUID: 484F0802EF53449FBAC5858BC9D17B5E; SupportsMonochrome: false; Copyright: © 2018 Adobe Systems, Inc.; SortName: B&W 01; Group: B&W; Parameters: Version: 16.5; ProcessVersion: 15.4; Contrast2012: +33; Highlights2012: -40; Shadows2012: +45; Blacks2012: -10; Clarity2012: +8; ConvertToGrayscale: True; LookTable: 62CE423BDCA099FE0B786CA01EB606B0; ToneCurvePV2012: 0, 0, 17, 17, 34, 36, 51, 55, 68, 75, 85, 96, 102, 116, 119, 136, 136, 154, 153, 171, 170, 187, 187, 202, 204, 216, 221, 230, 238, 242, 255, 255; ToneCurvePV2012Red: 0, 0, 255, 255; ToneCurvePV2012Green: 0, 0, 255, 255; ToneCurvePV2012Blue: 0, 0, 255, 255"
+        },
+        "History": {
+          "value": [
+            {
+              "action": {
+                "value": "derived",
+                "attributes": {},
+                "description": "derived"
+              },
+              "parameters": {
+                "value": "converted from image/x-sony-arw to image/jpeg, saved to new location",
+                "attributes": {},
+                "description": "converted from image/x-sony-arw to image/jpeg, saved to new location"
+              }
+            },
+            {
+              "action": {
+                "value": "saved",
+                "attributes": {},
+                "description": "saved"
+              },
+              "instanceID": {
+                "value": "xmp.iid:0711ca1d-3743-4e13-a824-935156b4cb34",
+                "attributes": {},
+                "description": "xmp.iid:0711ca1d-3743-4e13-a824-935156b4cb34"
+              },
+              "when": {
+                "value": "2024-09-30T11:41:56-07:00",
+                "attributes": {},
+                "description": "2024-09-30T11:41:56-07:00"
+              },
+              "softwareAgent": {
+                "value": "Adobe Lightroom 9.5.1 (iOS)",
+                "attributes": {},
+                "description": "Adobe Lightroom 9.5.1 (iOS)"
+              },
+              "changed": {
+                "value": "/",
+                "attributes": {},
+                "description": "/"
+              }
+            }
+          ],
+          "attributes": {},
+          "description": "action: derived; parameters: converted from image/x-sony-arw to image/jpeg, saved to new location, action: saved; instanceID: xmp.iid:0711ca1d-3743-4e13-a824-935156b4cb34; when: 2024-09-30T11:41:56-07:00; softwareAgent: Adobe Lightroom 9.5.1 (iOS); changed: /"
+        },
+        "DerivedFrom": {
+          "value": {},
+          "attributes": {},
+          "description": ""
+        },
+        "Preferred CMM type": {
+          "value": "Lino",
+          "description": "Lino"
+        },
+        "Profile Version": {
+          "value": "2.1.0",
+          "description": "2.1.0"
+        },
+        "Profile/Device class": {
+          "value": "mntr",
+          "description": "Display Device profile"
+        },
+        "Color Space": {
+          "value": "RGB ",
+          "description": "RGB "
+        },
+        "Connection Space": {
+          "value": "XYZ ",
+          "description": "XYZ "
+        },
+        "ICC Profile Date": {
+          "value": "1998-02-09T06:49:00.000Z",
+          "description": "1998-02-09T06:49:00.000Z"
+        },
+        "ICC Signature": {
+          "value": "acsp",
+          "description": "acsp"
+        },
+        "Primary Platform": {
+          "value": "MSFT",
+          "description": "Microsoft"
+        },
+        "Device Manufacturer": {
+          "value": "IEC ",
+          "description": "IEC "
+        },
+        "Device Model Number": {
+          "value": "sRGB",
+          "description": "sRGB"
+        },
+        "Rendering Intent": {
+          "value": 0,
+          "description": "Perceptual"
+        },
+        "Profile Creator": {
+          "value": "HP  ",
+          "description": "HP  "
+        },
+        "ICC Copyright": {
+          "value": "Copyright (c) 1998 Hewlett-Packard C",
+          "description": "Copyright (c) 1998 Hewlett-Packard C"
+        },
+        "ICC Description": {
+          "value": "sRGB IEC61966-2.1",
+          "description": "sRGB IEC61966-2.1"
+        },
+        "ICC Device Manufacturer for Display": {
+          "value": "IEC http://www.iec.ch",
+          "description": "IEC http://www.iec.ch"
+        },
+        "ICC Device Model Description": {
+          "value": "IEC 61966-2.1 Default RGB colour space - sRGB",
+          "description": "IEC 61966-2.1 Default RGB colour space - sRGB"
+        },
+        "ICC Viewing Conditions Description": {
+          "value": "Reference Viewing Condition in IEC61966-2.1",
+          "description": "Reference Viewing Condition in IEC61966-2.1"
+        },
+        "Technology": {
+          "value": "CRT ",
+          "description": "CRT "
+        },
+        "FileType": {
+          "value": "jpeg",
+          "description": "JPEG"
+        }
+      }
+    },
+    "details": {
+      "full": {
+        "name": "eu1ofxnri.jpg",
+        "size": 4309822,
+        "type": "image/jpeg",
+        "path": "/photos/original/eu1ofxnri.jpg"
+      },
+      "optimized": {
+        "name": "eu1ofxnri_optimized.jpg",
+        "size": 391245,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/eu1ofxnri_optimized.jpg"
+      },
+      "minified": {
+        "name": "eu1ofxnri_minified.jpg",
+        "size": 51797,
+        "type": "image/jpeg",
+        "path": "/photos/minified/eu1ofxnri_minified.jpg"
+      },
+      "thumb": {
+        "name": "eu1ofxnri_thumb.jpg",
+        "size": 33405,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/eu1ofxnri_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-27T04:48:38.448Z"
+  },
+  {
+    "id": "kdkvf227u",
+    "exif": {
+      "date": "2024:06:12 10:03:14",
+      "time": "10:03:14",
+      "make": "SONY",
+      "model": "ILCE-7M4",
+      "lens": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+      "aperture": "f/6.3",
+      "shutterSpeed": "1/800",
+      "iso": 50,
+      "width": 2490,
+      "height": 3734,
+      "resolution": {
+        "x": 300,
+        "y": 300,
+        "unit": "inches"
+      },
+      "software": "Adobe Lightroom 9.5.1 (iOS)",
+      "exposureMode": "Manual exposure",
+      "whiteBalance": "Custom",
+      "focalLength": "187.1 mm",
+      "focalLengthIn35mm": 280,
+      "colorSpace": "sRGB",
+      "meteringMode": "Average",
+      "flash": "Flash did not fire, compulsory flash mode",
+      "contrast": "Normal",
+      "saturation": "0",
+      "sharpness": "77",
+      "rawExif": {
+        "Bits Per Sample": {
+          "value": 8,
+          "description": "8"
+        },
+        "Image Height": {
+          "value": 3734,
+          "description": "3734px"
+        },
+        "Image Width": {
+          "value": 2490,
+          "description": "2490px"
+        },
+        "Color Components": {
+          "value": 3,
+          "description": "3"
+        },
+        "Subsampling": {
+          "value": [
+            [
+              0,
+              17,
+              0
+            ],
+            [
+              1,
+              17,
+              1
+            ],
+            [
+              2,
+              17,
+              1
+            ]
+          ],
+          "description": "YCb4:4:4 (1 1)"
+        },
+        "Thumbnail": {
+          "Compression": {
+            "id": 259,
+            "value": 6,
+            "description": 6
+          },
+          "XResolution": {
+            "id": 282,
+            "value": [
+              72,
+              1
+            ],
+            "description": "72"
+          },
+          "YResolution": {
+            "id": 283,
+            "value": [
+              72,
+              1
+            ],
+            "description": "72"
+          },
+          "ResolutionUnit": {
+            "id": 296,
+            "value": 2,
+            "description": "inches"
+          },
+          "JPEGInterchangeFormat": {
+            "id": 513,
+            "value": 1000,
+            "description": 1000
+          },
+          "JPEGInterchangeFormatLength": {
+            "id": 514,
+            "value": 4557,
+            "description": 4557
+          },
+          "type": "image/jpeg",
+          "image": {},
+          "base64": "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"
+        },
+        "Make": {
+          "id": 271,
+          "value": [
+            "SONY"
+          ],
+          "description": "SONY"
+        },
+        "Model": {
+          "id": 272,
+          "value": [
+            "ILCE-7M4"
+          ],
+          "description": "ILCE-7M4"
+        },
+        "XResolution": {
+          "id": 282,
+          "value": [
+            300,
+            1
+          ],
+          "description": "300"
+        },
+        "YResolution": {
+          "id": 283,
+          "value": [
+            300,
+            1
+          ],
+          "description": "300"
+        },
+        "ResolutionUnit": {
+          "id": 296,
+          "value": 2,
+          "description": "inches"
+        },
+        "Software": {
+          "id": 305,
+          "value": [
+            "Adobe Lightroom 9.5.1 (iOS)"
+          ],
+          "description": "Adobe Lightroom 9.5.1 (iOS)"
+        },
+        "DateTime": {
+          "id": 306,
+          "value": [
+            "2024:09:30 11:42:12"
+          ],
+          "description": "2024:09:30 11:42:12"
+        },
+        "Exif IFD Pointer": {
+          "id": 34665,
+          "value": 190,
+          "description": 190
+        },
+        "ExposureTime": {
+          "id": 33434,
+          "value": [
+            1,
+            800
+          ],
+          "description": "1/800"
+        },
+        "FNumber": {
+          "id": 33437,
+          "value": [
+            63,
+            10
+          ],
+          "description": "f/6.3"
+        },
+        "ExposureProgram": {
+          "id": 34850,
+          "value": 1,
+          "description": "Manual"
+        },
+        "ISOSpeedRatings": {
+          "id": 34855,
+          "value": 50,
+          "description": 50
+        },
+        "SensitivityType": {
+          "id": 34864,
+          "value": 2,
+          "description": "Recommended Exposure Index"
+        },
+        "RecommendedExposureIndex": {
+          "id": 34866,
+          "value": 50,
+          "description": 50
+        },
+        "ExifVersion": {
+          "id": 36864,
+          "value": [
+            48,
+            50,
+            51,
+            50
+          ],
+          "description": "0232"
+        },
+        "DateTimeOriginal": {
+          "id": 36867,
+          "value": [
+            "2024:06:12 10:03:14"
+          ],
+          "description": "2024:06:12 10:03:14"
+        },
+        "DateTimeDigitized": {
+          "id": 36868,
+          "value": [
+            "2024:06:12 10:03:14"
+          ],
+          "description": "2024:06:12 10:03:14"
+        },
+        "OffsetTime": {
+          "id": 36880,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "OffsetTimeOriginal": {
+          "id": 36881,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "OffsetTimeDigitized": {
+          "id": 36882,
+          "value": [
+            "-07:00"
+          ],
+          "description": "-07:00"
+        },
+        "ShutterSpeedValue": {
+          "id": 37377,
+          "value": [
+            9643856,
+            1000000
+          ],
+          "description": "1/800"
+        },
+        "ApertureValue": {
+          "id": 37378,
+          "value": [
+            5310704,
+            1000000
+          ],
+          "description": "6.30"
+        },
+        "BrightnessValue": {
+          "id": 37379,
+          "value": [
+            27144,
+            2560
+          ],
+          "description": "10.603125"
+        },
+        "ExposureBiasValue": {
+          "id": 37380,
+          "value": [
+            0,
+            10
+          ],
+          "description": "0"
+        },
+        "MaxApertureValue": {
+          "id": 37381,
+          "value": [
+            1272,
+            256
+          ],
+          "description": "5.60"
+        },
+        "MeteringMode": {
+          "id": 37383,
+          "value": 1,
+          "description": "Average"
+        },
+        "LightSource": {
+          "id": 37384,
+          "value": 11,
+          "description": "Shade"
+        },
+        "Flash": {
+          "id": 37385,
+          "value": 16,
+          "description": "Flash did not fire, compulsory flash mode"
+        },
+        "FocalLength": {
+          "id": 37386,
+          "value": [
+            1871,
+            10
+          ],
+          "description": "187.1 mm"
+        },
+        "SubSecTimeOriginal": {
+          "id": 37521,
+          "value": [
+            "763"
+          ],
+          "description": "763"
+        },
+        "SubSecTimeDigitized": {
+          "id": 37522,
+          "value": [
+            "763"
+          ],
+          "description": "763"
+        },
+        "ColorSpace": {
+          "id": 40961,
+          "value": 1,
+          "description": "sRGB"
+        },
+        "FocalPlaneXResolution": {
+          "id": 41486,
+          "value": [
+            64449339,
+            32768
+          ],
+          "description": "1966.8377380371094"
+        },
+        "FocalPlaneYResolution": {
+          "id": 41487,
+          "value": [
+            64449339,
+            32768
+          ],
+          "description": "1966.8377380371094"
+        },
+        "FocalPlaneResolutionUnit": {
+          "id": 41488,
+          "value": 3,
+          "description": "centimeters"
+        },
+        "FileSource": {
+          "id": 41728,
+          "value": 3,
+          "description": "DSC"
+        },
+        "SceneType": {
+          "id": 41729,
+          "value": 1,
+          "description": "A directly photographed image"
+        },
+        "CustomRendered": {
+          "id": 41985,
+          "value": 0,
+          "description": "Normal process"
+        },
+        "ExposureMode": {
+          "id": 41986,
+          "value": 1,
+          "description": "Manual exposure"
+        },
+        "WhiteBalance": {
+          "value": "Custom",
+          "attributes": {},
+          "description": "Custom"
+        },
+        "DigitalZoomRatio": {
+          "id": 41988,
+          "value": [
+            16,
+            16
+          ],
+          "description": "1"
+        },
+        "FocalLengthIn35mmFilm": {
+          "id": 41989,
+          "value": 280,
+          "description": 280
+        },
+        "SceneCaptureType": {
+          "id": 41990,
+          "value": 0,
+          "description": "Standard"
+        },
+        "Contrast": {
+          "id": 41992,
+          "value": 0,
+          "description": "Normal"
+        },
+        "Saturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Sharpness": {
+          "value": "77",
+          "attributes": {},
+          "description": "77"
+        },
+        "LensSpecification": {
+          "id": 42034,
+          "value": [
+            [
+              1000,
+              10
+            ],
+            [
+              4000,
+              10
+            ],
+            [
+              50,
+              10
+            ],
+            [
+              63,
+              10
+            ]
+          ],
+          "description": "100-400 mm f/6.3"
+        },
+        "LensModel": {
+          "value": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+          "attributes": {},
+          "description": "100-400mm F5-6.3 DG DN OS | Contemporary 020"
+        },
+        "Coded Character Set": {
+          "id": 346,
+          "value": [
+            27,
+            37,
+            71
+          ],
+          "description": "UTF-8"
+        },
+        "Record Version": {
+          "id": 512,
+          "value": [
+            0,
+            4
+          ],
+          "description": "4"
+        },
+        "Date Created": {
+          "id": 567,
+          "value": [
+            50,
+            48,
+            50,
+            52,
+            48,
+            54,
+            49,
+            50
+          ],
+          "description": "2024-06-12"
+        },
+        "Time Created": {
+          "id": 572,
+          "value": [
+            49,
+            48,
+            48,
+            51,
+            49,
+            52,
+            45,
+            48,
+            55,
+            48,
+            48
+          ],
+          "description": "10:03:14-07:00"
+        },
+        "Digital Creation Date": {
+          "id": 574,
+          "value": [
+            50,
+            48,
+            50,
+            52,
+            48,
+            54,
+            49,
+            50
+          ],
+          "description": "2024-06-12"
+        },
+        "Digital Creation Time": {
+          "id": 575,
+          "value": [
+            49,
+            48,
+            48,
+            51,
+            49,
+            52,
+            45,
+            48,
+            55,
+            48,
+            48
+          ],
+          "description": "10:03:14-07:00"
+        },
+        "about": {
+          "value": "",
+          "attributes": {},
+          "description": ""
+        },
+        "CreatorTool": {
+          "value": "Adobe Lightroom 9.5.1 (iOS)",
+          "attributes": {},
+          "description": "Adobe Lightroom 9.5.1 (iOS)"
+        },
+        "ModifyDate": {
+          "value": "2024-09-30T11:42:12-07:00",
+          "attributes": {},
+          "description": "2024-09-30T11:42:12-07:00"
+        },
+        "CreateDate": {
+          "value": "2024-06-12T10:03:14.763-07:00",
+          "attributes": {},
+          "description": "2024-06-12T10:03:14.763-07:00"
+        },
+        "MetadataDate": {
+          "value": "2024-09-30T11:42:12-07:00",
+          "attributes": {},
+          "description": "2024-09-30T11:42:12-07:00"
+        },
+        "LensInfo": {
+          "value": "1000/10 4000/10 50/10 63/10",
+          "attributes": {},
+          "description": "1000/10 4000/10 50/10 63/10"
+        },
+        "Lens": {
+          "value": "100-400mm F5-6.3 DG DN OS | Contemporary 020",
+          "attributes": {},
+          "description": "100-400mm F5-6.3 DG DN OS | Contemporary 020"
+        },
+        "LensDistortInfo": {
+          "value": "1060807627/1073741824 12833193/1073741824 -356687/1073741824 425457/1073741824",
+          "attributes": {},
+          "description": "1060807627/1073741824 12833193/1073741824 -356687/1073741824 425457/1073741824"
+        },
+        "LateralChromaticAberrationCorrectionAlreadyApplied": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "DateCreated": {
+          "value": "2024-06-12T10:03:14.763-07:00",
+          "attributes": {},
+          "description": "2024-06-12T10:03:14.763-07:00"
+        },
+        "format": {
+          "value": "image/jpeg",
+          "attributes": {},
+          "description": "image/jpeg"
+        },
+        "RawFileName": {
+          "value": "",
+          "attributes": {},
+          "description": ""
+        },
+        "Version": {
+          "value": "16.5",
+          "attributes": {},
+          "description": "16.5"
+        },
+        "ProcessVersion": {
+          "value": "15.4",
+          "attributes": {},
+          "description": "15.4"
+        },
+        "Temperature": {
+          "value": "7988",
+          "attributes": {},
+          "description": "7988"
+        },
+        "Tint": {
+          "value": "+10",
+          "attributes": {},
+          "description": "+10"
+        },
+        "Exposure2012": {
+          "value": "0.00",
+          "attributes": {},
+          "description": "0.00"
+        },
+        "Contrast2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Highlights2012": {
+          "value": "+47",
+          "attributes": {},
+          "description": "+47"
+        },
+        "Shadows2012": {
+          "value": "-14",
+          "attributes": {},
+          "description": "-14"
+        },
+        "Whites2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Blacks2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Texture": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Clarity2012": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Dehaze": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "Vibrance": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricShadows": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricDarks": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricLights": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricHighlights": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ParametricShadowSplit": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "ParametricMidtoneSplit": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ParametricHighlightSplit": {
+          "value": "75",
+          "attributes": {},
+          "description": "75"
+        },
+        "SharpenRadius": {
+          "value": "+1.0",
+          "attributes": {},
+          "description": "+1.0"
+        },
+        "SharpenDetail": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "SharpenEdgeMasking": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceSmoothing": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorNoiseReduction": {
+          "value": "25",
+          "attributes": {},
+          "description": "25"
+        },
+        "ColorNoiseReductionDetail": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ColorNoiseReductionSmoothness": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "HueAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HueAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SaturationAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentRed": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentOrange": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentYellow": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentGreen": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentAqua": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentBlue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentPurple": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LuminanceAdjustmentMagenta": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningShadowHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningShadowSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningHighlightHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningHighlightSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "SplitToningBalance": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneSat": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeShadowLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeMidtoneLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeHighlightLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeBlending": {
+          "value": "50",
+          "attributes": {},
+          "description": "50"
+        },
+        "ColorGradeGlobalHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeGlobalSat": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ColorGradeGlobalLum": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "AutoLateralCA": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LensProfileEnable": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "LensManualDistortionAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "VignetteAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringePurpleAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringePurpleHueLo": {
+          "value": "30",
+          "attributes": {},
+          "description": "30"
+        },
+        "DefringePurpleHueHi": {
+          "value": "70",
+          "attributes": {},
+          "description": "70"
+        },
+        "DefringeGreenAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "DefringeGreenHueLo": {
+          "value": "40",
+          "attributes": {},
+          "description": "40"
+        },
+        "DefringeGreenHueHi": {
+          "value": "60",
+          "attributes": {},
+          "description": "60"
+        },
+        "PerspectiveUpright": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveVertical": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveHorizontal": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveRotate": {
+          "value": "0.0",
+          "attributes": {},
+          "description": "0.0"
+        },
+        "PerspectiveAspect": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PerspectiveScale": {
+          "value": "100",
+          "attributes": {},
+          "description": "100"
+        },
+        "PerspectiveX": {
+          "value": "0.00",
+          "attributes": {},
+          "description": "0.00"
+        },
+        "PerspectiveY": {
+          "value": "0.00",
+          "attributes": {},
+          "description": "0.00"
+        },
+        "GrainAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "PostCropVignetteAmount": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "ShadowTint": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "RedHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "RedSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GreenHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "GreenSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "BlueHue": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "BlueSaturation": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HDREditMode": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "OverrideLookVignette": {
+          "value": "False",
+          "attributes": {},
+          "description": "False"
+        },
+        "ToneCurveName2012": {
+          "value": "Linear",
+          "attributes": {},
+          "description": "Linear"
+        },
+        "CameraProfile": {
+          "value": "Adobe Standard",
+          "attributes": {},
+          "description": "Adobe Standard"
+        },
+        "CameraProfileDigest": {
+          "value": "A4DC20C59DE4E2DF67946B80BFDA0801",
+          "attributes": {},
+          "description": "A4DC20C59DE4E2DF67946B80BFDA0801"
+        },
+        "HasSettings": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "CropTop": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "CropLeft": {
+          "value": "0.055398",
+          "attributes": {},
+          "description": "0.055398"
+        },
+        "CropBottom": {
+          "value": "0.810416",
+          "attributes": {},
+          "description": "0.810416"
+        },
+        "CropRight": {
+          "value": "0.865698",
+          "attributes": {},
+          "description": "0.865698"
+        },
+        "CropAngle": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "CropConstrainToWarp": {
+          "value": "0",
+          "attributes": {},
+          "description": "0"
+        },
+        "HasCrop": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "AlreadyApplied": {
+          "value": "True",
+          "attributes": {},
+          "description": "True"
+        },
+        "DocumentID": {
+          "value": "xmp.did:12e89846-f6ac-4268-ae09-2794c06f9415",
+          "attributes": {},
+          "description": "xmp.did:12e89846-f6ac-4268-ae09-2794c06f9415"
+        },
+        "InstanceID": {
+          "value": "xmp.iid:12e89846-f6ac-4268-ae09-2794c06f9415",
+          "attributes": {},
+          "description": "xmp.iid:12e89846-f6ac-4268-ae09-2794c06f9415"
+        },
+        "OriginalDocumentID": {
+          "value": "xmp.did:12e89846-f6ac-4268-ae09-2794c06f9415",
+          "attributes": {},
+          "description": "xmp.did:12e89846-f6ac-4268-ae09-2794c06f9415"
+        },
+        "ToneCurvePV2012": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Red": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Green": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "ToneCurvePV2012Blue": {
+          "value": [
+            {
+              "value": "0, 0",
+              "attributes": {},
+              "description": "0, 0"
+            },
+            {
+              "value": "255, 255",
+              "attributes": {},
+              "description": "255, 255"
+            }
+          ],
+          "attributes": {},
+          "description": "0, 0, 255, 255"
+        },
+        "PointColors": {
+          "value": [
+            {
+              "value": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000",
+              "attributes": {},
+              "description": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000"
+            }
+          ],
+          "attributes": {},
+          "description": "-1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000, -1.000000"
+        },
+        "Look": {
+          "value": {
+            "Name": {
+              "value": "Adobe Color",
+              "attributes": {},
+              "description": "Adobe Color"
+            },
+            "Amount": {
+              "value": "1",
+              "attributes": {},
+              "description": "1"
+            },
+            "UUID": {
+              "value": "B952C231111CD8E0ECCF14B86BAA7077",
+              "attributes": {},
+              "description": "B952C231111CD8E0ECCF14B86BAA7077"
+            },
+            "SupportsAmount": {
+              "value": "false",
+              "attributes": {},
+              "description": "false"
+            },
+            "SupportsMonochrome": {
+              "value": "false",
+              "attributes": {},
+              "description": "false"
+            },
+            "SupportsOutputReferred": {
+              "value": "false",
+              "attributes": {},
+              "description": "false"
+            },
+            "Copyright": {
+              "value": "© 2018 Adobe Systems, Inc.",
+              "attributes": {},
+              "description": "© 2018 Adobe Systems, Inc."
+            },
+            "Group": {
+              "value": [
+                {
+                  "value": "Profiles",
+                  "attributes": {
+                    "lang": "x-default"
+                  },
+                  "description": "Profiles"
+                }
+              ],
+              "attributes": {},
+              "description": "Profiles"
+            },
+            "Parameters": {
+              "value": {
+                "Version": {
+                  "value": "16.5",
+                  "attributes": {},
+                  "description": "16.5"
+                },
+                "ProcessVersion": {
+                  "value": "15.4",
+                  "attributes": {},
+                  "description": "15.4"
+                },
+                "ConvertToGrayscale": {
+                  "value": "False",
+                  "attributes": {},
+                  "description": "False"
+                },
+                "CameraProfile": {
+                  "value": "Adobe Standard",
+                  "attributes": {},
+                  "description": "Adobe Standard"
+                },
+                "LookTable": {
+                  "value": "E1095149FDB39D7A057BAB208837E2E1",
+                  "attributes": {},
+                  "description": "E1095149FDB39D7A057BAB208837E2E1"
+                },
+                "ToneCurvePV2012": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "22, 16",
+                      "attributes": {},
+                      "description": "22, 16"
+                    },
+                    {
+                      "value": "40, 35",
+                      "attributes": {},
+                      "description": "40, 35"
+                    },
+                    {
+                      "value": "127, 127",
+                      "attributes": {},
+                      "description": "127, 127"
+                    },
+                    {
+                      "value": "224, 230",
+                      "attributes": {},
+                      "description": "224, 230"
+                    },
+                    {
+                      "value": "240, 246",
+                      "attributes": {},
+                      "description": "240, 246"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 22, 16, 40, 35, 127, 127, 224, 230, 240, 246, 255, 255"
+                },
+                "ToneCurvePV2012Red": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                },
+                "ToneCurvePV2012Green": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                },
+                "ToneCurvePV2012Blue": {
+                  "value": [
+                    {
+                      "value": "0, 0",
+                      "attributes": {},
+                      "description": "0, 0"
+                    },
+                    {
+                      "value": "255, 255",
+                      "attributes": {},
+                      "description": "255, 255"
+                    }
+                  ],
+                  "attributes": {},
+                  "description": "0, 0, 255, 255"
+                }
+              },
+              "attributes": {},
+              "description": "Version: 16.5; ProcessVersion: 15.4; ConvertToGrayscale: False; CameraProfile: Adobe Standard; LookTable: E1095149FDB39D7A057BAB208837E2E1; ToneCurvePV2012: 0, 0, 22, 16, 40, 35, 127, 127, 224, 230, 240, 246, 255, 255; ToneCurvePV2012Red: 0, 0, 255, 255; ToneCurvePV2012Green: 0, 0, 255, 255; ToneCurvePV2012Blue: 0, 0, 255, 255"
+            }
+          },
+          "attributes": {},
+          "description": "Name: Adobe Color; Amount: 1; UUID: B952C231111CD8E0ECCF14B86BAA7077; SupportsAmount: false; SupportsMonochrome: false; SupportsOutputReferred: false; Copyright: © 2018 Adobe Systems, Inc.; Group: Profiles; Parameters: Version: 16.5; ProcessVersion: 15.4; ConvertToGrayscale: False; CameraProfile: Adobe Standard; LookTable: E1095149FDB39D7A057BAB208837E2E1; ToneCurvePV2012: 0, 0, 22, 16, 40, 35, 127, 127, 224, 230, 240, 246, 255, 255; ToneCurvePV2012Red: 0, 0, 255, 255; ToneCurvePV2012Green: 0, 0, 255, 255; ToneCurvePV2012Blue: 0, 0, 255, 255"
+        },
+        "History": {
+          "value": [
+            {
+              "action": {
+                "value": "derived",
+                "attributes": {},
+                "description": "derived"
+              },
+              "parameters": {
+                "value": "converted from image/x-sony-arw to image/jpeg, saved to new location",
+                "attributes": {},
+                "description": "converted from image/x-sony-arw to image/jpeg, saved to new location"
+              }
+            },
+            {
+              "action": {
+                "value": "saved",
+                "attributes": {},
+                "description": "saved"
+              },
+              "instanceID": {
+                "value": "xmp.iid:12e89846-f6ac-4268-ae09-2794c06f9415",
+                "attributes": {},
+                "description": "xmp.iid:12e89846-f6ac-4268-ae09-2794c06f9415"
+              },
+              "when": {
+                "value": "2024-09-30T11:42:12-07:00",
+                "attributes": {},
+                "description": "2024-09-30T11:42:12-07:00"
+              },
+              "softwareAgent": {
+                "value": "Adobe Lightroom 9.5.1 (iOS)",
+                "attributes": {},
+                "description": "Adobe Lightroom 9.5.1 (iOS)"
+              },
+              "changed": {
+                "value": "/",
+                "attributes": {},
+                "description": "/"
+              }
+            }
+          ],
+          "attributes": {},
+          "description": "action: derived; parameters: converted from image/x-sony-arw to image/jpeg, saved to new location, action: saved; instanceID: xmp.iid:12e89846-f6ac-4268-ae09-2794c06f9415; when: 2024-09-30T11:42:12-07:00; softwareAgent: Adobe Lightroom 9.5.1 (iOS); changed: /"
+        },
+        "DerivedFrom": {
+          "value": {},
+          "attributes": {},
+          "description": ""
+        },
+        "Preferred CMM type": {
+          "value": "Lino",
+          "description": "Lino"
+        },
+        "Profile Version": {
+          "value": "2.1.0",
+          "description": "2.1.0"
+        },
+        "Profile/Device class": {
+          "value": "mntr",
+          "description": "Display Device profile"
+        },
+        "Color Space": {
+          "value": "RGB ",
+          "description": "RGB "
+        },
+        "Connection Space": {
+          "value": "XYZ ",
+          "description": "XYZ "
+        },
+        "ICC Profile Date": {
+          "value": "1998-02-09T06:49:00.000Z",
+          "description": "1998-02-09T06:49:00.000Z"
+        },
+        "ICC Signature": {
+          "value": "acsp",
+          "description": "acsp"
+        },
+        "Primary Platform": {
+          "value": "MSFT",
+          "description": "Microsoft"
+        },
+        "Device Manufacturer": {
+          "value": "IEC ",
+          "description": "IEC "
+        },
+        "Device Model Number": {
+          "value": "sRGB",
+          "description": "sRGB"
+        },
+        "Rendering Intent": {
+          "value": 0,
+          "description": "Perceptual"
+        },
+        "Profile Creator": {
+          "value": "HP  ",
+          "description": "HP  "
+        },
+        "ICC Copyright": {
+          "value": "Copyright (c) 1998 Hewlett-Packard C",
+          "description": "Copyright (c) 1998 Hewlett-Packard C"
+        },
+        "ICC Description": {
+          "value": "sRGB IEC61966-2.1",
+          "description": "sRGB IEC61966-2.1"
+        },
+        "ICC Device Manufacturer for Display": {
+          "value": "IEC http://www.iec.ch",
+          "description": "IEC http://www.iec.ch"
+        },
+        "ICC Device Model Description": {
+          "value": "IEC 61966-2.1 Default RGB colour space - sRGB",
+          "description": "IEC 61966-2.1 Default RGB colour space - sRGB"
+        },
+        "ICC Viewing Conditions Description": {
+          "value": "Reference Viewing Condition in IEC61966-2.1",
+          "description": "Reference Viewing Condition in IEC61966-2.1"
+        },
+        "Technology": {
+          "value": "CRT ",
+          "description": "CRT "
+        },
+        "FileType": {
+          "value": "jpeg",
+          "description": "JPEG"
+        }
+      }
+    },
+    "details": {
+      "full": {
+        "name": "kdkvf227u.jpg",
+        "size": 2838599,
+        "type": "image/jpeg",
+        "path": "/photos/original/kdkvf227u.jpg"
+      },
+      "optimized": {
+        "name": "kdkvf227u_optimized.jpg",
+        "size": 181436,
+        "type": "image/jpeg",
+        "path": "/photos/optimized/kdkvf227u_optimized.jpg"
+      },
+      "minified": {
+        "name": "kdkvf227u_minified.jpg",
+        "size": 34780,
+        "type": "image/jpeg",
+        "path": "/photos/minified/kdkvf227u_minified.jpg"
+      },
+      "thumb": {
+        "name": "kdkvf227u_thumb.jpg",
+        "size": 27278,
+        "type": "image/jpeg",
+        "path": "/photos/thumb/kdkvf227u_thumb.jpg"
+      }
+    },
+    "keywords": [],
+    "createdAt": "2024-12-27T04:49:36.198Z"
   }
 ]

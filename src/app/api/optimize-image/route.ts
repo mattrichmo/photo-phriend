@@ -1,49 +1,11 @@
 import { NextResponse } from 'next/server'
 import sharp from 'sharp'
 import * as ExifReader from 'exifreader'
-
-interface ExifData {
-  latitude?: number;
-  longitude?: number;
-  altitude?: number;
-  date?: string;
-  time?: string;
-  make?: string;
-  model?: string;
-  lens?: string;
-  aperture?: string;
-  shutterSpeed?: string;
-  iso?: string;
-  
-  width?: number;
-  height?: number;
-  resolution?: {
-    x: number;
-    y: number;
-    unit: string;
-  };
-  software?: string;
-  exposureMode?: string;
-  whiteBalance?: string;
-  focalLength?: string;
-  focalLengthIn35mm?: number;
-  colorSpace?: string;
-  meteringMode?: string;
-  flash?: string;
-  contrast?: string;
-  saturation?: string;
-  sharpness?: string;
-  rawExif?: Record<string, unknown>;
-}
-
-interface ImageVersion {
-  buffer: Buffer;
-  size: number;
-  width: number;
-  height: number;
-}
+import { ExifData, ImageVersion } from '@/types/file'
+import { insertOptimizedPhoto } from '@/components/db/insert-optimize'
 
 interface OptimizationResult {
+  id: string;
   optimized: ImageVersion;
   minified: ImageVersion;
   thumb: ImageVersion;
@@ -59,10 +21,18 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File
+    const fileId = formData.get('fileId') as string
     
     if (!file) {
       return NextResponse.json(
         { error: 'No file provided' },
+        { status: 400 }
+      )
+    }
+
+    if (!fileId) {
+      return NextResponse.json(
+        { error: 'No file ID provided' },
         { status: 400 }
       )
     }
@@ -77,7 +47,6 @@ export async function POST(request: Request) {
       const tags = await ExifReader.load(buffer);
       console.log('Raw EXIF tags:', JSON.stringify(tags, null, 2));
 
-      
       if (tags) {
         const dateTime = tags['DateTimeOriginal'] || tags['DateTime'] || tags['MetadataDate'];
         const xResolution = tags['XResolution'] as ResolutionValue;
@@ -145,16 +114,37 @@ export async function POST(request: Request) {
       processImage(buffer, metadata, 'thumb')
     ]);
 
+    // Create result object using the provided ID
     const result: OptimizationResult = {
+      id: fileId,
       optimized: optimizedData,
       minified: minifiedData,
       thumb: thumbData,
       exif: exifData
     };
 
+    // Insert data into database
+    try {
+      console.log('Attempting to insert data into database for photo:', fileId);
+      const extension = metadata.format || 'jpg';
+      const dbResult = await insertOptimizedPhoto({
+        id: fileId,
+        filename: `${fileId}.${extension}`,
+        type: metadata.format || 'unknown',
+        optimized: optimizedData,
+        minified: minifiedData,
+        thumb: thumbData,
+        exif: exifData
+      });
+      console.log('Database insertion result:', dbResult);
+    } catch (error) {
+      console.error('Failed to insert data into database:', error);
+      // Continue execution to return processed images even if database insert fails
+    }
+
     return NextResponse.json(result);
   } catch (error) {
-    console.error('Error optimizing image:', error)
+    console.error('Error in optimize-image endpoint:', error)
     return NextResponse.json(
       { error: 'Failed to optimize image' },
       { status: 500 }

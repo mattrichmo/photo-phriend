@@ -123,6 +123,7 @@ export default function OptimizePage() {
       // Then optimize the image
       const optimizeFormData = new FormData()
       optimizeFormData.append('file', file.file)
+      optimizeFormData.append('fileId', file.id)
 
       const response = await fetch('/api/optimize-image', {
         method: 'POST',
