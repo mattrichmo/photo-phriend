@@ -21,16 +21,28 @@ A modern web application for optimizing and managing your photo collection. Buil
 - Bulk operations:
   - Download multiple images as a ZIP file
   - Delete multiple images
+  - Move to trash
   - Generate keywords for multiple images
 - Individual image actions:
   - Download single image
-  - Delete single image
+  - Move to trash
   - Generate keywords
   - View full-size image in overlay
 
+### Trash Management
+- Dedicated trash page for deleted images
+- Ability to restore images from trash
+- Permanent deletion option
+- Bulk restore and permanent delete operations
+
 ### Metadata & Keywords
+- Advanced keyword management system:
+  - Dedicated keywords page
+  - View photos by keyword
+  - Add/remove keywords from images
+  - Bulk keyword operations
 - Extracts and preserves EXIF data from images
-- Stores important metadata:
+- Stores important metadata in structured database:
   - Camera information
   - Lens details
   - Exposure settings
@@ -47,10 +59,16 @@ A modern web application for optimizing and managing your photo collection. Buil
 - Progress indicators for operations
 - Bulk action toolbar
 - Sort and filter capabilities
+- Dedicated pages for:
+  - Gallery
+  - Optimization
+  - Keywords
+  - Trash
 
 ### Technical Features
 - Server-side image processing
-- Efficient file storage management
+- SQLite database for efficient data management
+- Structured EXIF data storage
 - API endpoints for all operations
 - TypeScript for type safety
 - Modern React patterns and hooks
@@ -69,16 +87,6 @@ A modern web application for optimizing and managing your photo collection. Buil
    ```
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## API Endpoints
-
-### Images
-- `GET /api/images` - List all images
-- `POST /api/optimize-image` - Upload and optimize a new image
-- `POST /api/save-image` - Save an optimized image
-- `GET /api/images/[id]/download` - Download a single image package
-- `POST /api/images/download-zip` - Download multiple images as ZIP
-- `DELETE /api/images/delete` - Delete one or more images
-
 ## File Structure
 ```
 public/
@@ -93,17 +101,12 @@ src/
   ├── app/           # Next.js app directory
   │   ├── api/       # API routes
   │   ├── gallery/   # Gallery page
-  │   └── optimize/  # Upload page
+  │   ├── optimize/  # Upload page
+  │   ├── keywords/  # Keywords management
+  │   └── trash/     # Trash management
   ├── components/    # React components
   ├── lib/          # Utility functions
   └── types/        # TypeScript types
-```
-
-## Environment Variables
-
-Create a `.env.local` file with the following variables:
-```
-# Add any required environment variables here
 ```
 
 ## Contributing
