@@ -70,7 +70,7 @@ export default function TrashPage() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch('/api/trash')
+        const response = await fetch('/api/db/trash')
         if (!response.ok) throw new Error('Failed to fetch images')
         const data = await response.json()
         setImages(data.images)
@@ -103,12 +103,12 @@ export default function TrashPage() {
   const handlePermanentDelete = async (imageIds: string[]) => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/images/delete-permanent', {
+      const response = await fetch('/api/db/trash/delete-permanent', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageIds }),
+        body: JSON.stringify({ photoIds: imageIds }),
       })
 
       if (!response.ok) throw new Error('Failed to delete images')
@@ -127,12 +127,12 @@ export default function TrashPage() {
   const handleRevert = async (imageIds: string[]) => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/images/revert', {
+      const response = await fetch('/api/db/trash/restore', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageIds }),
+        body: JSON.stringify({ photoIds: imageIds }),
       })
 
       if (!response.ok) throw new Error('Failed to revert images')
@@ -168,7 +168,7 @@ export default function TrashPage() {
             <div className="relative w-full h-full">
               <Image
                 src={viewingImage.details.optimized.path}
-                alt={viewingImage.details.full.name}
+                alt={`Full size view of ${viewingImage.details.full.name}`}
                 fill
                 className="object-contain"
                 sizes="(max-width: 1280px) 100vw, 1280px"

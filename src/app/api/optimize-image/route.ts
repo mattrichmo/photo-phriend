@@ -126,7 +126,7 @@ export async function POST(request: Request) {
     // Insert data into database
     try {
       console.log('Attempting to insert data into database for photo:', fileId);
-      const extension = metadata.format || 'jpg';
+      const extension = metadata.format === 'jpeg' ? 'jpg' : (metadata.format || 'jpg');
       const dbResult = await insertOptimizedPhoto({
         id: fileId,
         filename: `${fileId}.${extension}`,

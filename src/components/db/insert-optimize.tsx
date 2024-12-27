@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import { ExifData, ImageVersion, ExifTagData } from '@/types/file';
+import { ExifData, ImageVersion, ExifTag } from '@/types/file';
 
 interface InsertOptimizeParams {
   id: string;
@@ -105,7 +105,7 @@ export async function insertOptimizedPhoto(data: InsertOptimizeParams) {
         try {
           for (const [tagName, tagData] of Object.entries(exif.rawExif)) {
             if (tagData && typeof tagData === 'object' && 'id' in tagData) {
-              const exifTag = tagData as unknown as ExifTagData;
+              const exifTag = tagData as unknown as ExifTag;
               const now = new Date().toISOString();
               await db.run(`
                 INSERT INTO exif_tags (
@@ -143,7 +143,8 @@ export async function insertOptimizedPhoto(data: InsertOptimizeParams) {
         { type: 'thumb', data: thumb }
       ];
 
-      const extension = data.filename.split('.').pop() || 'jpg';
+      const rawExtension = data.filename.split('.').pop() || 'jpg';
+      const extension = rawExtension === 'jpeg' ? 'jpg' : rawExtension;
       for (const version of versions) {
         await db.run(`
           INSERT INTO photo_details (
@@ -155,7 +156,7 @@ export async function insertOptimizedPhoto(data: InsertOptimizeParams) {
           `${id}_${version.type}.${extension}`,
           version.data.size,
           data.type,
-          `/photos/${id}/${id}_${version.type}.${extension}`
+          `/photos/${version.type}/${id}_${version.type}.${extension}`
         ]);
       }
       console.log('✓ Photo versions inserted');

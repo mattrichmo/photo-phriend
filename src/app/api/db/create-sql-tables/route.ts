@@ -109,6 +109,18 @@ export async function GET() {
       );
     `);
 
+    // Create trash table for storing deleted photos
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS trash (
+        photo_id TEXT PRIMARY KEY,
+        deleted_at TEXT NOT NULL,
+        auto_delete_at TEXT NOT NULL,
+        photo_data JSON NOT NULL,  -- Complete photo data for restoration
+        FOREIGN KEY(photo_id) REFERENCES photos(id)
+      );
+      CREATE INDEX IF NOT EXISTS idx_trash_dates ON trash(deleted_at, auto_delete_at);
+    `);
+
     await db.close();
 
     return NextResponse.json({ 

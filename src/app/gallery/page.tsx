@@ -42,12 +42,24 @@ export default function GalleryPage() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch('/api/images')
-        if (!response.ok) throw new Error('Failed to fetch images')
+        console.log('Fetching images from API...')
+        const response = await fetch('/api/db/get-photos')
+        
+        if (!response.ok) {
+          const errorData = await response.json()
+          console.error('API error response:', errorData)
+          throw new Error(errorData.error || 'Failed to fetch images')
+        }
+        
         const data = await response.json()
+        console.log(`Successfully fetched ${data.images.length} images`)
         setImages(data.images)
       } catch (error) {
         console.error('Error fetching images:', error)
+        if (error instanceof Error) {
+          console.error('Error message:', error.message)
+          console.error('Error stack:', error.stack)
+        }
       }
     }
 
@@ -95,22 +107,22 @@ export default function GalleryPage() {
   const handleDelete = async (imageIds: string[]) => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/images/delete', {
-        method: 'DELETE',
+      const response = await fetch('/api/db/trash/move-to-trash', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageIds }),
+        body: JSON.stringify({ photoIds: imageIds }),
       })
 
-      if (!response.ok) throw new Error('Failed to delete images')
+      if (!response.ok) throw new Error('Failed to move images to trash')
 
       // Remove deleted images from state
       setImages(prevImages => prevImages.filter(img => !imageIds.includes(img.id)))
       setSelectedImages(new Set())
     } catch (error) {
-      console.error('Error deleting images:', error)
-      alert('Failed to delete images')
+      console.error('Error moving images to trash:', error)
+      alert('Failed to move images to trash')
     } finally {
       setIsLoading(false)
     }
