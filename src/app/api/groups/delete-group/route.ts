@@ -5,11 +5,11 @@ import path from 'path';
 
 export async function DELETE(request: NextRequest) {
   try {
-    const { groupId } = await request.json();
+    const { groupIds } = await request.json();
 
-    if (!groupId) {
+    if (!groupIds || !Array.isArray(groupIds) || groupIds.length === 0) {
       return NextResponse.json(
-        { error: 'Group ID is required' },
+        { error: 'Group IDs are required' },
         { status: 400 }
       );
     }
@@ -19,35 +19,49 @@ export async function DELETE(request: NextRequest) {
       driver: sqlite3.Database
     });
 
-    // First delete all photo associations
-    await db.run(
-      'DELETE FROM photo_groups WHERE group_id = ?',
-      [groupId]
-    );
+    // Start a transaction
+    await db.run('BEGIN TRANSACTION');
 
-    // Then delete the group itself
-    const result = await db.run(
-      'DELETE FROM groups WHERE id = ?',
-      [groupId]
-    );
-
-    await db.close();
-
-    if (result.changes === 0) {
-      return NextResponse.json(
-        { error: 'Group not found' },
-        { status: 404 }
+    try {
+      // First delete all photo associations for these groups
+      const placeholders = groupIds.map(() => '?').join(',');
+      await db.run(
+        `DELETE FROM photo_groups WHERE group_id IN (${placeholders})`,
+        groupIds
       );
+
+      // Then delete the groups themselves
+      const result = await db.run(
+        `DELETE FROM groups WHERE id IN (${placeholders})`,
+        groupIds
+      );
+
+      // Commit the transaction
+      await db.run('COMMIT');
+      await db.close();
+
+      if (result.changes === 0) {
+        return NextResponse.json(
+          { error: 'No groups found to delete' },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({
+        message: 'Groups deleted successfully'
+      });
+
+    } catch (error) {
+      // If anything goes wrong, roll back the transaction
+      await db.run('ROLLBACK');
+      await db.close();
+      throw error;
     }
 
-    return NextResponse.json({
-      message: 'Group deleted successfully'
-    });
-
   } catch (error) {
-    console.error('Error deleting group:', error);
+    console.error('Error deleting groups:', error);
     return NextResponse.json(
-      { error: 'Failed to delete group' },
+      { error: 'Failed to delete groups' },
       { status: 500 }
     );
   }
