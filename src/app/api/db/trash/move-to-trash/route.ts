@@ -63,6 +63,17 @@ export async function POST(request: Request) {
       }
 
       await db.run('COMMIT');
+
+      // After successful commit, delete from main tables
+      for (const photoId of photoIds) {
+        await db.run('DELETE FROM photos WHERE id = ?', photoId);
+        await db.run('DELETE FROM raw_exif WHERE photo_id = ?', photoId);
+        await db.run('DELETE FROM common_exif WHERE photo_id = ?', photoId);
+        await db.run('DELETE FROM photo_details WHERE photo_id = ?', photoId);
+        await db.run('DELETE FROM photo_keywords WHERE photo_id = ?', photoId);
+        await db.run('DELETE FROM photo_groups WHERE photo_id = ?', photoId);
+      }
+
       await db.close();
 
       return NextResponse.json({ 

@@ -16,7 +16,7 @@ export async function insertOptimizedPhoto(data: InsertOptimizeParams) {
   let db;
   try {
     db = await open({
-      filename: './photo-phriend.db',
+      filename: './db/photo-phriend.db',
       driver: sqlite3.Database
     });
     console.log('Database opened successfully');

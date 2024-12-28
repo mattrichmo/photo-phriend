@@ -57,42 +57,32 @@ export async function POST(request: Request) {
         const yResolution = tags['YResolution'] as ResolutionValue;
         
         exifData = {
+          date: dateTime?.description?.split(' ')[0] || undefined,
+          time: dateTime?.description?.split(' ')[1] || undefined,
+          width: metadata.width,
+          height: metadata.height,
+          resolution: {
+            x: xResolution?.description ? Number(xResolution.description) : 0,
+            y: yResolution?.description ? Number(yResolution.description) : 0,
+            unit: tags['ResolutionUnit']?.description || 'inches'
+          },
+          colorSpace: tags['ColorSpace']?.description || undefined,
+          make: tags['Make']?.description || undefined,
+          model: tags['Model']?.description || undefined,
+          lens: tags['LensModel']?.description || tags['Lens']?.description || undefined,
+          focalLength: tags['FocalLength']?.description || undefined,
+          focalLengthIn35mm: tags['FocalLengthIn35mmFormat']?.description ? Number(tags['FocalLengthIn35mmFormat'].description) : undefined,
+          aperture: tags['FNumber']?.description || tags['ApertureValue']?.description || undefined,
+          shutterSpeed: tags['ExposureTime']?.description || tags['ShutterSpeedValue']?.description || undefined,
+          iso: tags['ISO']?.description || tags['ISOSpeedRatings']?.description || undefined,
+          exposureMode: tags['ExposureMode']?.description || undefined,
+          meteringMode: tags['MeteringMode']?.description || undefined,
+          whiteBalance: tags['WhiteBalance']?.description || undefined,
+          flash: tags['Flash']?.description || undefined,
+          software: tags['Software']?.description || undefined,
           latitude: tags['GPSLatitude']?.description ? Number(tags['GPSLatitude'].description) : undefined,
           longitude: tags['GPSLongitude']?.description ? Number(tags['GPSLongitude'].description) : undefined,
           altitude: tags['GPSAltitude']?.description ? Number(tags['GPSAltitude'].description) : undefined,
-          
-          date: dateTime?.description ? String(dateTime.description).split('T')[0] : undefined,
-          time: dateTime?.description ? (String(dateTime.description).includes('T') ? 
-            String(dateTime.description).split('T')[1].split('-')[0] : 
-            String(dateTime.description).split(' ')[1]) : undefined,
-          
-          make: tags['Make']?.description,
-          model: tags['Model']?.description,
-          lens: tags['LensModel']?.description,
-          
-          aperture: tags['FNumber']?.description,
-          shutterSpeed: tags['ExposureTime']?.description,
-          iso: tags['ISOSpeedRatings']?.description,
-
-          width: Number(tags['Image Width']?.value),
-          height: Number(tags['Image Height']?.value),
-          resolution: xResolution && yResolution ? {
-            x: xResolution.value[0],
-            y: yResolution.value[0],
-            unit: tags['ResolutionUnit']?.description || 'inches'
-          } : undefined,
-          software: tags['Software']?.description,
-          exposureMode: tags['ExposureMode']?.description,
-          whiteBalance: tags['WhiteBalance']?.description,
-          focalLength: tags['FocalLength']?.description,
-          focalLengthIn35mm: typeof tags['FocalLengthIn35mmFilm']?.value === 'number' ? 
-            tags['FocalLengthIn35mmFilm'].value : undefined,
-          colorSpace: tags['ColorSpace']?.description,
-          meteringMode: tags['MeteringMode']?.description,
-          flash: tags['Flash']?.description,
-          contrast: tags['Contrast']?.description,
-          saturation: tags['Saturation']?.description,
-          sharpness: tags['Sharpness']?.description,
           rawExif: tags
         };
 

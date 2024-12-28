@@ -63,7 +63,7 @@ export async function GET() {
         focal_length_35mm INTEGER, -- FocalLengthIn35mmFormat
         aperture TEXT,             -- FNumber
         shutter_speed TEXT,        -- ExposureTime
-        iso INTEGER,               -- ISO
+        iso TEXT,                  -- ISO
         exposure_program TEXT,     -- ExposureProgram
         exposure_mode TEXT,        -- ExposureMode
         metering_mode TEXT,        -- MeteringMode

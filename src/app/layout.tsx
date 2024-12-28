@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Photo Phriend - Image Optimization Made Easy",
   description: "A simple tool to optimize your images and manage them efficiently",
+  icons: {
+    icon: "/assets/favicon/photo-phriend.svg",
+  },
 };
 
 export default function RootLayout({
