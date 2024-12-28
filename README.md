@@ -71,13 +71,7 @@ git clone https://github.com/yourusername/photo-phriend.git
 npm install
 ```
 
-3. Set up your environment variables:
-```bash
-cp .env.example .env
-```
-Add your OpenAI API key to the `.env` file.
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
@@ -97,9 +91,8 @@ The application uses SQLite to manage:
 - EXIF data in both raw and structured formats
 - Photo versions and optimizations
 - AI-generated keywords and relationships
+- Trash can for deleted photos
 
-## License
-[MIT License](LICENSE)
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
