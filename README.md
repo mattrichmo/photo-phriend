@@ -42,10 +42,13 @@ localhost:3000/api/db/create-sql-tables
 ## Screenshots
 
 ### Photos Page
-![Photo Phriend Screenshot](public/assets/readme/screenshots/photos-screenshot.png)
+![Photo Phriend Screenshot](public/assets/readme/screenshots/photos.png)
 
 ### Keywords Page
-![Photo Phriend Screenshot](public/assets/readme/screenshots/keywords-screenshot.png)
+![Photo Phriend Screenshot](public/assets/readme/screenshots/keywords.png)
+
+### Groups Page
+![Photo Phriend Screenshot](public/assets/readme/screenshots/groups.png)
 
 
 
