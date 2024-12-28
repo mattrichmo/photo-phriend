@@ -17,7 +17,6 @@ import { FileData, FileVersion } from '@/types/file'
 import { X, Table as TableIcon, Grid, LayoutGrid } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
@@ -399,7 +398,7 @@ export default function GalleryPage() {
     if (!newGroupTitle.trim()) return;
 
     try {
-      // First create the group
+      // Create the group without adding photos
       const response = await fetch('/api/groups/create-group', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -417,27 +416,16 @@ export default function GalleryPage() {
           description: newGroupDescription || null
         };
 
-        // Add the selected photos to the new group
-        const selectedIds = Array.from(selectedImages);
-        await fetch('/api/groups/add-to-group', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            groupId: data.groupId,
-            photoIds: selectedIds
-          })
-        });
-
         setGroups([...groups, newGroup]);
         setSelectedGroups(new Set([data.groupId]));
         setIsCreateGroupDialogOpen(false);
         setNewGroupTitle('');
         setNewGroupDescription('');
-        setIsGroupPopoverOpen(false); // Close the group popover as well
+        setIsGroupPopoverOpen(true); // Keep the group popover open
       }
     } catch (error) {
       console.error('Error creating group:', error);
-      alert('Failed to create group or add photos');
+      alert('Failed to create group');
     }
   };
 
@@ -537,34 +525,42 @@ export default function GalleryPage() {
                 <PopoverContent className="w-80" align="end">
                   <div className="space-y-4">
                     <h4 className="font-medium">Select Groups</h4>
-                    <RadioGroup
-                      value={selectedGroups.size === 1 ? Array.from(selectedGroups)[0].toString() : undefined}
-                      onValueChange={(value: string) => {
-                        if (value === 'new') {
-                          setIsCreateGroupDialogOpen(true);
-                          setIsGroupPopoverOpen(false);
-                        } else {
-                          setSelectedGroups(new Set([parseInt(value)]));
-                        }
-                      }}
-                    >
+                    <div className="space-y-2">
                       {groups.map((group) => (
                         <div key={group.id} className="flex items-center space-x-2">
-                          <RadioGroupItem value={group.id.toString()} id={`group-${group.id}`} />
+                          <Checkbox
+                            id={`group-${group.id}`}
+                            checked={selectedGroups.has(group.id)}
+                            onCheckedChange={(checked) => {
+                              const newSelectedGroups = new Set(selectedGroups);
+                              if (checked) {
+                                newSelectedGroups.add(group.id);
+                              } else {
+                                newSelectedGroups.delete(group.id);
+                              }
+                              setSelectedGroups(newSelectedGroups);
+                            }}
+                          />
                           <Label htmlFor={`group-${group.id}`}>{group.title}</Label>
                         </div>
                       ))}
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="new" id="new-group" />
-                        <Label htmlFor="new-group">Create New Group</Label>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full"
+                          onClick={() => setIsCreateGroupDialogOpen(true)}
+                        >
+                          Create New Group
+                        </Button>
                       </div>
-                    </RadioGroup>
+                    </div>
                     <Button 
                       className="w-full" 
                       onClick={handleAddToGroups}
                       disabled={selectedGroups.size === 0}
                     >
-                      Add to Group{selectedGroups.size > 1 ? 's' : ''}
+                      Add to {selectedGroups.size} Group{selectedGroups.size !== 1 ? 's' : ''}
                     </Button>
                   </div>
                 </PopoverContent>

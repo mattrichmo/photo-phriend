@@ -69,24 +69,36 @@ export function Sidebar() {
 
           {/* Groups Section */}
           <div>
-            <button
-              onClick={() => setIsGroupsExpanded(!isGroupsExpanded)}
-              className={cn(
-                'group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium',
-                pathname.startsWith('/groups')
-                  ? 'bg-zinc-800 text-white'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-              )}
-            >
-              <FolderIcon className="h-5 w-5 shrink-0" />
-              <span className="flex-1 text-left">Groups</span>
-              <ChevronRightIcon 
+            <div className="flex">
+              <Link
+                href="/groups"
                 className={cn(
-                  "h-4 w-4 shrink-0 transition-transform",
-                  isGroupsExpanded && "rotate-90"
+                  'group flex flex-1 items-center gap-2 rounded-l-md px-2 py-2 text-sm font-medium',
+                  pathname.startsWith('/groups')
+                    ? 'bg-zinc-800 text-white'
+                    : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                 )}
-              />
-            </button>
+              >
+                <FolderIcon className="h-5 w-5 shrink-0" />
+                <span className="flex-1 text-left">Groups</span>
+              </Link>
+              <button
+                onClick={() => setIsGroupsExpanded(!isGroupsExpanded)}
+                className={cn(
+                  'rounded-r-md px-2 py-2',
+                  pathname.startsWith('/groups')
+                    ? 'bg-zinc-800 text-white'
+                    : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                )}
+              >
+                <ChevronRightIcon 
+                  className={cn(
+                    "h-4 w-4 shrink-0 transition-transform",
+                    isGroupsExpanded && "rotate-90"
+                  )}
+                />
+              </button>
+            </div>
 
             {/* Groups List */}
             {isGroupsExpanded && (
