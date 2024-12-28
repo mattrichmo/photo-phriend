@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { ImageIcon, ImagePlusIcon, TagsIcon, TrashIcon } from 'lucide-react'
+import { ImageIcon, ImagePlusIcon, TagsIcon, TrashIcon, FolderIcon } from 'lucide-react'
 
 const navigation = [
   {
@@ -22,10 +22,16 @@ const navigation = [
     icon: TagsIcon,
   },
   {
+    name: 'Groups',
+    href: '/groups',
+    icon: FolderIcon,
+  },
+  {
     name: 'Trash',
     href: '/trash',
     icon: TrashIcon,
   },
+
 ]
 
 export function Sidebar() {

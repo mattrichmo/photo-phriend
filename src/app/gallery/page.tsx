@@ -16,6 +16,12 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { FileData, FileVersion } from '@/types/file'
 import { X, Table as TableIcon, Grid, LayoutGrid } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 interface EditData {
   keywords: string[]
@@ -29,6 +35,12 @@ interface EditData {
   shutterSpeed: string
 }
 
+interface Group {
+  id: number;
+  title: string;
+  description: string | null;
+}
+
 export default function GalleryPage() {
   const router = useRouter()
   const [images, setImages] = useState<FileData[]>([])
@@ -40,6 +52,12 @@ export default function GalleryPage() {
   const [editingRows, setEditingRows] = useState<Set<string>>(new Set())
   const [editData, setEditData] = useState<{ [key: string]: EditData }>({})
   const [viewMode, setViewMode] = useState<'table' | 'masonry' | 'masonry-zoomed'>('table')
+  const [groups, setGroups] = useState<Group[]>([])
+  const [selectedGroups, setSelectedGroups] = useState<Set<number>>(new Set())
+  const [isGroupPopoverOpen, setIsGroupPopoverOpen] = useState(false)
+  const [isCreateGroupDialogOpen, setIsCreateGroupDialogOpen] = useState(false)
+  const [newGroupTitle, setNewGroupTitle] = useState('')
+  const [newGroupDescription, setNewGroupDescription] = useState('')
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -66,6 +84,22 @@ export default function GalleryPage() {
     }
 
     fetchImages()
+  }, [])
+
+  useEffect(() => {
+    const fetchGroups = async () => {
+      try {
+        const response = await fetch('/api/groups/get-groups')
+        if (response.ok) {
+          const data = await response.json()
+          setGroups(data.groups)
+        }
+      } catch (error) {
+        console.error('Error fetching groups:', error)
+      }
+    }
+
+    fetchGroups()
   }, [])
 
   const handleDownload = async (image: FileData) => {
@@ -361,6 +395,75 @@ export default function GalleryPage() {
     return `${size.toFixed(1)} ${units[unitIndex]}`
   }
 
+  const handleCreateGroup = async () => {
+    if (!newGroupTitle.trim()) return;
+
+    try {
+      // First create the group
+      const response = await fetch('/api/groups/create-group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: newGroupTitle,
+          description: newGroupDescription || null
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const newGroup = {
+          id: data.groupId,
+          title: newGroupTitle,
+          description: newGroupDescription || null
+        };
+
+        // Add the selected photos to the new group
+        const selectedIds = Array.from(selectedImages);
+        await fetch('/api/groups/add-to-group', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            groupId: data.groupId,
+            photoIds: selectedIds
+          })
+        });
+
+        setGroups([...groups, newGroup]);
+        setSelectedGroups(new Set([data.groupId]));
+        setIsCreateGroupDialogOpen(false);
+        setNewGroupTitle('');
+        setNewGroupDescription('');
+        setIsGroupPopoverOpen(false); // Close the group popover as well
+      }
+    } catch (error) {
+      console.error('Error creating group:', error);
+      alert('Failed to create group or add photos');
+    }
+  };
+
+  const handleAddToGroups = async () => {
+    try {
+      const selectedIds = Array.from(selectedImages);
+      const groupIds = Array.from(selectedGroups);
+
+      for (const groupId of groupIds) {
+        await fetch('/api/groups/add-to-group', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            groupId,
+            photoIds: selectedIds
+          })
+        });
+      }
+
+      setIsGroupPopoverOpen(false);
+      setSelectedGroups(new Set());
+    } catch (error) {
+      console.error('Error adding to groups:', error);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Image Overlay */}
@@ -425,6 +528,48 @@ export default function GalleryPage() {
         <div className="space-x-2">
           {selectedImages.size > 0 && (
             <>
+              <Popover open={isGroupPopoverOpen} onOpenChange={setIsGroupPopoverOpen}>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    Add {selectedImages.size} to Group
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80" align="end">
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Select Groups</h4>
+                    <RadioGroup
+                      value={selectedGroups.size === 1 ? Array.from(selectedGroups)[0].toString() : undefined}
+                      onValueChange={(value: string) => {
+                        if (value === 'new') {
+                          setIsCreateGroupDialogOpen(true);
+                          setIsGroupPopoverOpen(false);
+                        } else {
+                          setSelectedGroups(new Set([parseInt(value)]));
+                        }
+                      }}
+                    >
+                      {groups.map((group) => (
+                        <div key={group.id} className="flex items-center space-x-2">
+                          <RadioGroupItem value={group.id.toString()} id={`group-${group.id}`} />
+                          <Label htmlFor={`group-${group.id}`}>{group.title}</Label>
+                        </div>
+                      ))}
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="new" id="new-group" />
+                        <Label htmlFor="new-group">Create New Group</Label>
+                      </div>
+                    </RadioGroup>
+                    <Button 
+                      className="w-full" 
+                      onClick={handleAddToGroups}
+                      disabled={selectedGroups.size === 0}
+                    >
+                      Add to Group{selectedGroups.size > 1 ? 's' : ''}
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
+
               {countSelectedImagesNeedingKeywords() > 0 && (
                 <Button
                   variant="outline"
@@ -759,6 +904,47 @@ export default function GalleryPage() {
           ))}
         </div>
       )}
+
+      {/* Create Group Dialog */}
+      <Dialog open={isCreateGroupDialogOpen} onOpenChange={setIsCreateGroupDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create New Group</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium mb-1">
+                Title
+              </label>
+              <Input
+                id="title"
+                value={newGroupTitle}
+                onChange={(e) => setNewGroupTitle(e.target.value)}
+                placeholder="Enter group title"
+              />
+            </div>
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium mb-1">
+                Description (optional)
+              </label>
+              <Textarea
+                id="description"
+                value={newGroupDescription}
+                onChange={(e) => setNewGroupDescription(e.target.value)}
+                placeholder="Enter group description"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsCreateGroupDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleCreateGroup}>
+              Create Group
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 } 
