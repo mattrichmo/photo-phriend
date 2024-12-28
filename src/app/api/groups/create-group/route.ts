@@ -3,6 +3,11 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import path from 'path';
 
+// Generate a random 5-digit ID
+function generateGroupId(): string {
+  return Math.floor(10000 + Math.random() * 90000).toString();
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { title, description } = await request.json();
@@ -20,18 +25,19 @@ export async function POST(request: NextRequest) {
     });
 
     const now = new Date().toISOString();
+    const groupId = generateGroupId();
     
-    const result = await db.run(
-      `INSERT INTO groups (title, description, created_at, updated_at)
-       VALUES (?, ?, ?, ?)`,
-      [title, description || null, now, now]
+    await db.run(
+      `INSERT INTO groups (id, title, description, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?)`,
+      [groupId, title, description || null, now, now]
     );
 
     await db.close();
 
     return NextResponse.json({
       message: 'Group created successfully',
-      groupId: result.lastID
+      groupId: groupId
     });
 
   } catch (error) {

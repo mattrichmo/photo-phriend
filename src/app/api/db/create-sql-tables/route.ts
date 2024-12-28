@@ -125,7 +125,7 @@ export async function GET() {
     // Create groups table
     await db.exec(`
       CREATE TABLE IF NOT EXISTS groups (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         description TEXT,
         created_at TEXT NOT NULL,
@@ -137,7 +137,7 @@ export async function GET() {
     await db.exec(`
       CREATE TABLE IF NOT EXISTS photo_groups (
         photo_id TEXT,
-        group_id INTEGER,
+        group_id TEXT,
         added_at TEXT NOT NULL,
         FOREIGN KEY(photo_id) REFERENCES photos(id),
         FOREIGN KEY(group_id) REFERENCES groups(id),

@@ -29,7 +29,12 @@ Creates four versions of each photo:
 - Manage photo descriptions and keywords using OpenAI or manually
 - Track photo versions and modifications
 
-### Saves all data to a local sqlite db in the folder. To initialize the database, run
+### 📂 Grouping and Organization
+- Create and manage groups of photos
+- View and edit group details
+- Organize photos into groups
+
+## Saves all data to a local sqlite db in the folder. To initialize the database, run
 ``` bash
 localhost:3000/api/db/create-sql-tables
 ```
