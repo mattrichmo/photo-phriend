@@ -2,7 +2,7 @@
 
 ![Photo Phriend Banner](public/assets/img/banner/photo-phriend-banner.webp)
 
-A powerful local photo management application that helps you organize, optimize, and enhance your photo collection with AI-powered features.
+A powerful local photo management application that helps you organize, optimize, and enhance your photo collection with AI-powered features. Designed to run locally but db can be hooked up easily to allow for cloud sync. No tracking, no ads, no data sharing, just a central place to manage your photos that you want to keep seperate from your existing cloud photo libraries.
 
 ## Features
 
@@ -26,8 +26,13 @@ Creates four versions of each photo:
 
 ### 📝 Metadata Management
 - View and edit EXIF data
-- Manage photo descriptions and keywords
+- Manage photo descriptions and keywords using OpenAI or manually
 - Track photo versions and modifications
+
+### Saves all data to a local sqlite db in the folder. To initialize the database, run
+``` bash
+localhost:3000/api/db/create-sql-tables
+```
 
 ## Screenshots
 
