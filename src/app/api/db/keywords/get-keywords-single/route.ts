@@ -15,6 +15,7 @@ export async function POST(request: Request) {
         const { photoId, apiKey } = await request.json();
 
         if (!photoId || !apiKey) {
+            console.error('Missing parameters:', { photoId: !!photoId, apiKey: !!apiKey });
             return NextResponse.json(
                 { error: 'Missing required parameters' },
                 { status: 400 }
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
 
         // Open database connection
         db = await open({
-            filename: './photo-phriend.db',
+            filename: path.join(process.cwd(), 'db/photo-phriend.db'),
             driver: sqlite3.Database
         });
 
@@ -38,20 +39,24 @@ export async function POST(request: Request) {
         `, [photoId]);
 
         if (!photo) {
+            console.error('Photo not found:', photoId);
             return NextResponse.json(
                 { error: 'Photo not found' },
                 { status: 404 }
             );
         }
 
+        console.log('Found photo:', { id: photo.id, path: photo.path });
+
         // Read the image file
         const imagePath = path.join(process.cwd(), 'public', photo.path);
+        console.log('Reading image from:', imagePath);
         const imageBuffer = await fs.readFile(imagePath);
         const base64Image = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
 
         // Generate keywords using OpenAI
         const response = await openai.chat.completions.create({
-            model: "gpt-4-vision-preview",
+            model: "gpt-4o-mini",
             messages: [
                 { role: "system", content: systemPrompt },
                 {

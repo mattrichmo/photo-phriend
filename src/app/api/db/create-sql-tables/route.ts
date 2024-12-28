@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
+import path from 'path';
 
 export async function GET() {
   try {
     // Open SQLite database
     const db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     });
 

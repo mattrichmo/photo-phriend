@@ -183,27 +183,36 @@ export default function GalleryPage() {
         // Add image to loading state
         setLoadingImages(prev => new Set(prev).add(imageId));
 
-        // Use the API key from the generate page
-        const apiKey = localStorage.getItem('apiKey');
-        if (!apiKey) throw new Error('API key not found');
+        // Get the API key from the keys page storage
+        const savedKeys = localStorage.getItem('photo-phriend-api-keys');
+        if (!savedKeys) {
+          alert('Please set your OpenAI API key in the Keys page');
+          return;
+        }
+        const keys = JSON.parse(savedKeys);
+        if (!keys.openai) {
+          alert('Please set your OpenAI API key in the Keys page');
+          return;
+        }
 
-        console.log('API Key:', apiKey);
         console.log('Image Path:', image.details.optimized.path);
 
         const response = await fetch('/api/db/keywords/get-keywords-single', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            imagePath: image.details.optimized.path,
-            imageId: image.id,
-            apiKey,
+            photoId: image.id,
+            apiKey: keys.openai
           })
         });
 
-        if (!response.ok) throw new Error('Failed to generate keywords');
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('API error response:', errorData);
+          throw new Error(errorData.error || 'Failed to generate keywords');
+        }
 
         const data = await response.json();
 

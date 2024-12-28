@@ -15,7 +15,7 @@ export async function DELETE(request: Request) {
     }
 
     const db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     });
 

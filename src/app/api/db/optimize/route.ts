@@ -144,7 +144,7 @@ export async function POST(request: Request) {
     // Insert into database
     try {
       db = await open({
-        filename: './photo-phriend.db',
+        filename: path.join(process.cwd(), 'db/photo-phriend.db'),
         driver: sqlite3.Database
       });
       console.log('Database opened successfully');

@@ -25,7 +25,7 @@ interface TrashPhotoData {
 export async function GET() {
   try {
     const db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     });
 
@@ -68,7 +68,7 @@ export async function GET() {
 export async function DELETE() {
   try {
     const db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     });
 

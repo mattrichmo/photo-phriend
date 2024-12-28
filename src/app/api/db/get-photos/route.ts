@@ -5,7 +5,7 @@ import path from 'path'
 
 export async function GET() {
   try {
-    const dbPath = path.join(process.cwd(), 'photo-phriend.db')
+    const dbPath = path.join(process.cwd(), 'db/photo-phriend.db')
     console.log('Opening database at:', dbPath)
 
     // Open database connection

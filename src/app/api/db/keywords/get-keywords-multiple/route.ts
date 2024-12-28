@@ -272,7 +272,7 @@ export async function POST(req: Request) {
         
         // Open database connection
         db = await open({
-            filename: './photo-phriend.db',
+            filename: path.join(process.cwd(), 'db/photo-phriend.db'),
             driver: sqlite3.Database
         });
 
