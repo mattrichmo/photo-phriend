@@ -15,7 +15,7 @@ export async function GET(
 
     // Open database connection
     db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     })
 
@@ -47,6 +47,8 @@ export async function GET(
       WHERE p.id = ?
     `, id)
 
+    console.log('Database query result:', JSON.stringify(photo, null, 2))
+
     if (!photo) {
       return NextResponse.json(
         { error: 'Image not found' },
@@ -68,21 +70,25 @@ export async function GET(
 
     // Add original image
     const originalPath = path.join(process.cwd(), 'public', 'photos', photo.id, photo.filename)
+    console.log('Attempting to read original file from:', originalPath)
     const originalBuffer = await fs.readFile(originalPath)
     zip.file(photo.filename, originalBuffer)
 
     // Add optimized image
     const optimizedPath = path.join(process.cwd(), 'public', 'photos', 'optimized', photo.optimized_name)
+    console.log('Attempting to read optimized file from:', optimizedPath)
     const optimizedBuffer = await fs.readFile(optimizedPath)
     zip.file(photo.optimized_name, optimizedBuffer)
 
     // Add minified image
     const minifiedPath = path.join(process.cwd(), 'public', 'photos', 'minified', photo.minified_name)
+    console.log('Attempting to read minified file from:', minifiedPath)
     const minifiedBuffer = await fs.readFile(minifiedPath)
     zip.file(photo.minified_name, minifiedBuffer)
 
     // Add thumbnail image
     const thumbPath = path.join(process.cwd(), 'public', 'photos', 'thumb', photo.thumb_name)
+    console.log('Attempting to read thumbnail file from:', thumbPath)
     const thumbBuffer = await fs.readFile(thumbPath)
     zip.file(photo.thumb_name, thumbBuffer)
 
@@ -149,6 +155,13 @@ export async function GET(
     })
   } catch (error) {
     console.error('Error downloading image:', error)
+    if (error instanceof Error) {
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      })
+    }
     return NextResponse.json(
       { error: 'Failed to download image' },
       { status: 500 }

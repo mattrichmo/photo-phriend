@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
     // Open database connection
     db = await open({
-      filename: './photo-phriend.db',
+      filename: path.join(process.cwd(), 'db/photo-phriend.db'),
       driver: sqlite3.Database
     })
 
@@ -48,6 +48,12 @@ export async function POST(request: Request) {
       WHERE p.id IN (${imageIds.map(() => '?').join(',')})
     `, imageIds)
 
+    console.log('Database query results:', JSON.stringify(photos, null, 2))
+    
+    if (!photos || photos.length === 0) {
+      return NextResponse.json({ error: 'No photos found' }, { status: 404 })
+    }
+
     // Get keywords for each photo
     for (const photo of photos) {
       const keywords = await db.all(`
@@ -78,21 +84,25 @@ export async function POST(request: Request) {
       try {
         // Add original image
         const originalPath = path.join(process.cwd(), 'public', 'photos', photo.id, photo.filename)
+        console.log('Reading original file from:', originalPath)
         const originalContent = await fs.readFile(originalPath)
         originalFolder.file(photo.filename, originalContent)
 
         // Add optimized image
         const optimizedPath = path.join(process.cwd(), 'public', 'photos', 'optimized', photo.optimized_name)
+        console.log('Reading optimized file from:', optimizedPath)
         const optimizedContent = await fs.readFile(optimizedPath)
         optimizedFolder.file(photo.optimized_name, optimizedContent)
 
         // Add minified image
         const minifiedPath = path.join(process.cwd(), 'public', 'photos', 'minified', photo.minified_name)
+        console.log('Reading minified file from:', minifiedPath)
         const minifiedContent = await fs.readFile(minifiedPath)
         minifiedFolder.file(photo.minified_name, minifiedContent)
 
         // Add thumbnail image
         const thumbPath = path.join(process.cwd(), 'public', 'photos', 'thumb', photo.thumb_name)
+        console.log('Reading thumbnail file from:', thumbPath)
         const thumbContent = await fs.readFile(thumbPath)
         thumbFolder.file(photo.thumb_name, thumbContent)
 
@@ -162,6 +172,13 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Error creating zip file:', error)
+    if (error instanceof Error) {
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      })
+    }
     return NextResponse.json({ error: 'Failed to create zip file' }, { status: 500 })
   } finally {
     if (db) {
