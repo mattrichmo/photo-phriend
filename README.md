@@ -76,6 +76,12 @@ npm install
 npm run dev
 ```
 
+4. Initialize the database:
+visit the following url in your browser to initialize the database. Creates a photo-phriend.db file in the db folder.
+```bash
+localhost:3000/api/db/create-sql-tables
+```
+
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Tech Stack
