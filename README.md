@@ -82,7 +82,27 @@ visit the following url in your browser to initialize the database. Creates a ph
 localhost:3000/api/db/create-sql-tables
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser. This will take you to the Load & Optimize page.
+
+6. Start by adding photos in the Load & Optimize page. 
+
+
+### To Generate Keywords
+This will take all of the images you have selected, organize them in different arrays based on their aspect ratio, then combine 1-4 images into a quadrant composite image with a maximum 500px on the longest side. Send that image to OpenAI and then map the keywords based on the quadrant image. Doing mutliple images at once saves in api calls vs doing one at a time.
+```bash
+1. Go to the Gallery page.
+2. Select the photos you want to generate keywords for.
+3. Click the "Generate Keywords" button.
+4. Click Generate All Keywords button on the keywords page.
+5. The keywords will be generated and added to the database. They can be edited later on by clicking the edit button on the All Photos page.
+```
+OR For a single image:
+This sends a single image to the openAI api to generate keywords.
+```bash
+1. click generate keywords on the image you want to generate keywords for.
+2. The keywords will be generated and added to the database. They can be edited later on by clicking the edit button on the All Photos page.
+```
+
 
 ## Tech Stack
 - Next.js
